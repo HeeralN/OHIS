@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Roommate Matching Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="logo.png" width="50" height="50" alt="Logo">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Profile</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">My Listings</a></li>
+          <li><a href="#">Search Listings</a></li>
+        </ul>
+      </li>
+      <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Roommate Matching Form</a></li>
+          <li><a href="#">Roommate Matching Results</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Navbar Button</h2>
+</div>
+
+<! –– action ––>
+<form action ="/roommateMatchingFormEdit.html" >
+  <fieldset>
+    <legend>Edit Your Roommate Preferences</legend>
+    <label for="option">Gender Preference:</label>
+    <select id="option" name="option">
+      <option value="Female">Female</option>
+      <option value="Male">Male</option>
+      <option value="Non-binary">Non-binary</option>
+      <option value="No preference" selected>No preference</option>
+    </select><br><br>
+    <label for="option">Prefer/Accept an international student? </label>
+    <select id="option" name="option">
+      <option value="yes">Yes</option>
+      <option value="no"">No</option>
+    </select><br><br>
+    <label for="option">Are you a smoker? </label>
+    <select id="option" name="option">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+      <option value="sometimes">Sometimes</option>
+    </select><br><br>
+    <label for="option">Room care: </label>
+    <select id="option" name="option">
+      <option value="1">Always Clean</option>
+      <option value="2">Clean but not obsessive</option>
+      <option value="3">Casual</option>
+      <option value="4">A few clothes lying around</option>
+      <option value="4">Disaster Area</option>
+    </select><br><br>
+    <label for="option">Bedtime: </label>
+    <select id="option" name="option">
+      <option value="1">9pm-12am</option>
+      <option value="2">12am-3am</option>
+      <option value="3">Later than 3am</option>
+    </select><br><br>
+    <label for="option">Sleeping Habits</label>
+    <select id="option" name="option">
+      <option value="1">Snore/Sleepwalk</option>
+      <option value="2">Light Sleeper</option>
+      <option value="3">Sleep through anything</option>
+      <option value="4">Windows open</option>
+    </select><br><br>
+    <label for="option">My Personality: </label>
+    <select id="option" name="option">
+      <option value="1">Shy</option>
+      <option value="2">Talkative</option>
+      <option value="3">Mellow</option>
+      <option value="4">Loud</option>
+      <option value="5">Perky</option>
+    </select><br><br>
+    <label for="option">Study Habits: </label><br>
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1">Study in room</label><br>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2">Must be quiet</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3">Study with music</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3">Late night study</label><br><br>
+    <label for="option">Music Preference: </label>
+    <select id="option" name="option">
+      <option value="1">Low</option>
+      <option value="2">Medium</option>
+      <option value="3">High</option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+
+</body>
+</html>
