@@ -28,7 +28,36 @@
 <div class="container">
   <h2>Navbar Button</h2>
   <p>Admin Manage Listings</p>
+
+  <div class="input-group">
+    <input type="number" class="form-control" id="housingListingID" placeholder="Enter Housing Listing ID">
+    <span class="input-group-btn" style="width:0;">
+        <button href="#housingListingProfile" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button>
+    </span>
+  </div>
+  
+  <div id="housingListingProfile" class="collapse">
+    <div class="container">
+      <h2>Housing Listing Profile</h2>
+      <p>ID: <span id="housingListingID"></span></p>
+      <p>Address: <span id="housingListingAddress"></span></p>
+      <p>City: <span id="housingListingCity"></span></p>
+      <p>State: <span id="housingListingState"></span></p>
+      <p>Zip: <span id="housingListingZip"></span></p>
+      <p>Price: <span id="housingListingPrice"></span></p>
+      <p>Description: <span id="housingListingDescription"></span></p>
+      <p>Date Posted: <span id="housingListingDatePosted"></span></p>
+      <p>Number of Bedrooms: <span id="housingListingBedrooms"></span></p>
+      <p>Number of Bathrooms: <span id="housingListingBathrooms"></span></p>
+      <p>Square Feet: <span id="housingListingSquareFeet"></span></p>
+      <p>Number of Parking Spaces: <span id="housingListingParkingSpaces"></span></p>
+  
+      <button type="button" class="btn btn-default" id="housingListingEdit">Edit Listing</button>
+      <button type="button" class="btn btn-danger" id="housingListingDelete">Delete Listing</button>
+  </div>
 </div>
+
+
 
 </body>
 </html>
