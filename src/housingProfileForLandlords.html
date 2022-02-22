@@ -16,9 +16,14 @@
       <img src="logo.png" width="50" height="50" alt="Logo">
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Manage Accounts</a></li>
-      <li><a href="#">Messaging</a></li>
-      <li class="active"><a href="#">Manage Listings</a></li>
+      <li><a href="landlordProfile.html">Profile</a></li>
+      <li><a href="landlordMessaging.html">Messaging</a></li>
+      <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="editListingPage.html">My Listings</a></li>
+          <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -28,10 +33,9 @@
 
 <div class="container">
   <h2>Navbar Button</h2>
-  <p>Landlord Listing Profile</p>
 </div>
 <button type="button" class="btn">
-  <span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br><br>
+  <a href="propertySearchLandlords.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a> <br><br>
   <div class="row">
     <div class="col-sm-3" style="background-color:lavender;">
       <br>
