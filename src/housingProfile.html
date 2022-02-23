@@ -4,13 +4,14 @@
   <title>Housing Profile Student View</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <img src="logo.png" width="50" height="50" alt="Logo">
@@ -37,27 +38,26 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
   <h2>Navbar Button</h2>
 </div>
-<button type="button" class="btn">
-  <a href="propertySearch.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a> <br><br>
+<button type="button" class="btn btn-secondary btn-xs" href="propertySearch.html" style="margin-left: 10px; margin-bottom: 10px;">
+<span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br>
 <div class="row">
-  <div class="col-sm-3" style="background-color:lavender;">
-    <br>
-    <label><span class="label label-default">New</span> Private and Safe 3 Bedroom Apartment Close to Campus</label><br>
-    <img src="apt.jpg" class="img-rounded" alt="apt1"> <br> <br>
+  <div class="col-sm-2">
+
+    <label style="margin-top: 10px; margin-bottom: 10px"><span class="label label-default">New</span> Private and Safe 3 Bedroom Apartment Close to Campus</label><br>
+    <img src="apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
     <div class="btn-group-vertical">
-    <a href="studentMessaging.html"><button class="btn btn-info">Contact Landlord</button></a>
-    <button type="button" class="btn btn-info">Book Viewing</button>
-    <a href="landlordProfile.html"><button class="btn btn-info">View Landlord's Page</button></a>
+    <button class="btn btn-primary" href="studentMessaging.html">Contact Landlord</button>
+    <button type="button" class="btn btn-primary">Book Viewing</button>
+    <button class="btn btn-primary" href="landlordProfile.html">View Landlord's Page</button>
    </div>
    <br><br>
   </div>
-
-  <div class="col-sm-9" style="background-color:lightblue;">
+  <div class="col-sm-9 col-sm-offset-4.5">
     <br><br>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide align-items-center" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -156,5 +156,8 @@
   </div>
 </div>
 </div>
+<footer class="container-fluid bg-4 text-center margin">
+  <p>Contact us at support@ohis.com</p>
+</footer>
 </body>
 </html>
