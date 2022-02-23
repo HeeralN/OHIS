@@ -28,6 +28,27 @@
 <div class="container">
   <h2>Navbar Button</h2>
   <p>Admin Manage Users</p>
+
+  <div class="input-group">
+    <input type="text" class="form-control" user="username" placeholder="Enter username">
+    <span class="input-group-btn" style="width:0;">
+        <button href="#userProfile" class="btn btn-default" type="button" id="userSearch" data-toggle="collapse">Search</button>
+    </span>
+  </div>
+  
+  <div id="userProfile" class="collapse">
+    <div class="container">
+      <h2>User Profile</h2>
+      <p>Username:</p>
+      <p>Name:</p>
+      <p>Email:</p>
+      <p>School:</p>
+      <p>Birthday:</p>
+      <p>Number of active listings:</p>
+
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#editUser">Edit User</button>
+      <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#deleteUser">Delete User</button>
+  </div>
 </div>
 
 </body>
