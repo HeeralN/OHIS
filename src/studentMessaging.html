@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student Messaging</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="logo.png" width="50" height="50" alt="Logo">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Profile</a></li>
+      <li class="active"><a href="#">Messaging</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">My Listings</a></li>
+          <li><a href="#">Search Listings</a></li>
+        </ul>
+      </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Roommate Matching Form</a></li>
+          <li><a href="#">Roommate Matching Results</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Navbar Button</h2>
+  <p>Student Messaging</p>
+</div>
+
+<table id="studentMessages" class="table table-hover">
+  <thead>
+    <th class="col-md-1">Sender</th>
+    <th class="col-md-1">Subject</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>Townhome Sublet</td>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>Townhome Sublet</td>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>Townhome Sublet</td>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>Townhome Sublet</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body">
+        <div class="sender"><b>Sender: </b><span></span></div>
+        <div class="subject"><b>Subject: </b><span></span></div>
+        <div class="message"><b>Message: </b><span></span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  jQuery(document).ready(function($) {
+    $('#studentMessages').DataTable({
+        searching: false,
+        responsive: true,
+        "autoWidth": false,
+    });
+    var table = $('#studentMessages').DataTable();
+    $('#studentMessages tbody').on('click', 'tr', function () {
+        console.log(table.row(this).data());
+        $(".modal-body div span").text("");
+        $(".sender span").text(table.row(this).data()[0]);
+        $(".subject span").text(table.row(this).data()[1]);
+        $(".message span").text("I was interested in your listing. Please contact me.");
+        $("#myModal").modal("show");
+    });
+} );
+</script>
+
+</body>
+</html>
