@@ -80,6 +80,7 @@
       <ul class="nav navbar-nav navbar-collpase">
         <li class="active"><a href="landlordProfile.html">Profile</a></li>
         <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="editListingPage.html">My Listings</a></li>
@@ -88,7 +89,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
         </div>
     </div>
@@ -108,6 +109,11 @@
         <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
       </div>
     </div>
-
+    <script>
+      function logout(){
+        alert("You have been logged out");
+        window.location='login.html';
+      }
+    </script>
 </body>
 </html>

@@ -24,13 +24,13 @@
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Manage Accounts</a></li>
-          <li><a href="#">Manage Listings</a></li>
-          <li><a href="#">Create a Admin Account</a></li>
+          <li class="active"><a href="adminManagingUsers.html">Manage Accounts</a></li>
+          <li><a href="adminManagingListings.html">Manage Listings</a></li>
+          <li><a href="masterAdminCreateAdminAccounts.html">Create a Admin Account</a></li>
         </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
         </div>
     </div>
@@ -67,7 +67,12 @@
   </div>
 </div>
 
-
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
 
 </body>
 </html>
