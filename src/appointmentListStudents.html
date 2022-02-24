@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Roommate Matching Form</title>
+  <title>Booked Appointments</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -16,10 +16,10 @@
     align-items: center;
     padding:20px;
     background: linear-gradient(#8b699b, gray);
-  
 }</style>
 </head>
 <body>
+
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -40,7 +40,7 @@
             <li><a href="propertySearch.html">Search Listings</a></li>
           </ul>
         </li>
-        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
             <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
@@ -55,69 +55,64 @@
   </nav>
 
 <div class="container mt-3">
-  <h2>Your Roommate Preferences</h2>
-  <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-  <form action ="/roommateMatchingFormEdit.html" >  
+  <form>
+  <h2>Booked Appointments</h2>
+  <p>Keep track and manage your booked appointments.</p>        
   <table class="table">
     <tbody>
       <tr>
-        <td>Gender Preference</td>
-        <td>    
-          --
-      </td>
+        <th></th>
+        <th>Listing</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Landlord</th>
       </tr>
       <tr>
-        <td>Prefer/Accept an international student?</td>
-        <td>
-          --
-        </td>
+        <td><input type="checkbox" id="checkbox1" value="listing1"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
       <tr>
-        <td>Are you a smoker?</td>
-        <td>
-          --
-        </td>
+        <td><input type="checkbox" id="checkbox2"  value="listing2"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
       <tr>
-        <td>Room care</td>
-        <td>
-          --
-        </td>
+        <td> <input type="checkbox" id="checkbox3" value="listing3"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
       <tr>
-        <td>Bedtime</td>
-        <td>
-          --
-        </td>
+        <td> <input type="checkbox" id="checkbox4" value="listing4"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
       <tr>
-        <td>Sleeping Habits</td>
-        <td>
-          --
-        </td>
+        <td> <input type="checkbox" id="checkbox5" value="listing5"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
       <tr>
-        <td>My Personality</td>
-        <td>
-          --
-        </td>
-      </tr>
-      <tr>
-        <td>Study Habits</td>
-        <td>
-          --
-        </td>
-      </tr>
-      <tr>
-        <td>Music Volume Level Preference</td>
-        <td>
-          --
-        </td>
+        <td> <input type="checkbox" id="checkbox6"value="listing6"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Landlord Profile</td>
       </tr>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-primary mt-3">Edit</button>
-</form>  
+  <button type="submit" class="btn btn-primary mt-3">Delete</button>
+</form> 
 </div>
 
 
