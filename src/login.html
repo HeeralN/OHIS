@@ -64,34 +64,34 @@
         <div class="top-row">
           <div class="field-wrap">
             <label>
-              First Name<span class="req">*</span>
+              First Name<span class="">*</span>
             </label>
-            <input type="text" required autocomplete="off" />
+            <input type="text" autocomplete="off" />
           </div>
       
           <div class="field-wrap">
             <label>
-              Last Name<span class="req">*</span>
+              Last Name<span class="">*</span>
             </label>
-            <input type="text"required autocomplete="off"/>
+            <input type="text" autocomplete="off"/>
           </div>
         </div>
 
         <div class="field-wrap">
           <label>
-            Email Address<span class="req">*</span>
+            Email Address<span class="">*</span>
           </label>
-          <input type="email"required autocomplete="off"/>
+          <input type="email" autocomplete="off"/>
         </div>
         
         <div class="field-wrap">
           <label>
-            Set A Password<span class="req">*</span>
+            Set A Password<span class="">*</span>
           </label>
-          <input type="password"required autocomplete="off"/>
+          <input type="password" autocomplete="off"/>
         </div>
         
-        <button type="submit" class="button button-block"/>Get Started</button>
+        <button type="submit" class="button button-block">Get Started</button>
         
         </form>
         </div>
@@ -101,33 +101,46 @@
       <div id="login">   
         <h1>Welcome Back!</h1>
         
-        <form action="/" method="post">
+        <form action="/" method="post" id="Login">
         
           <div class="field-wrap">
           <label>
-            Email Address<span class="req">*</span>
+            Email Address<span class="">*</span>
           </label>
-          <input type="email"required autocomplete="off"/>
+          <input type="email" autocomplete="off" id="email"/>
         </div>
         
         <div class="field-wrap">
           <label>
-            Password<span class="req">*</span>
+            Password<span class="">*</span>
           </label>
-          <input type="password"required autocomplete="off"/>
+          <input type="password" autocomplete="off" id="password"/>
         </div>
         
         <p class="forgot"><a href="forgotPassword.html">Forgot Password?</a></p>
         
-        <button class="button button-block">Log In</button>
+        <button class="button button-block" onclick="validateForm()">Log In</button>
         
         </form>
 
       </div>
       </div>
     </div>
-    
-
+    <script>
+    function validateForm() {
+      let x = document.forms["Login"]["email"].value;
+      let y = document.forms["Login"]["password"].value;
+      if (x == "student" && y == "student") {
+        window.location = 'studentProfile.html';
+      }
+      else if (x == "landlord" && y == "landlord") {
+        window.location = 'landlordProfile.html';
+      }
+      else if (x == "admin" && y == "admin") {
+        window.location = 'adminLanding.html';
+      }
+    }
+</script>
 </body>
 
 </html>
