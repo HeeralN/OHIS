@@ -20,33 +20,39 @@
 }</style>
 </head>
 <body>
-
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Messaging</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Listings</a></li>
-          <li><a href="#">Search Listings</a></li>
-        </ul>
-      </li>
-      <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Roommate Matching Form</a></li>
-          <li><a href="#">Roommate Matching Results</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="studentProfile.html">Profile</a></li>
+        <li><a href="studentMessaging.html">Messaging</a></li>
+        <li ><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editSubletPage.html">My Listings</a></li>
+            <li><a href="propertySearch.html">Search Listings</a></li>
+          </ul>
+        </li>
+        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
+            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+          </ul>
+        </li>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
 
 <div class="container mt-3">
   <h2>Your Roommate Preferences</h2>
