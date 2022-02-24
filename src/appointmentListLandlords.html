@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Booked Appointments</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="template.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    display:flex;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background: linear-gradient(#8b699b, gray);
+}</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="landlordProfile.html">Profile</a></li>
+        <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+<div class="container mt-3">
+  <form>
+  <h2>Booked Appointments</h2>
+  <p>Keep track and manage your booked appointments.</p>        
+  <table class="table">
+    <tbody>
+      <tr>
+        <th></th>
+        <th>Listing</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Student</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" id="checkbox1" value="listing1"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" id="checkbox2"  value="listing2"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+      <tr>
+        <td> <input type="checkbox" id="checkbox3" value="listing3"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+      <tr>
+        <td> <input type="checkbox" id="checkbox4" value="listing4"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+      <tr>
+        <td> <input type="checkbox" id="checkbox5" value="listing5"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+      <tr>
+        <td> <input type="checkbox" id="checkbox6"value="listing6"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary mt-3">Delete</button>
+</form> 
+</div>
+
+
+</body>
+</html>
