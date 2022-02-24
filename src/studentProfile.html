@@ -5,42 +5,118 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="template.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+  body {
+    display:flex;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background: linear-gradient(#8b699b, gray);
+  }
+  .container{
+    display:flex;
+    max-width:800px;
+    width:100%;
+    max-height:450px;
+    height:100%;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background: white;
+    padding: 20px 20px;
+  }
+  .container .left{
+    width:30%;
+    max-height:450px;
+    height:100%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: white;
+    padding: 30px 35px;
+    margin:0px;
+    text-align: center;
+  }
+  .container .left .img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 80px;
+    border: 1px solid gray;
+    width:100px;
+  }
+
+  .container .left img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    opacity: 0.5;
+  }
+  .container .right{
+    max-width:1000px;
+    width:60%;
+    max-height:450px;
+    height:100%;
+    padding: 30px 35px;
+    border-radius:80px;
+  }
+</style>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Profile</a></li>
-      <a href="#">Messaging</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Listings</a></li>
-          <li><a href="#">Search Listings</a></li>
-        </ul>
-      </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Roommate Matching Form</a></li>
-          <li><a href="#">Roommate Matching Results</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li class="active"><a href="studentProfile.html">Profile</a></li>
+        <li><a href="studentMessaging.html">Messaging</a></li>
+        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editSubletPage.html">My Listings</a></li>
+            <li><a href="propertySearch.html">Search Listings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
+            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+          </ul>
+        </li>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+
 
 <div class="container">
-  <h2>Navbar Button</h2>
-  <p>Student profile Page Hello</p>
-</div>
+  <div class="left">
+    <img class="img" src="images/student.png" alt="user" >
+    <h4>Full Name</h4>
+    <p>University</p>
+    <p>Email</p>
+  </div>
+  <div class="right">
+    <div class="info">
+      <h3>About Me</h3>
+      <div class="info_data">
+        <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+      </div>
+    </div>
 
+  </div>
+</div>
 </body>
 </html>
