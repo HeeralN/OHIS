@@ -94,19 +94,19 @@
       <img src="logo.png" alt="logo" class="logo">
     </div>
   </div>
-
+  
   <div class="container">
     <div class="title">Welcome Back</div>
     <br>
-    <form action="#">
+    <form action="#" id="Login">
       <div class="user-info">
         <div class="reg-box">
-          <span class="info">Email Address</span>
-          <input type=”text”  placeholder="University" required>
+          <span class="info">Username</span>
+          <input type=”text” id="email" placeholder="Username" required>
         </div>
         <div class="reg-box">
           <span class="info">Password</span>
-          <input type=”text”  placeholder="Password" required>
+          <input type=”text”  id="password" placeholder="Password" required>
         </div>
       </div>
       <p class="forgot"><a href="forgotPassword.html">Forgot Password?</a></p>
@@ -133,6 +133,12 @@
         window.location = 'adminLanding.html';
       }
     }
+</script>
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
 </script>
 </body>
 

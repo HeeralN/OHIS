@@ -90,23 +90,6 @@
             <img src="logo.png" width="50" height="50" alt="Logo">
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">Profile</a></li>
-            <li class="active"><a href="#">Messaging</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">My Listings</a></li>
-                    <li><a href="#">Search Listings</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Roommate Matching Form</a></li>
-                    <li><a href="#">Roommate Matching Results</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -145,6 +128,11 @@
         </div>
     </form>
 </div>
-
+<script>
+    function logout(){
+      alert("You have been logged out");
+      window.location='login.html';
+    }
+  </script>
 </body>
 </html>

@@ -25,6 +25,7 @@
       <ul class="nav navbar-nav navbar-collpase">
         <li><a href="landlordProfile.html">Profile</a></li>
         <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="editListingPage.html">My Listings</a></li>
@@ -33,16 +34,11 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
         </div>
     </div>
   </nav>
-
-<div class="container">
-  <h2>Navbar Button</h2>
-  <p>Landlord Edit Listing</p>
-</div>
 
 <div container-fluid>
   <div class="row">
@@ -52,7 +48,7 @@
           ​<br><br><br><br><br><br><br><br><br><br>
       </div>
       
-  </div>
+  
 
   <div class="col-sm-8" style="background-color:lightblue;">
       <br>
@@ -146,6 +142,12 @@
     </div>
   </div>
 </div>
-
+</div>
+<script>
+    function logout(){
+      alert("You have been logged out");
+      window.location='login.html';
+    }
+  </script>
 </body>
 </html>
