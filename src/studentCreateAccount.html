@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Master Admin Create Admin Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="template.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display:flex;
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+            padding:20px;
+            background: linear-gradient(#8b699b, gray);
+        }
+        .container{
+            max-width:700px;
+            width:100%;
+            max-height:450px;
+            height:100%;
+            background: white;
+            padding: 30px 35px;
+            border-radius:8px;
+        }
+
+        .container .title{
+            font-size: 30px;
+            font-weight:100;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container form .user-info{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        form .user-info .reg-box{
+            margin-bottom:25px;
+            width:calc(100%/2 - 25px);
+        }
+
+        .user-info .reg-box .info {
+            display:block;
+            font-weight:500;
+            margin-bottom:5px;
+        }
+        .user-info .reg-box input {
+            height:35px;
+            width:100%;
+            border-radius:8px;
+            padding-left: 8px;
+            font-size: 14px;
+        }
+        form .submit-button {
+            height:40px;
+            width:100%;
+            margin: 30px 0;
+            text-align: center;
+        }
+        form .submit-button input{
+            height:100%;
+            width:30%;
+            font-size: 19px;
+            color: black;
+            background-color: white;
+            outline:10px;
+            outline-color: #000;
+            border-color:black;
+            border-width: 2px;
+            border-radius: 50px;
+            font-weight:100;
+        }
+        form .submit-button input:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="logo.png" width="50" height="50" alt="Logo">
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Profile</a></li>
+            <li class="active"><a href="#">Messaging</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">My Listings</a></li>
+                    <li><a href="#">Search Listings</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Roommate Matching Form</a></li>
+                    <li><a href="#">Roommate Matching Results</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="title">Student Registration</div>
+    <form action="#">
+        <div class="user-info">
+            <div class="reg-box">
+                <span class="info">Full Name</span>
+                <input type=”text”  placeholder="Full Name" required>
+            </div>
+            <div class="reg-box">
+                <span class="info">Username</span>
+                <input type=”text”  placeholder="Username" required>
+            </div>
+            <div class="reg-box">
+                <span class="info">University</span>
+                <input type=”text”  placeholder="University" required>
+            </div>
+            <div class="reg-box">
+                <span class="info">Password</span>
+                <input type=”text”  placeholder="Password" required>
+            </div>
+            <div class="reg-box">
+                <span class="info">University Email Address</span>
+                <input type="email" placeholder="example@school.edu" required>
+            </div>
+            <div class="reg-box">
+                <span class="info">Confirm Password</span>
+                <input type=”text”  placeholder="Confirm Password" required>
+            </div>
+        </div>
+        <div class="submit-button">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
