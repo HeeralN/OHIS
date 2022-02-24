@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Roommate Matching Results</title>
+  <title>Booked Appointments</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -16,7 +16,6 @@
     align-items: center;
     padding:20px;
     background: linear-gradient(#8b699b, gray);
-  
 }</style>
 </head>
 <body>
@@ -28,6 +27,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Profile</a></li>
+      <li><a href="#">Messaging</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">My Listings</a></li>
@@ -47,58 +47,65 @@
   </div>
 </nav>
 
-
-
-
 <div class="container mt-3">
-  <h2>Your Roommate Results</h2>
-  <p>Below is a list of roommates that match your preferences!</p>        
+  <form>
+  <h2>Booked Appointments</h2>
+  <p>Keep track and manage your booked appointments.</p>        
   <table class="table">
     <tbody>
       <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Contact</th>
+        <th></th>
+        <th>Listing</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Student</th>
       </tr>
       <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td><input type="checkbox" id="checkbox1" value="listing1"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
       <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td><input type="checkbox" id="checkbox2"  value="listing2"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
       <tr>
-        <td>Ernst Handel</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td> <input type="checkbox" id="checkbox3" value="listing3"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
       <tr>
-        <td>Island Trading</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td> <input type="checkbox" id="checkbox4" value="listing4"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
       <tr>
-        <td>Laughing Bacchus Winecellars</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td> <input type="checkbox" id="checkbox5" value="listing5"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
       <tr>
-        <td>Magazzini Alimentari Riuniti</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td> <input type="checkbox" id="checkbox6"value="listing6"></td>
+        <td>Address</td>
+        <td>10/07/2022</td>
+        <td>5:20PM</td>
+        <td>Link to Student Profile</td>
       </tr>
     </tbody>
   </table>
+  <button type="submit" class="btn btn-primary mt-3">Delete</button>
+</form> 
 </div>
 
 
