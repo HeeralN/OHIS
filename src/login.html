@@ -98,15 +98,16 @@
   <div class="container">
     <div class="title">Welcome Back</div>
     <br>
-    <form action="#" id="Login">
+    <form action="/" method="post" id="Login">
       <div class="user-info">
         <div class="reg-box">
+
           <span class="info">Username</span>
-          <input type=”text” id="email" placeholder="Username" required>
+          <input type="email" id="email" placeholder="Username" required/>
         </div>
         <div class="reg-box">
           <span class="info">Password</span>
-          <input type=”text”  id="password" placeholder="Password" required>
+          <input type="password"  id="password" placeholder="Password" required/>
         </div>
       </div>
       <p class="forgot"><a href="forgotPassword.html">Forgot Password?</a></p>
@@ -133,12 +134,6 @@
         window.location = 'adminLanding.html';
       }
     }
-</script>
-<script>
-  function logout(){
-    alert("You have been logged out");
-    window.location='login.html';
-  }
 </script>
 </body>
 
