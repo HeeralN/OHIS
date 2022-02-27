@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Master Admin Create Admin Form</title>
+    <title>Create Student Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -96,42 +96,42 @@
 
 <div class="container">
     <div class="title">Student Registration</div>
-    <form action="#">
-        <div class="user-info">
-            <div class="reg-box">
-                <span class="info">Full Name</span>
-                <input type=”text”  placeholder="Full Name" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Username</span>
-                <input type=”text”  placeholder="Username" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">University</span>
-                <input type=”text”  placeholder="University" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Password</span>
-                <input type=”text”  placeholder="Password" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">University Email Address</span>
-                <input type="email" placeholder="example@school.edu" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Confirm Password</span>
-                <input type=”text”  placeholder="Confirm Password" required>
-            </div>
+    <form action="#" id="NewAccount">
+      <div class="user-info">
+        <div class="reg-box">
+          <span class="info">Full Name</span>
+          <input type=”text”  placeholder="Full Name" required>
         </div>
-        <div class="submit-button">
-            <input type="submit" value="Submit">
+        <div class="reg-box">
+          <span class="info">Username</span>
+          <input type=”text” id="username" placeholder="Username" required>
         </div>
+        <div class="reg-box">
+          <span class="info">University</span>
+          <input type="text" id="university" placeholder="University" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">Password (8 characters minimum): </span>
+          <input type="password" id="password" placeholder="Password" minlength="8" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">University Email Address</span>
+          <input type=”email” id="email" placeholder="example@school.edu" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">Confirm Password:</span>
+          <input type="password" id="confirm-password" name="password" minlength="8" placeholder="Password" required>
+        </div>
+      </div>
+      <div class="submit-button">
+        <input type="submit" value="Submit" onclick="viewProfile()">
+      </div>
     </form>
-</div>
+  </div>
+
 <script>
-    function logout(){
-      alert("You have been logged out");
-      window.location='login.html';
+    function viewProfile(){
+      window.location='studentProfile.html';
     }
   </script>
 </body>
