@@ -22,13 +22,16 @@
       width:100%;
       max-height:450px;
       height:100%;
-      background: e3f2fd;
-      padding: 30px 35px;
+      background: white;
+      padding: 40px 35px;
       border-radius:8px;
   }
   .logo-row {
-      width: 150px;
-      margin: 0 auto;
+    position:absolute;
+    align-items: center;
+    top:0;
+    margin-bottom:10px;
+    padding-bottom: 10px;
   }
   .logo {
       width: 200px;
@@ -38,7 +41,7 @@
   .container .title{
       font-size: 30px;
       font-weight:100;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       text-align: center;
   }
 
@@ -64,15 +67,14 @@
       padding-left: 8px;
       font-size: 14px;
   }
-  form .submit-button {
+  .submit-button button {
       height:40px;
-      width:100%;
-      margin: 30px 0;
-      text-align: center;
-  }
-  form .submit-button input{
-      height:100%;
-      width:30%;
+      padding: 5px 0 5px 0;
+      justify-content: center;
+      width:50%;
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 10px;
       font-size: 19px;
       color: black;
       background-color: white;
@@ -83,13 +85,13 @@
       border-radius: 50px;
       font-weight:100;
   }
-  form .submit-button input:hover {
+  .submit-button button:hover {
       box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
       opacity: 0.5;
   }
 </style>
 <body>
-  <div class="row">
+  <div class="logo-row">
     <div class="logo">
       <img src="logo.png" alt="logo" class="logo">
     </div>
@@ -101,28 +103,36 @@
     <form action="/" method="post" id="Login">
       <div class="user-info">
         <div class="reg-box">
-
           <span class="info">Username</span>
-          <input type="email" id="email" placeholder="Username" required/>
+          <input type="text" id="username" placeholder="Username" required/>
         </div>
         <div class="reg-box">
           <span class="info">Password</span>
           <input type="password"  id="password" placeholder="Password" required/>
         </div>
-      </div>
-      <p class="forgot"><a href="forgotPassword.html">Forgot Password?</a></p>
-      
-      <button class="button button-block" onclick="validateForm()">Log In</button>
-      
+      </div> 
     </form>
-      
-      <div class="submit-button">
-        <button class="button button-block"> Create a Landlord Account</button>
-      </div>
+
+    <p class="forgot"><a href="forgotPassword.html">Forgot Password?</a></p>
+    <div class="submit-button">
+      <button class="button-block" onclick="validateForm()">Log In</button>
     </div>
-    <script>
+    <div class="submit-button">
+      <button class="button-block" onclick="goToLandlordAcc()"> Create a Landlord Account</button>
+    </div>
+    <div class="submit-button">
+      <button class="button-block" onclick="goToStudentAcc()"> Create a Student Account</button>
+    </div>
+  </div>
+  <script>
+    function goToStudentAcc(){
+      window.location="studentCreateAccount.html";
+    }
+    function goToLandlordAcc(){
+      window.location='landlordCreateAccount.html';
+    }
     function validateForm() {
-      let x = document.forms["Login"]["email"].value;
+      let x = document.forms["Login"]["username"].value;
       let y = document.forms["Login"]["password"].value;
       if (x == "student" && y == "student") {
         window.location = 'studentProfile.html';
@@ -132,6 +142,9 @@
       }
       else if (x == "admin" && y == "admin") {
         window.location = 'adminLanding.html';
+      }
+      else{
+        alert("Username or password not found.");
       }
     }
 </script>
