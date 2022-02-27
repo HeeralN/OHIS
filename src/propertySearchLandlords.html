@@ -124,7 +124,7 @@
         <div class="container-fluid text-center bg-grey">
           <div class="row text-center">
             <div class="col-sm-4">
-              <div class="thumbnail">
+              <div class="thumbnail" onclick="openHousingProfile()">
                 <img src="apt.jpg" alt="apt1">
                 <p><strong>Hamtilton St</strong></p>
                 <p>3 bed 2 bath</p>
@@ -203,5 +203,10 @@
           window.location='login.html';
         }
       </script>
+       <script>
+        function openHousingProfile() {
+            window.location = 'housingProfile.html';
+        }
+    </script>
     </body>
     </html>
