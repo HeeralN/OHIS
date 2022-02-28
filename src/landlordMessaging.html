@@ -4,37 +4,127 @@
   <title>Landlord Messaging</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </head>
+<style>
+  body{
+    background-color: lavender;
+  }
+  footer {
+    bottom:0;
+    position:absolute;
+    width:100%;
+    padding:5px;
+  }
+</style>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Profile</a></li>
-      <li class="active"><a href="#">Messaging</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Listings</a></li>
-          <li><a href="#">Search Listings</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="landlordProfile.html">Profile</a></li>
+        <li class="active"><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+          </ul>
+        </li>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
 
-<div class="container">
-  <h2>Navbar Button</h2>
-  <p>Landlord Messaging</p>
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
+<table id="landlordMessages" class="table table-hover">
+  <thead>
+    <th class="col-md-1">Sender</th>
+    <th class="col-md-1">Subject</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Interested in Leasing</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Interested in Leasing</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Interested in Leasing</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Interested in Leasing</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body">
+        <div class="sender"><b>Sender: </b><span></span></div>
+        <div class="subject"><b>Subject: </b><span></span></div>
+        <div class="message"><b>Message: </b><span></span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Reply</button>
+      </div>
+    </div>
+  </div>
 </div>
+<footer class="container-fluid bg-4 text-center margin">
+  <p>Contact us at support@ohis.com</p>
+</footer>
+<script>
+  jQuery(document).ready(function($) {
+    $('#landlordMessages').DataTable({
+        searching: false,
+        responsive: true,
+        "autoWidth": false,
+    });
+    var table = $('#landlordMessages').DataTable();
+    $('#landlordMessages tbody').on('click', 'tr', function () {
+        console.log(table.row(this).data());
+        $(".modal-body div span").text("");
+        $(".sender span").text(table.row(this).data()[0]);
+        $(".subject span").text(table.row(this).data()[1]);
+        $(".message span").text("I was interested in your listing. Can you please tell me more?");
+        $("#myModal").modal("show");
+    });
+} );
+</script>
 
 </body>
 </html>

@@ -4,37 +4,147 @@
   <title>Landlord Create Listing</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Messaging</a></li>
-      <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Listings</a></li>
-          <li><a href="#">Search Listings</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="landlordProfile.html">Profile</a></li>
+        <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
+        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+          </ul>
+        </li>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+<div container-fluid>
+    <div class="row">
+        <div class="col-sm-4" style="background-color:lavender;">
+            <h4>Student's Full Name</h4>
+            <img class="img" src="images/landlord.jpg" width="150" height="150" alt="user">
+        </div>
 
-<div class="container">
-  <h2>Navbar Button</h2>
-  <p>Landlord Create Listing</p>
-</div>
-
+        <div class="col-sm-8" style="background-color:lightblue;">
+        <br>
+        <div class="rendered-form">
+            <div class="">
+                <h1 access="false" id="control-8418835">Make a listing:</h1>
+            </div>
+            <div class="formbuilder-text form-group field-address">
+                <label for="address" class="formbuilder-text-label">Address of Listing:<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="address" access="false" id="address" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-building-website">
+                <label for="building-website" class="formbuilder-text-label">Link to Building Website:</label>
+                <input type="text" class="form-control" name="building-website" access="false" id="building-website">
+            </div>
+            <div class="formbuilder-textarea form-group field-description-of-listing">
+                <label for="description-of-listing" class="formbuilder-textarea-label">Description of Listing:</label>
+                <textarea type="textarea" class="form-control" name="description-of-listing" access="false" id="description-of-listing"></textarea>
+            </div>
+            <div class="formbuilder-text form-group field-square-feet">
+                <label for="square-feet" class="formbuilder-text-label">Square Feet:<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="square-feet" access="false" id="square-feet" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-number-of-bath">
+                <label for="number-of-bath" class="formbuilder-text-label"># of Bath:<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="number-of-bath" access="false" id="number-of-bath" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-num-total-rooms">
+                <label for="num-total-rooms" class="formbuilder-text-label"># of Total Rooms<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="num-total-rooms" access="false" id="num-total-rooms" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-occupancy-date">
+                <label for="occupancy-date" class="formbuilder-text-label">Occupancy Date<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="occupancy-date" access="false" id="occupancy-date" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-lease-type">
+                <label for="lease-type" class="formbuilder-text-label">Lease Type:<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="lease-type" access="false" id="lease-type" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-rental-rate-range">
+                <label for="rental-rate-range" class="formbuilder-text-label">Rental Rate Range:<span class="formbuilder-required">*</span></label>
+                <input type="text" class="form-control" name="rental-rate-range" access="false" id="rental-rate-range" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-textarea form-group field-restrictions">
+                <label for="restrictions" class="formbuilder-textarea-label">Restrictions</label>
+                <textarea type="textarea" class="form-control" name="restrictions" access="false" id="restrictions"></textarea>
+            </div>
+            <div class="formbuilder-checkbox-group form-group field-amenities">
+                <label for="amenities" class="formbuilder-checkbox-group-label">Amenities Included:</label>
+                <div class="checkbox-group">
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-0" value="gym" type="checkbox">
+                        <label for="amenities-0">Gym</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-1" value="pool" type="checkbox">
+                        <label for="amenities-1">Pool</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-2" value="laundry" type="checkbox">
+                        <label for="amenities-2">Laundry</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-3" value="parking" type="checkbox">
+                        <label for="amenities-3">Parking</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-4" value="furnished" type="checkbox">
+                        <label for="amenities-4">Furnished</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-5" value="dishwasher" type="checkbox">
+                        <label for="amenities-5">Dishwasher</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-6" value="hardwood-floors" type="checkbox">
+                        <label for="amenities-6">Hardwood Floors</label>
+                    </div>
+                    <div class="formbuilder-checkbox">
+                        <input name="amenities[]" access="false" id="amenities-7" value="carpeted-floors" type="checkbox">
+                        <label for="amenities-7">Carpeted Floors</label>
+                    </div>
+                </div>
+            </div>
+            <div class="formbuilder-button form-group field-publish-listing">
+                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing">Publish Listing</button>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+    <footer class="container-fluid bg-4 text-center margin">
+        <p>Contact us at support@ohis.com</p>
+      </footer>
+    <script>
+        function logout(){
+          alert("You have been logged out");
+          window.location='login.html';
+        }
+      </script>
 </body>
+
 </html>

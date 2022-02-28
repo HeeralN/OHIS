@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Master Admin Create Admin Form</title>
+    <title>Create Student Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -79,6 +79,17 @@
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
             opacity: 0.5;
         }
+        #button {
+            position:absolute; top:60px; left:10px;
+        }
+        footer {
+            margin-left:0;
+            bottom:0;
+            left:0px; right:0px;
+            position:absolute;
+            padding:5px;
+            width:100%;
+        }
     </style>
 </head>
 <body>
@@ -87,64 +98,56 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
     <div class="container-fluid">
         <div class="navbar-header">
-            <img src="logo.png" width="50" height="50" alt="Logo">
+            <img src="images/logo.png" width="50" height="50" alt="Logo">
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">Profile</a></li>
-            <li class="active"><a href="#">Messaging</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">My Listings</a></li>
-                    <li><a href="#">Search Listings</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Roommate Matching Form</a></li>
-                    <li><a href="#">Roommate Matching Results</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
 
+<button type="button" class="btn" id="button">
+    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a>
 <div class="container">
     <div class="title">Student Registration</div>
-    <form action="#">
-        <div class="user-info">
-            <div class="reg-box">
-                <span class="info">Full Name</span>
-                <input type=”text”  placeholder="Full Name" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Username</span>
-                <input type=”text”  placeholder="Username" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">University</span>
-                <input type=”text”  placeholder="University" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Password</span>
-                <input type=”text”  placeholder="Password" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">University Email Address</span>
-                <input type="email" placeholder="example@school.edu" required>
-            </div>
-            <div class="reg-box">
-                <span class="info">Confirm Password</span>
-                <input type=”text”  placeholder="Confirm Password" required>
-            </div>
+    <form action="#" id="NewAccount">
+      <div class="user-info">
+        <div class="reg-box">
+          <span class="info">Full Name</span>
+          <input type=”text”  placeholder="Full Name" required>
         </div>
-        <div class="submit-button">
-            <input type="submit" value="Submit">
+        <div class="reg-box">
+          <span class="info">Username</span>
+          <input type=”text” id="username" placeholder="Username" required>
         </div>
+        <div class="reg-box">
+          <span class="info">University</span>
+          <input type="text" id="university" placeholder="University" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">Password (8 characters minimum): </span>
+          <input type="password" id="password" placeholder="Password" minlength="8" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">University Email Address</span>
+          <input type=”email” id="email" placeholder="example@school.edu" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+        </div>
+        <div class="reg-box">
+          <span class="info">Confirm Password:</span>
+          <input type="password" id="confirm-password" name="password" minlength="8" placeholder="Password" required>
+        </div>
+      </div>
+      <div class="submit-button">
+        <input type="submit" value="Submit" onclick="viewProfile()">
+      </div>
     </form>
 </div>
-
+<footer class="container-fluid bg-4 text-center margin">
+    <p>Contact us at support@ohis.com</p>
+  </footer>
+<script>
+    function viewProfile(){
+      window.location='studentProfile.html';
+    }
+  </script>
 </body>
 </html>

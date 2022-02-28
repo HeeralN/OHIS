@@ -4,32 +4,51 @@
   <title>Admin Manage Listings</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+  body {
+    background: lavender;
+  }
+  container{
+    margin-top: 30px;
+    margin-right:50px;
+  }
+</style>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Manage Accounts</a></li>
-      <li class="active"><a href="#">Manage Listings</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="adminManagingUsers.html">Manage Accounts</a></li>
+          <li><a href="adminManagingListings.html">Manage Listings</a></li>
+          <li><a href="masterAdminCreateAdminAccounts.html">Create a Admin Account</a></li>
+        </ul>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
 
 <div class="container">
-  <h2>Navbar Button</h2>
-  <p>Admin Manage Listings</p>
+  <h2>Manage Listings</h2>
 
-  <div class="input-group">
+  <div class="input-group" >
     <input type="number" class="form-control" id="housingListingID" placeholder="Enter Housing Listing ID">
     <span class="input-group-btn" style="width:0;">
         <button href="#housingListingProfile" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button>
@@ -57,7 +76,12 @@
   </div>
 </div>
 
-
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
 
 </body>
 </html>

@@ -62,36 +62,52 @@
     padding: 30px 35px;
     border-radius:80px;
   }
+  footer {
+    margin-left:0;
+    bottom:0;
+    left:0px; right:0px;
+    position:absolute;
+    padding:5px;
+    width:100%;
+  }
 </style>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li class="active"><a href="studentProfile.html">Profile</a></li>
+        <li><a href="studentMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListStudents.html">Appointments</a></li>
+        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editSubletPage.html">My Listings</a></li>
+            <li><a href="propertySearch.html">Search Listings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
+            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Profile</a></li>
-      <li class="active"><a href="#">Messaging</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Listings</a></li>
-          <li><a href="#">Search Listings</a></li>
-        </ul>
-      </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Roommate Matching Form</a></li>
-          <li><a href="#">Roommate Matching Results</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
+  </nav>
 
 
 <div class="container">
@@ -111,5 +127,14 @@
 
   </div>
 </div>
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
+<footer class="container-fluid bg-4 text-center margin">
+  <p>Contact us at support@ohis.com</p>
+</footer>
 </body>
 </html>

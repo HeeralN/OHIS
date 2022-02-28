@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div class="container-fluid">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -19,12 +19,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <img src="logo.png" width="50" height="50" alt="Logo">
+      <img src="images/logo.png" width="50" height="50" alt="Logo">
     </div>
     <div id="myNavbar">
     <ul class="nav navbar-nav navbar-collpase">
       <li><a href="studentProfile.html">Profile</a></li>
       <li><a href="studentMessaging.html">Messaging</a></li>
+      <li><a href="appointmentListStudents.html">Appointments</a></li>
       <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="editSubletPage.html">My Listings</a></li>
@@ -39,22 +40,20 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
       </div>
   </div>
 </nav>
 
-<div class="container-fluid">
-  <h2>Navbar Button</h2>
-</div>
-<button type="button" class="btn btn-secondary btn-xs" href="propertySearch.html" style="margin-left: 10px; margin-bottom: 10px;">
-<span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br>
+
+<!--<button type="button" class="btn btn-secondary btn-xs" href="propertySearch.html" style="margin-left: 10px; margin-bottom: 10px;">
+<button><span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br>-->
 <div class="row">
   <div class="col-sm-2">
 
     <label style="margin-top: 10px; margin-bottom: 10px"><span class="label label-default">New</span> Private and Safe 3 Bedroom Apartment Close to Campus</label><br>
-    <img src="apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
+    <img src="images/apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
     <div class="btn-group-vertical">
     <button class="btn btn-primary" href="studentMessaging.html">Contact Landlord</button>
     <button type="button" class="btn btn-primary">Book Viewing</button>
@@ -73,15 +72,15 @@
 
       <div class="carousel-inner">
         <div class="item active">
-          <img src="apt.jpg" alt="apt1">
+          <img src="images/apt.jpg" alt="apt1">
         </div>
     
         <div class="item">
-          <img src="apt2.jpg" alt="apt2">
+          <img src="images/apt2.jpg" alt="apt2">
         </div>
 
         <div class="item">
-          <img src="apt6.jpg" alt="apt3">
+          <img src="images/apt6.jpg" alt="apt3">
         </div>
       </div>
     
@@ -163,8 +162,15 @@
   </div>
 </div>
 </div>
+</div>
 <footer class="container-fluid bg-4 text-center margin">
   <p>Contact us at support@ohis.com</p>
 </footer>
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
 </body>
 </html>
