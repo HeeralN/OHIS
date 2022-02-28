@@ -79,6 +79,17 @@
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
             opacity: 0.5;
         }
+        #button {
+            position:absolute; top:60px; left:10px;
+        }
+        footer {
+            margin-left:0;
+            bottom:0;
+            left:0px; right:0px;
+            position:absolute;
+            padding:5px;
+            width:100%;
+        }
     </style>
 </head>
 <body>
@@ -87,13 +98,15 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
     <div class="container-fluid">
         <div class="navbar-header">
-            <img src="logo.png" width="50" height="50" alt="Logo">
+            <img src="images/logo.png" width="50" height="50" alt="Logo">
         </div>
         <ul class="nav navbar-nav">
         </ul>
     </div>
 </nav>
 
+<button type="button" class="btn" id="button">
+    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a>
 <div class="container">
     <div class="title">Student Registration</div>
     <form action="#" id="NewAccount">

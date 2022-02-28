@@ -14,7 +14,7 @@
             height:100vh;
             justify-content: center;
             align-items: center;
-            padding:20px;
+            padding:40px;
             background: linear-gradient(#8b699b, gray);
         }
         .container{
@@ -76,6 +76,15 @@
             border-radius: 50px;
             font-weight:100;
         }
+        footer {
+            bottom:0;
+            position:absolute;
+            width:100%;
+            padding:5px;
+        }
+        #button {
+            position:absolute; top:60px; left:10px;
+        }
     </style>
 </head>
 <body>
@@ -83,15 +92,17 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
     <div class="container-fluid">
         <div class="navbar-header">
-            <img src="logo.png" width="50" height="50" alt="Logo">
+            <img src="images/logo.png" width="50" height="50" alt="Logo">
         </div>
         <ul class="nav navbar-nav">   
         </ul>
     </div>
 </nav>
 
-
+<button type="button" class="btn" id="button">
+    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a>
 <div class="container">
+
     <div class="title">Landlord Registration</div>
     <form action="#">
         <div class="user-info">

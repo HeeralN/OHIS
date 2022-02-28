@@ -67,6 +67,9 @@
       padding-left: 8px;
       font-size: 14px;
   }
+  .submit-button {
+    margin: 15px;
+  }
   .submit-button button {
       height:40px;
       padding: 5px 0 5px 0;
@@ -89,14 +92,18 @@
       box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
       opacity: 0.5;
   }
+  footer {
+    bottom:0;
+    position:absolute;
+  }
 </style>
 <body>
   <div class="logo-row">
     <div class="logo">
-      <img src="logo.png" alt="logo" class="logo">
+      <img src="images/logo.png" alt="logo" class="logo">
     </div>
   </div>
-  
+
   <div class="container">
     <div class="title">Welcome Back</div>
     <br>
@@ -147,8 +154,9 @@
         alert("Username or password not found.");
       }
     }
+
 </script>
-<footer class="container-fluid bg-4 text-center margin">
+<footer class="container-fluid bg-4 text-center margin" id="footer">
   <p>Contact us at support@ohis.com</p>
 </footer>
 </body>
