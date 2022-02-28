@@ -4,43 +4,55 @@
   <title>Landlord Listing Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+  .row #button {
+    padding-top:10px;
+    background-color: white;
+  }
+</style>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="landlordProfile.html">Profile</a></li>
-      <li><a href="landlordMessaging.html">Messaging</a></li>
-      <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="editListingPage.html">My Listings</a></li>
-          <li><a href="propertySearchLandlords.html">Search Listings</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="landlordProfile.html">Profile</a></li>
+        <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
+        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+          </ul>
+        </li>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
 
-<div class="container">
-  <h2>Navbar Button</h2>
-</div>
-<button type="button" class="btn">
-  <a href="propertySearchLandlords.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a> <br><br>
   <div class="row">
     <div class="col-sm-3" style="background-color:lavender;">
-      <br>
+      <button type="button" class="btn" id="button">
+        <a href="propertySearchLandlords.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a>
+      <br> </br>
       <label><span class="label label-default">New</span> Private and Safe 3 Bedroom Apartment Close to Campus</label><br>
-      <img src="apt.jpg" class="img-rounded" alt="apt1"> <br> <br>
+      <img src="images/apt.jpg" class="img-rounded" alt="apt1"> <br> <br>
       <div class="btn-group-vertical">
       <button type="button" class="btn btn-info disabled">Contact Landlord</button>
       <button type="button" class="btn btn-info disabled">Book Viewing</button>
@@ -60,15 +72,15 @@
   
         <div class="carousel-inner">
           <div class="item active">
-            <img src="apt.jpg" alt="apt1">
+            <img src="images/apt.jpg" alt="apt1">
           </div>
       
           <div class="item">
-            <img src="apt2.jpg" alt="apt2">
+            <img src="images/apt2.jpg" alt="apt2">
           </div>
   
           <div class="item">
-            <img src="apt6.jpg" alt="apt3">
+            <img src="images/apt6.jpg" alt="apt3">
           </div>
         </div>
       
@@ -151,6 +163,15 @@
     </div>
   </div>
   </div>
+  <footer class="container-fluid bg-4 text-center margin">
+    <p>Contact us at support@ohis.com</p>
+  </footer>
+  <script>
+    function logout(){
+      alert("You have been logged out");
+      window.location='login.html';
+    }
+  </script>
   </body>
   </html>
   

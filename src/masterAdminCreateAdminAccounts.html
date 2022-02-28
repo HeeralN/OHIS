@@ -4,101 +4,154 @@
   <title>Master Admin Create Admin Form</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+  body {
+    display:flex;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background: linear-gradient(#8b699b, gray);
+  }
+  .container{
+    max-width:700px;
+    width:100%;
+    max-height:450px;
+    height:100%;
+    background: white;
+    padding: 30px 35px;
+    border-radius:8px;
+  }
+
+  .container .title{
+    font-size: 30px;
+    font-weight:100;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .container form .user-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  form .user-info .reg-box{
+    margin-bottom:25px;
+    width:calc(100%/2 - 25px);
+  }
+
+  .user-info .reg-box .info {
+    display:block;
+    font-weight:500;
+    margin-bottom:5px;
+  }
+  .user-info .reg-box input {
+    height:35px;
+    width:100%;
+    border-radius:8px;
+    padding-left: 8px;
+    font-size: 14px;
+  }
+  form .submit-button {
+    height:40px;
+    width:100%;
+    margin: 30px 0;
+    text-align: center;
+  }
+  form .submit-button input{
+    height:100%;
+    width:30%;
+    font-size: 19px;
+    color: black;
+    background-color: white;
+    outline:10px;
+    outline-color: #000;
+    border-color:black;
+    border-width: 2px;
+    border-radius: 50px;
+    font-weight:100;
+  }
+  form .submit-button input:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    opacity: 0.5;
+  }
+</style>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#">Manage Accounts</a></li>
-      <li><a href="#">Manage Listings</a></li>
-      <li class="active"><a href="#">Create a Admin Account</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <ul class="nav navbar-nav">
+          <li><a href="adminManagingUsers.html">Manage Accounts</a></li>
+          <li><a href="adminManagingListings.html">Manage Listings</a></li>
+          <li class="active"><a href="masterAdminCreateAdminAccounts.html">Create a Admin Account</a></li>
+        </ul>
       </ul>
-  </div>
-</nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+
 
 <div class="container">
-  <h2>Navbar Button</h2>
-  <p style="text-align:left">Master Admin Create Admin Form</p>
+  <div class="title">Admin Registration</div>
+  <form action="#">
+    <div class="user-info">
+      <div class="reg-box">
+        <span class="info">Full Name</span>
+        <input type=”text”  placeholder="Full Name" required>
+      </div>
+      <div class="reg-box">
+        <span class="info">Company ID</span>
+        <input type=”text” id="companyID" placeholder="Company ID" required>
+      </div>
+      <div class="reg-box">
+        <span class="info">Phone Number</span>
+        <input type="tel" id="phone-number" placeholder=111-222-3333 id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+      </div>
+      <div class="reg-box">
+        <span class="info">Email </span>
+        <input type="email" id="email" placeholder="example@gmail.com" required>
+      </div>
+      <div class="reg-box">
+        <span class="info">Username</span>
+        <input type=”text” id="username" placeholder="Username" required>
+      </div>
+      <div class="reg-box">
+        <label for="pass">Password (8 characters minimum):</label>
+        <input type="password" id="pass" name="password" minlength="8" placeholder="Password" required>
+      
+      </div>
+    </div>
+    <div class="submit-button">
+      <input type="submit" value="Submit" onclick="submit()">
+    </div>
+  </form>
 </div>
-<form>
-  <table class="center">
-    <tr>
-      <td>
-        <label>First Name:</label>
-      </td>
-
-      <td>
-        <input type=”text”  placeholder=First name=””>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label>Last Name:</label>
-      </td>
-
-      <td>
-        <input type=”text”  placeholder=Last name=””>
-      </td>
-    <tr>
-    <tr>
-      <td>
-        <label>Phone Number:</label>
-      </td>
-
-      <td>
-        <input type="tel" placeholder=111-222-3333 id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label>Email:</label>
-      </td>
-
-      <td>
-        <input type="email" placeholder=example@gmail.com id="email" name="email">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label>Company ID:</label>
-      </td>
-
-      <td>
-        <input type=”text” placeholder=Id name=””>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label>Username:</label>
-      </td>
-
-      <td>
-        <input type="text" placeholder=Username&quot name="">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label>Password:</label>
-      </td>
-
-      <td>
-        <input type=”Password” placeholder=Password name=””>
-      </td>
-    </tr>
-
-  </table>
-  <input type="submit" value="Submit">
-  <input type="reset">
-</form>
+<script>
+  function submit(){
+      window.location='landlordProfile.html';
+    }
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
 </body>
 </html>
