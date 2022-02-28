@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>View Student Sublet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="template.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    display:flex;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background: linear-gradient(#8b699b, gray);
+}
+  footer {
+    bottom:0;
+    position:absolute;
+    width:100%;
+    padding:5px;
+  }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li><a href="landlordProfile.html">Profile</a></li>
+        <li><a href="landlordMessaging.html">Messaging</a></li>
+        <li><a href="appointmentListLandlords.html">Appointments</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="active"><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+<div class="container mt-3">
+    <form>
+    <h2>View/Edit Sublet</h2>
+    <p>Students can have at max 1 sublet listing. If you wish to add more, create a landlord account.</p>
+    <p>Click on a listing if you wish to edit it.</p>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Listing ID</th>
+            <th>Date Listed</th>
+            <th>Lease Date</th>
+        </tr>
+        <tr>
+            <th><p class="listing"><a href="editSubletPage.html">ID_1</a></p></th>
+            <td>10/07/2022</td>
+            <td>12/23/2022</td>
+        </tr>
+
+        </tbody>
+    </table>
+    
+      <button type="button" class="btn btn-primary mt-3" onclick="createListing()">Create Listing</button>
+     
+  </form> 
+</div>
+<script>
+    function createListing(){
+        window.location="createSubletPage.html";
+    }
+</script>
+<footer class="container-fluid bg-4 text-center margin">
+  <p>Contact us at support@ohis.com</p>
+</footer>
+</body>
+</html>

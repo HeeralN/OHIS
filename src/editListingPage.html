@@ -28,7 +28,7 @@
         <li><a href="appointmentListLandlords.html">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="viewLandlordListings.html">My Listings</a></li>
             <li><a href="propertySearchLandlords.html">Search Listings</a></li>
           </ul>
         </li>
@@ -54,7 +54,7 @@
       <br>
     <div class="rendered-form">
       <div class="">
-          <h1 access="false" id="control-8418835">Make a listing:</h1></div>
+          <h1 access="false" id="control-8418835">Edit listing:</h1></div>
       <div class="formbuilder-text form-group field-address">
           <label for="address" class="formbuilder-text-label">Address of Listing:<span class="formbuilder-required">*</span></label>
           <input type="text" class="form-control" name="address" access="false" id="address" required="required" aria-required="true">
@@ -133,11 +133,11 @@
           </div>
       </div>
       <div class="formbuilder-button form-group field-publish-listing">
-        <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing">Publish Edits</button>
+        <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing" onclick="publishListing()">Publish Edits</button>
         </div>
         
         <div class="formbuilder-button form-group field-delete-listing">
-        <button type="button" class="btn btn-danger" name="delete-listing" access="false" id="delete-listing">Delete Listing</button>
+        <button type="button" class="btn btn-danger" name="delete-listing" access="false" id="delete-listing" onclick="deleteListing()">Delete Listing</button>
         </div>
     </div>
   </div>
@@ -147,6 +147,13 @@
   <p>Contact us at support@ohis.com</p>
 </footer>
 <script>
+    function publishListing(){
+      window.location='viewLandlordListings.html';
+    }
+    function deleteListing(){
+      alert("Listing has been deleted.");
+      window.location='viewLandlordListings.html';
+    }
     function logout(){
       alert("You have been logged out");
       window.location='login.html';
