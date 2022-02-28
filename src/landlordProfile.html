@@ -17,11 +17,11 @@
     align-items: center;
     padding:20px;
     background: linear-gradient(#8b699b, gray);
+    overflow: hidden;
   }
   .container{
     display:flex;
     max-width:800px;
-    width:100%;
     max-height:450px;
     height:100%;
     border: 3px solid black;
@@ -56,12 +56,19 @@
     opacity: 0.5;
   }
   .container .right{
-    max-width:1000px;
     width:60%;
     max-height:450px;
     height:100%;
     padding: 30px 35px;
     border-radius:80px;
+  }
+  footer {
+    margin-left:0;
+    bottom:0;
+    left:0px; right:0px;
+    position:absolute;
+    padding:5px;
+    width:100%;
   }
 </style>
 <body>
@@ -74,7 +81,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
         </button>
-        <img src="logo.png" width="50" height="50" alt="Logo">
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
@@ -109,11 +116,17 @@
         <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
       </div>
     </div>
+  </div>
+  <footer class="container-fluid bg-4 text-center margin">
+    <p>Contact us at support@ohis.com</p>
+  </footer>
     <script>
       function logout(){
         alert("You have been logged out");
         window.location='login.html';
       }
     </script>
+
 </body>
+
 </html>

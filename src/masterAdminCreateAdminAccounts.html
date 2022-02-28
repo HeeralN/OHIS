@@ -91,7 +91,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
         </button>
-        <img src="logo.png" width="50" height="50" alt="Logo">
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
@@ -119,31 +119,35 @@
       </div>
       <div class="reg-box">
         <span class="info">Company ID</span>
-        <input type=”text”  placeholder="Company ID" required>
+        <input type=”text” id="companyID" placeholder="Company ID" required>
       </div>
       <div class="reg-box">
         <span class="info">Phone Number</span>
-        <input type="tel" placeholder=111-222-3333 id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <input type="tel" id="phone-number" placeholder=111-222-3333 id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
       </div>
       <div class="reg-box">
         <span class="info">Email </span>
-        <input type="email" placeholder="example@gmail.com" required>
+        <input type="email" id="email" placeholder="example@gmail.com" required>
       </div>
       <div class="reg-box">
         <span class="info">Username</span>
-        <input type=”text”  placeholder="Username" required>
+        <input type=”text” id="username" placeholder="Username" required>
       </div>
       <div class="reg-box">
-        <span class="info">Temporary Password</span>
-        <input type=”text”  placeholder="Temporary Password" required>
+        <label for="pass">Password (8 characters minimum):</label>
+        <input type="password" id="pass" name="password" minlength="8" placeholder="Password" required>
+      
       </div>
     </div>
     <div class="submit-button">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" onclick="submit()">
     </div>
   </form>
 </div>
 <script>
+  function submit(){
+      window.location='landlordProfile.html';
+    }
   function logout(){
     alert("You have been logged out");
     window.location='login.html';
