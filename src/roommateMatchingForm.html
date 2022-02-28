@@ -51,7 +51,7 @@
 <div class="container mt-3">
   <h2>Your Roommate Preferences</h2>
   <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-  <form action ="/roommateMatchingFormEdit.html" >  
+
   <table class="table">
     <tbody>
       <tr>
@@ -110,10 +110,20 @@
       </tr>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-primary mt-3">Edit</button>
-</form>  
+  <button class="btn btn-primary mt-3" onclick="gotoEdit()">Edit</button>
+
 </div>
-
-
+<footer class="container-fluid bg-4 text-center margin">
+  <p>Contact us at support@ohis.com</p>
+</footer>
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+  function gotoEdit(){
+    window.location='roommateMatchingFormEdit.html';
+  }
+</script>
 </body>
 </html>
