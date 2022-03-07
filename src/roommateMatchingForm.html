@@ -46,7 +46,7 @@
         <li><a href="appointmentListStudents.html">Appointments</a></li>
         <li ><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="editSubletPage.html">My Listings</a></li>
+            <li><a href="viewStudentSublet.html">My Listings</a></li>
             <li><a href="propertySearch.html">Search Listings</a></li>
           </ul>
         </li>
@@ -67,7 +67,7 @@
 <div class="container mt-3">
   <h2>Your Roommate Preferences</h2>
   <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-  <form action ="/roommateMatchingFormEdit.html" >  
+
   <table class="table">
     <tbody>
       <tr>
@@ -126,8 +126,9 @@
       </tr>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-primary mt-3">Edit</button>
-</form>  
+
+  <button class="btn btn-primary mt-3" onclick="gotoEdit()">Edit</button>
+
 </div>
 <footer class="container-fluid bg-4 text-center margin">
   <p>Contact us at support@ohis.com</p>
@@ -136,6 +137,10 @@
   function logout(){
     alert("You have been logged out");
     window.location='login.html';
+  }
+
+  function gotoEdit(){
+    window.location='roommateMatchingFormEdit.html';
   }
 </script>
 </body>

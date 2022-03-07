@@ -28,7 +28,7 @@
         <li><a href="appointmentListLandlords.html">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="editListingPage.html">My Listings</a></li>
+            <li><a href="viewLandlordListings.html">My Listings</a></li>
             <li><a href="propertySearchLandlords.html">Search Listings</a></li>
           </ul>
         </li>
@@ -42,7 +42,7 @@
 <div container-fluid>
     <div class="row">
         <div class="col-sm-4" style="background-color:lavender;">
-            <h4>Student's Full Name</h4>
+            <h4>Landlord's Full Name</h4>
             <img class="img" src="images/landlord.jpg" width="150" height="150" alt="user">
         </div>
 
@@ -130,16 +130,20 @@
                 </div>
             </div>
             <div class="formbuilder-button form-group field-publish-listing">
-                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing">Publish Listing</button>
+                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing" onclick="viewLandlordListings()">Publish Listing</button>
             </div>
         </div>
     
+    </div>
     </div>
     </div>
     <footer class="container-fluid bg-4 text-center margin">
         <p>Contact us at support@ohis.com</p>
       </footer>
     <script>
+        function viewLandlordListings(){
+            window.location='viewLandlordListings.html';
+        }
         function logout(){
           alert("You have been logged out");
           window.location='login.html';
