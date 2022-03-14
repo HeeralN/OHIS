@@ -58,7 +58,8 @@ app.post('/auth/index', function(req, res) {
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
-                res.redirect('/studentProfile');
+                res.send("YAYYY!")
+                //res.redirect('/studentProfile');
             } else {
                 res.send('Incorrect Username and/or Password!');
             }
