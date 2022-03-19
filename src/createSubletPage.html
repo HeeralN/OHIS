@@ -29,7 +29,7 @@
         <li><a href="appointmentListStudents.html">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="editSubletPage.html">My Listings</a></li>
+            <li><a href="viewStudentSublet.html">My Listings</a></li>
             <li><a href="propertySearch.html">Search Listings</a></li>
           </ul>
         </li>
@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="formbuilder-button form-group field-publish-listing">
-                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing">Publish Listing</button>
+                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing" onclick="publishListing()">Publish Listing</button>
             </div>
         </div>
     </div>
@@ -152,6 +152,9 @@
     <p>Contact us at support@ohis.com</p>
   </footer>
 <script>
+    function publishListing(){
+      window.location='viewStudentSublet.html';
+    }
     function logout(){
       alert("You have been logged out");
       window.location='login.html';
