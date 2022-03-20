@@ -9,9 +9,44 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+  input, label {
+      margin: 5px 5px;
+  }
 
+  .form-group {
+      width: 450px;
+  }
+
+  .form-control {
+      float: left;
+  }
+
+  #inputCity {
+      width: 50%;
+  }
+
+  #inputState {
+      width: 15%;
+  }
+
+  #inputZip {
+      width: 28%;
+  }
+
+  #inputCounty {
+      width: 45%;
+  }
+
+  #inputCountry {
+      width: 50%;
+  }
+
+  #inputsquare-feet{
+      width: 15%;
+  }
+</style>
 <body>
-
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -49,102 +84,103 @@
 
 
 <div container-fluid>
-    <div class="row">
+  <div class="row">
       <div class="col-sm-4" style="background-color:lavender;">
-            <h4>Student's Full Name</h4>
+            <h4>Student Jane Doe</h4>
             <img class="img" src="images/landlord.jpg" width="150" height="150" alt="user">
-            ​<br><br><br><br><br><br><br><br><br><br>
         </div>
 
     <div class="col-sm-8" style="background-color:lightblue;">
         <br>
         <div class="rendered-form">
-            <div class="">
-                <h1 access="false" id="control-2549505">Make a listing:</h1></div>
-            <div class="formbuilder-text form-group field-address">
-                <label for="address" class="formbuilder-text-label">Address of Listing:<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="address" access="false" id="address" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-building-website">
-                <label for="building-website" class="formbuilder-text-label">Link to Building Website:</label>
-                <input type="text" class="form-control" name="building-website" access="false" id="building-website">
-            </div>
-            <div class="formbuilder-textarea form-group field-description-of-listing">
-                <label for="description-of-listing" class="formbuilder-textarea-label">Description of Listing:</label>
-                <textarea type="textarea" class="form-control" name="description-of-listing" access="false" id="description-of-listing"></textarea>
-            </div>
-            <div class="formbuilder-text form-group field-square-feet">
-                <label for="square-feet" class="formbuilder-text-label">Square Feet:<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="square-feet" access="false" id="square-feet" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-number-of-bath">
-                <label for="number-of-bath" class="formbuilder-text-label"># of Bath:<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="number-of-bath" access="false" id="number-of-bath" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-num-total-rooms">
-                <label for="num-total-rooms" class="formbuilder-text-label"># of Total Rooms<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="num-total-rooms" access="false" id="num-total-rooms" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-num-unoccupied-rooms">
-                <label for="num-unoccupied-rooms" class="formbuilder-text-label"># of Unoccupied Rooms<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="num-unoccupied-rooms" access="false" id="num-unoccupied-rooms" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-occupancy-date">
-                <label for="occupancy-date" class="formbuilder-text-label">Occupancy Date<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="occupancy-date" access="false" id="occupancy-date" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-lease-type">
-                <label for="lease-type" class="formbuilder-text-label">Lease Type:<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="lease-type" access="false" id="lease-type" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-text form-group field-rental-rate-range">
-                <label for="rental-rate-range" class="formbuilder-text-label">Rental Rate Range:<span class="formbuilder-required">*</span></label>
-                <input type="text" class="form-control" name="rental-rate-range" access="false" id="rental-rate-range" required="required" aria-required="true">
-            </div>
-            <div class="formbuilder-textarea form-group field-restrictions">
-                <label for="restrictions" class="formbuilder-textarea-label">Restrictions</label>
-                <textarea type="textarea" class="form-control" name="restrictions" access="false" id="restrictions"></textarea>
-            </div>
-            <div class="formbuilder-checkbox-group form-group field-amenities">
-                <label for="amenities" class="formbuilder-checkbox-group-label">Amenities Included:</label>
-                <div class="checkbox-group">
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-0" value="gym" type="checkbox">
-                        <label for="amenities-0">Gym</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-1" value="pool" type="checkbox">
-                        <label for="amenities-1">Pool</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-2" value="laundry" type="checkbox">
-                        <label for="amenities-2">Laundry</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-3" value="parking" type="checkbox">
-                        <label for="amenities-3">Parking</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-4" value="furnished" type="checkbox">
-                        <label for="amenities-4">Furnished</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-5" value="dishwasher" type="checkbox">
-                        <label for="amenities-5">Dishwasher</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-6" value="hardwood-floors" type="checkbox">
-                        <label for="amenities-6">Hardwood Floors</label>
-                    </div>
-                    <div class="formbuilder-checkbox">
-                        <input name="amenities[]" access="false" id="amenities-7" value="carpeted-floors" type="checkbox">
-                        <label for="amenities-7">Carpeted Floors</label>
-                    </div>
-                </div>
-            </div>
-            <div class="formbuilder-button form-group field-publish-listing">
-                <button type="button" class="btn-default btn" name="publish-listing" access="false" id="publish-listing" onclick="publishListing()">Publish Listing</button>
-            </div>
+          <h1 id="control-8418835">Make a Sublet Listing</h1>
+
+          <form id="listingForm">
+              <!-- Address -->
+              <label for="address" class="">Address of Listing: *</label>
+              <div class="form-group">
+                  <input type="text" class="form-control" id="street" placeholder="Street" required>
+                  <input type="text" class="form-control" id="inputCity" placeholder="City" required>
+                  <input type="text" class="form-control" id="inputState" placeholder="State" value="NJ" required>
+                  <input type="number" pattern="[0-9]{5}" class="form-control" id="inputZip" placeholder="Zip" required>
+                  <input type="country" class="form-control" id="inputCountry" placeholder="Country" value="USA" required>
+              </div>
+              <br><br><br><br><br><br>
+              <!-- Website -->
+              <div class="form-group">
+                  <label for="building-website" class="formbuilder-text-label">Link to Building Website:</label>
+                  <input type="text" class="form-control" name="building-website" id="building-website">
+              </div>
+              <!-- Description -->
+              <div class="form-group">
+                  <label for="description-of-listing" class="formbuilder-textarea-label">Description of Listing:</label>
+                  <textarea type="textarea" class="form-control" name="description-of-listing" id="description-of-listing"></textarea>
+              </div>
+              <!-- Square Feet -->
+              <div class="form-group">
+                  <label class="form-label" for="square-feet">Square Feet: *</label>
+                  <input type="number" id="square-feet" class="form-control" required="required" aria-required="true" />
+              </div>
+              <!-- Number of Bath -->
+              <div class="form-group">
+                  <label for="number-of-bath" class="formbuilder-text-label"># of Bath: *</label>
+                  <input type="number" class="form-control" name="number-of-bath" id="number-of-bath" required="required" aria-required="true">
+              </div>
+              <!-- Total Rooms -->
+              <div class="form-group">
+                  <label for="num-total-rooms" class="formbuilder-text-label"># of Total Rooms *</label>
+                  <input type="number" class="form-control" name="num-total-rooms" id="num-total-rooms" required="required" aria-required="true">
+              </div>
+              <!-- Occupancy Date -->
+              <div class="form-group">
+                  <label for="occupancy-date" class="text-label">Occupancy Date *</label>
+                  <input type="date" class="form-control" name="occupancy-date" id="occupancy-date" required="required" aria-required="true">
+              </div>
+              <!-- Lease Type -->
+              <div class="form-group">
+                  <label for="lease-type" class="text-label">Lease Type: *</label>
+                  <input type="text" class="form-control" name="lease-type" id="lease-type" required="required" aria-required="true" required>
+              </div>
+              <!-- Rental Rate of prices -->
+              <div class="form-group">
+                  <label for="rental-rate" class="text-label">Rental Rate: *</label>
+                  <input type="number" class="form-control" name="rental-rate" id="rental-rate" required="required" aria-required="true">
+              </div>
+              <!-- Restrictions - Text Area -->
+              <div class=" form-group">
+                  <label for="restrictions" class="textarea-label">Restrictions</label>
+                  <textarea type="textarea" class="form-control" name="restrictions" id="restrictions"></textarea>
+              </div>
+              <br><br><br>
+              <!-- Ammenities -->
+              <label> Select Amenities </label>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="gym">Gym</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="pool">Pool</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="laundry">Laundry</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="parking">Parking</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="furnished">Furnished</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="dishwasher">Dishwasher</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="hardwood-floors">Hardwood Floors</label>
+              </div>
+              <div class="checkbox">
+                  <label><input type="checkbox" value="carpeted-floors">Carpeted Floors</label>
+              </div>
+              
+              <button type="submit" class="btn-default btn" name="publish-listing" id="publish-listing" onclick="publishListing()">Publish Listing</button>
+          </form>
         </div>
     </div>
 </div>
@@ -153,7 +189,24 @@
   </footer>
 <script>
     function publishListing(){
-      window.location='viewStudentSublet.html';
+      // verifying all fields are entered
+      let street = document.forms["listingForm"]["street"].value;
+      let inputCity = document.forms["listingForm"]["inputCity"].value;
+      let inputState = document.forms["listingForm"]["inputState"].value;
+      let inputZip = document.forms["listingForm"]["inputZip"].value;
+      let inputCountry = document.forms["listingForm"]["inputCountry"].value;
+      let squarefeet = document.forms["listingForm"]["square-feet"].value;
+      let numberOfBath = document.forms["listingForm"]["number-of-bath"].value;
+      let numTotalRooms = document.forms["listingForm"]["num-total-rooms"].value;
+      let occupancyDate = document.forms["listingForm"]["occupancy-date"].value;
+      let leaseType = document.forms["listingForm"]["lease-type"].value;
+      let rentalRate = document.forms["listingForm"]["rental-rate"].value;
+
+      if(street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0 && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 
+          && numTotalRooms.length > 0 && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
+          window.location='viewStudentSublet.html';
+      }
+      
     }
     function logout(){
       alert("You have been logged out");
