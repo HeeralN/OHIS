@@ -23,5 +23,13 @@ router.get('/studentProfile', function(request, response) {
     response.end();
 });
 
+router.get("/createListingPage",(req,res)=>{
+    res.render("createListingPage");
+});
+
+router.get("/createSubletPage",(req,res)=>{
+    res.render("createSubletPage");
+});
+
 
 module.exports = router;
