@@ -43,13 +43,25 @@ app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 1000 *60 * 60 *24 }
 }));
 
 
 app.listen(5001, () => {
     console.log("Sever started on Port 5001")
 });
+
+// app.get("/",(req,res)=>{
+//     res.render("index");
+// });
+//
+// app.get("/landlordCreateAccount",(req,res)=>{
+//     res.render("landlordCreateAccount");
+// });
+//
+// app.get("/studentCreateAccount",(req,res)=>{
+//     res.render("studentCreateAccount");
+// });
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -58,8 +70,8 @@ app.post('/auth/index', function(req, res) {
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
-                res.send("YAYYY!")
-                //res.redirect('/studentProfile');
+                //res.send("YAYYY!")
+                res.redirect('/studentProfile');
             } else {
                 res.send('Incorrect Username and/or Password!');
             }
@@ -70,3 +82,16 @@ app.post('/auth/index', function(req, res) {
         res.end();
     }
 });
+
+app.get('/studentProfile', function(req, res) {
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("studentProfile", {
+            username: req.session.username
+        });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
