@@ -15,7 +15,7 @@ exports.studentCreateAccount = (req,res) => {
     //console.log(req.body);
     const {fullname, username, university, password, email, confirmpassword} = req.body;
 
-    db.query("SELECT username FROM login WHERE username= ?", [username], async (error, results) => {
+    db.query("SELECT email FROM login WHERE email= ?", [username], async (error, results) => {
         if (error) {
             console.log(error);
         }
