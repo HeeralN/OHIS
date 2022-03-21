@@ -90,6 +90,6 @@ app.get('/studentProfile', function(req, res) {
     } else {
         res.redirect('/');
     }
-    res.end();
+    //res.end();
 });
 
