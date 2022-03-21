@@ -86,9 +86,7 @@ app.post('/auth/index', function(req, res) {
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
         //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("studentProfile", {
-            username: req.session.username
-        });
+        res.render("studentProfile");
     } else {
         res.redirect('/');
     }
