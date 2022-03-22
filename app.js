@@ -23,8 +23,8 @@ app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-
-app.set("view engine", "hbs");
+ 
+app.set("view engine", "hbs"); 
 
 db.connect((error)=> {
     if(error) {
@@ -61,7 +61,7 @@ app.listen(5001, () => {
 //
 // app.get("/studentCreateAccount",(req,res)=>{
 //     res.render("studentCreateAccount");
-// });
+// }); 
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -93,3 +93,12 @@ app.get('/studentProfile', function(req, res) {
     //res.end();
 });
 
+app.get('/landlordProfile', function(req, res) {
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("landlordProfile");
+    } else {
+        res.redirect('/');
+    }
+    //res.end();
+});

@@ -52,6 +52,51 @@ exports.studentCreateAccount = (req,res) => {
     //
     // })
 }
+
+
+exports.landlordCreateAccount = (req,res) => {
+    //console.log(req.body);
+    const {llfullname, llusername, phone, llpassword, llemail, llconfirmpassword} = req.body;
+
+    db.query("SELECT email FROM login WHERE email= ?", [llusername], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("landlordCreateAccount",{
+                message: "That username or email is already in use"
+            })
+
+        }
+        else if(llpassword!==llconfirmpassword) {
+            return res.render("landlordCreateAccount",{
+                message: "Passwords do not match"
+            })
+
+        }
+        //let hashedPassword = await bcrypt.hash(password, 8); //hashes the password for encryption
+        //console.log(hashedPassword);
+
+        db.query("INSERT INTO login SET ?", {fullname:llfullname, username:llusername, university: phone, email: llemail, password: llpassword}, (error,results)=>{
+            if (error){
+                console.log(results);
+                console.log(error);
+            }
+            else{
+                console.log(results);
+                return res.render("landlordCreateAccount", {
+                    message:"User registered"
+                });
+            }
+        })
+    });
+
+    //res.send("Form submitted")
+    // res.json({ //to test form on front end
+    //
+    // })
+}
+
 // exports.index = (req,res) => {
 //     const {username, password} = req.body;
 //     if (username && password) {

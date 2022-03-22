@@ -102,38 +102,38 @@
 <button type="button" class="btn" id="button">
     <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a>
 <div class="container">
-
     <div class="title">Landlord Registration</div>
-    <form action="#">
+    <form action="/auth/landlordCreateAccount" method="POST" id="NewAccount">
         <div class="user-info">
             <div class="reg-box">
-                <span class="info">Full Name</span>
-                <input type=”text”  placeholder="Full Name" required>
+                <label for="fullname">Full Name</label>
+                <input type=”text”  placeholder="Full Name" id="llfullname" name="fullname" required>
             </div>
             <div class="reg-box">
-                <span class="info">Username</span>
-                <input type=”text”  placeholder="Username" required>
+                <label for="username">Username</label>
+                <input type=”text” id="llusername" placeholder="Username" id="llusername" name="username" required>
             </div>
             <div class="reg-box">
-                <span class="info">Phone Number</span>
-                <input type="tel" placeholder=111-222-3333 id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" placeholder="111-222-3333" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
             </div>
             <div class="reg-box">
-                <span class="info">Password</span>
-                <input type=”text”  placeholder="Password" required>
+                <label for="password">Password (8 characters minimum) </label>
+                <input type="password" id="llpassword" placeholder="Password" id="llpassword" name="password" minlength="8" required>
             </div>
             <div class="reg-box">
-                <span class="info">Email Address</span>
-                <input type="email" placeholder="example@email.com" required>
+                <label for="email">Email Address</label>
+                <input type=”email” id="llemail" placeholder="example@email.com" id="llemail" name="email" required>
             </div>
             <div class="reg-box">
-                <span class="info">Confirm Password</span>
-                <input type=”text”  placeholder="Confirm Password" required>
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="password" id="llconfirmpassword" name="confirmpassword" minlength="8" placeholder="Password" required>
             </div>
         </div>
         <div class="submit-button">
-            <input type="submit" value="Submit" onclick="viewProfile()">
+            <button type="submit" class="Submit">Submit</button>
         </div>
+            
     </form>
 </div>
 <footer class="container-fluid bg-4 text-center margin">
@@ -141,7 +141,7 @@
 </footer>
 <script>
     function viewProfile(){
-        window.location='landlordProfile.html';
+        window.location='landlordProfile.hbs.html';
     }
 </script>
 </body>

@@ -5,5 +5,6 @@ const router=express.Router();
 router.post("/studentCreateAccount", authController.studentCreateAccount)
 
 //router.post("/", authController.index)
+router.post("/landlordCreateAccount", authController.landlordCreateAccount)
 
 module.exports = router;
