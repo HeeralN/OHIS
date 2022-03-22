@@ -102,3 +102,30 @@ app.get('/landlordProfile', function(req, res) {
     }
     //res.end();
 });
+
+app.get("/createListingPage",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/createSubletPage",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/viewStudentSublet",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("viewStudentSublet");
+    } else {
+        res.redirect('/');
+    }
+});
