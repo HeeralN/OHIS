@@ -31,5 +31,8 @@ router.get("/createSubletPage",(req,res)=>{
     res.render("createSubletPage");
 });
 
+router.get("/viewStudentSublet",(req,res)=>{
+    res.render("viewStudentSublet");
+});
 
 module.exports = router;
