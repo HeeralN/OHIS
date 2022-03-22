@@ -56,9 +56,9 @@ exports.studentCreateAccount = (req,res) => {
 
 exports.landlordCreateAccount = (req,res) => {
     //console.log(req.body);
-    const {llfullname, llusername, phone, llpassword, llemail, llconfirmpassword} = req.body;
+    const {fullname, username, phone, password, email, confirmpassword} = req.body;
 
-    db.query("SELECT email FROM login WHERE email= ?", [llusername], async (error, results) => {
+    db.query("SELECT email FROM LandlordLogin WHERE email= ?", [username], async (error, results) => {
         if (error) {
             console.log(error);
         }
@@ -68,7 +68,7 @@ exports.landlordCreateAccount = (req,res) => {
             })
 
         }
-        else if(llpassword!==llconfirmpassword) {
+        else if(password!==confirmpassword) {
             return res.render("landlordCreateAccount",{
                 message: "Passwords do not match"
             })
@@ -77,7 +77,7 @@ exports.landlordCreateAccount = (req,res) => {
         //let hashedPassword = await bcrypt.hash(password, 8); //hashes the password for encryption
         //console.log(hashedPassword);
 
-        db.query("INSERT INTO login SET ?", {fullname:llfullname, username:llusername, university: phone, email: llemail, password: llpassword}, (error,results)=>{
+        db.query("INSERT INTO LandlordLogin SET ?", {fullname:fullname, username:username, phone: phone, email: email, password: password}, (error,results)=>{
             if (error){
                 console.log(results);
                 console.log(error);

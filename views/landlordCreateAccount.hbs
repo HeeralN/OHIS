@@ -107,23 +107,23 @@
         <div class="user-info">
             <div class="reg-box">
                 <label for="fullname">Full Name</label>
-                <input type=”text”  placeholder="Full Name" id="llfullname" name="fullname" required>
+                <input type=”text”  placeholder="Full Name" id="fullname" name="fullname" required>
             </div>
             <div class="reg-box">
                 <label for="username">Username</label>
-                <input type=”text” id="llusername" placeholder="Username" id="llusername" name="username" required>
+                <input type=”text” placeholder="Username" id="llusername" name="username" required>
             </div>
             <div class="reg-box">
                 <label for="phone">Phone Number</label>
-                <input type="text" id="phone" placeholder="111-222-3333" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                <input type="text" placeholder="111-222-3333" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
             </div>
             <div class="reg-box">
                 <label for="password">Password (8 characters minimum) </label>
-                <input type="password" id="llpassword" placeholder="Password" id="llpassword" name="password" minlength="8" required>
+                <input type="password"  placeholder="Password" id="llpassword" name="password" minlength="8" required>
             </div>
             <div class="reg-box">
                 <label for="email">Email Address</label>
-                <input type=”email” id="llemail" placeholder="example@email.com" id="llemail" name="email" required>
+                <input type=”email”  placeholder="example@email.com" id="llemail" name="email" required>
             </div>
             <div class="reg-box">
                 <label for="confirmpassword">Confirm Password</label>
@@ -135,6 +135,9 @@
         </div>
             
     </form>
+    {{#if message}}
+        <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
 </div>
 <footer class="container-fluid bg-4 text-center margin">
     <p>Contact us at support@ohis.com</p>
