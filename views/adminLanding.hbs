@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Landing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+  .container1 {
+    width:50%;
+    float:left;
+  }
+  .container2 {
+    width:50%;
+    float:right;
+  }
+  .container2 img{
+    height: 100%;
+    width: 70%;
+    margin-top:10px;
+    margin-left:40px;
+    object-fit: contain;
+  }
+  h2{
+    text-align: center;
+  }
+  body {
+    background: lavender;
+  }
+  .styled-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 600px;
+    background-color: white;
+    margin-top:10px;
+    margin-left:90px;
+  }
+  .styled-table thead tr {
+    background-color: gray;
+    color: #ffffff;
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+  }
+  .styled-table tbody tr {
+    border-bottom: 1px solid gray;
+  }
+
+</style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <ul class="nav navbar-nav">
+          <li><a href="adminManagingUsers.html">Manage Accounts</a></li>
+          <li><a href="adminManagingListings.html">Manage Listings</a></li>
+          <li><a href="masterAdminCreateAdminAccounts.html">Create a Admin Account</a></li>
+        </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+  <h2>Admin Dashboard</h2>
+<div class="container1">
+  <table class="styled-table">
+    <thead>
+      <th>Active Admins</th>
+      <th># of Listings Managed</th>
+      <th># of Accounts Managed</th>
+    </thead>
+    <tbody>
+      <td>Alfreds Futterkiste</td>
+      <td>15</td>
+      <td>20</td>
+    </tbody>
+    <tr>
+      <td>Howdy Yall</td>
+      <td>28</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Joe Smith</td>
+      <td>11</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Jane Green</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Tiffany Blue</td>
+      <td>0</td>
+      <td>8</td>
+    </tr>
+
+  </table>
+</div>
+<div class="container2">
+  <img class="img" src="images/Sign-Ups.png" alt="signups" >
+</div>
+
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
+</body>
+</html>

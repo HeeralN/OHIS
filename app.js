@@ -67,11 +67,20 @@ app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
         db.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+            console.log(results);
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
                 //res.send("YAYYY!")
-                res.redirect('/studentProfile');
+                db.query("SELECT adminPerms FROM account WHERE username = ? AND password = ?", [username, password], function(error, results, fields){
+                    console.log("admin");
+                    if (results.length > 0 && results[0].adminPerms === 1) {
+                        console.log("admin powers found");
+                        res.send("haha L");
+                        //res.redirect("/adminLanding");
+                    }
+                });
+                //res.redirect('/studentProfile');
             } else {
                 res.send('Incorrect Username and/or Password!');
             }
@@ -80,6 +89,14 @@ app.post('/auth/index', function(req, res) {
     } else {
         res.send('Please enter Username and Password!');
         res.end();
+    }
+});
+
+app.get('/adminLanding', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminLanding');
+    } else {
+        res.send('Please login to view this page!');
     }
 });
 
