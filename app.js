@@ -129,3 +129,13 @@ app.get("/viewStudentSublet",(req,res)=>{
         res.redirect('/');
     }
 });
+
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err) => {
+        if(err){
+            return console.error(err)
+        }
+        console.log("The session has been destroyed!")
+        res.redirect("/");
+    })
+});
