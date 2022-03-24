@@ -23,5 +23,16 @@ router.get("/studentCreateAccount",(req,res)=>{
 //     response.end();
 // });
 
+router.get("/createListingPage",(req,res)=>{
+    res.render("createListingPage");
+});
+
+router.get("/createSubletPage",(req,res)=>{
+    res.render("createSubletPage");
+});
+
+router.get("/viewStudentSublet",(req,res)=>{
+    res.render("viewStudentSublet");
+});
 
 module.exports = router;

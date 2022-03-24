@@ -23,8 +23,8 @@ app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-
-app.set("view engine", "hbs");
+ 
+app.set("view engine", "hbs"); 
 
 db.connect((error)=> {
     if(error) {
@@ -61,7 +61,7 @@ app.listen(5001, () => {
 //
 // app.get("/studentCreateAccount",(req,res)=>{
 //     res.render("studentCreateAccount");
-// });
+// }); 
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -86,12 +86,46 @@ app.post('/auth/index', function(req, res) {
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
         //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("studentProfile", {
-            username: req.session.username
-        });
+        res.render("studentProfile");
     } else {
         res.redirect('/');
     }
-    res.end();
+    //res.end();
 });
 
+app.get('/landlordProfile', function(req, res) {
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("landlordProfile");
+    } else {
+        res.redirect('/');
+    }
+    //res.end();
+});
+
+app.get("/createListingPage",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/createSubletPage",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/viewStudentSublet",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("viewStudentSublet");
+    } else {
+        res.redirect('/');
+    }
+});

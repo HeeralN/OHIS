@@ -4,8 +4,8 @@
   <title>Create Sublet Listing</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -95,7 +95,7 @@
         <div class="rendered-form">
           <h1 id="control-8418835">Make a Sublet Listing</h1>
 
-          <form method="POST" id="listingForm">
+          <form action="/auth/createSubletPage" method="POST" id="listingForm">
               <!-- Address -->
               <label for="address" class="">Address of Listing: *</label>
               <div class="form-group">
@@ -178,8 +178,10 @@
               <div class="checkbox">
                   <label><input type="checkbox" value="carpeted-floors">Carpeted Floors</label>
               </div>
-              
-              <button type="submit" class="btn-default btn" name="publish-listing" id="publish-listing" onclick="publishListing()">Publish Listing</button>
+                     <div class="submit-button">
+            <button type="submit" class="Submit">Submit</button>
+        </div>
+              {{!-- <button type="submit" class="btn-default btn" name="publish-listing" id="publish-listing" onclick="publishListing()">Publish Listing</button> --}}
           </form>
         </div>
     </div>
