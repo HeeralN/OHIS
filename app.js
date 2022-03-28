@@ -93,8 +93,9 @@ app.post('/auth/index', function(req, res) {
 
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("studentProfile");
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+            res.render("studentProfile", {account: results});
+        });
     } else {
         res.redirect('/');
     }
