@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Manage Users</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  body {
+    background: lavender;
+  }
+</style>
+<body>
+
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/adminManagingUsers">Manage Accounts</a></li>
+          <li><a href="/adminManagingListings">Manage Listings</a></li>
+        </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+
+<div class="container">
+  <h2>Manage Users</h2>
+
+  <form action="/adminManagingUsers/getUser" method="POST">
+    <div class="form-group">
+      <label for="userID">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+    <!--button type="submit" class="btn btn-default">Submit</button-->
+  </form> 
+  
+  <div id="userProfile">
+    <div class="container">
+      <h2>User Profile</h2>
+      <p><b>Username</b>: {{username}}</p>
+      <p>Name: {{fullname}}</p>
+      <p>Email: {{email}}</p>
+      <p>Admin?: {{adminPerms}}</p>
+
+      <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#deleteUser">Delete User</button>
+  </div>
+</div>
+</body>
+</html>

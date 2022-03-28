@@ -100,6 +100,49 @@ app.get('/adminLanding', function(req, res) {
     }
 });
 
+app.get('/adminManagingListings', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminManagingListings');
+    } else { 
+        res.send('Please login to view this page!');
+    }
+}); 
+
+app.get('/adminManagingUsers', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminManagingUsers');
+    } else { 
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/adminManagingListings/getListing', function(req, res) {
+    const housingId = req.body;
+    db.query('SELECT listingId, address, user email, date created, last modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
+        if (results.length > 0) {
+            res.send(results);
+        } else {
+            res.send('No listing found!');
+        }
+        res.end();
+    });
+});
+
+app.post('/adminManagingUsers/getUser', function(req, res) {
+    const userId = req.body.username;
+    //console.log(userId);
+    db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ?', [userId], function(error, results, fields) {
+        if (results && results.length > 0) {
+            console.log(results);
+            //res.send(results);
+            return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
+        } else {
+            res.send('No user found!');
+        }
+        res.end();
+    });
+});
+
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
         //res.send('Welcome back, ' + req.session.username + '!');

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Manage Listings</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  body {
+    background: lavender;
+  }
+  container{
+    margin-top: 30px;
+    margin-right:50px;
+  }
+</style>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
+      </div>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <ul class="nav navbar-nav">
+          <li><a href="/adminManagingUsers">Manage Accounts</a></li>
+          <li class="active"><a href="/adminManagingListings">Manage Listings</a></li>
+        </ul>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+
+<div class="container">
+  <h2>Manage Listings</h2>
+
+  <div class="input-group" >
+    <input type="number" class="form-control" id="housingListingID" placeholder="Enter Housing Listing ID">
+    <span class="input-group-btn" style="width:0;">
+        <!--button href="#housingListingProfile" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button-->
+        <button href="/adminManagingListings/getListing" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button>
+    </span>
+  </div>
+  
+  <div id="housingListingProfile" class="collapse">
+    <div class="container">
+      <h2>Housing Listing Profile</h2>
+      <p>ID: <span id="housingListingID"></span></p>
+      <p>Address: <span id="housingListingAddress"></span></p>
+      <p>User Email: <span id="housingListingUserEmail"></span></p>
+      <p>Date Created: <span id="housingListingState"></span></p>
+      <p>Last Modified: <span id="housingListingZip"></span></p>
+      <p>Link: <span id="housingListingPrice"></span></p>
+  
+      <button type="button" class="btn btn-danger" id="housingListingDelete">Delete Listing</button>
+  </div>
+</div>
+
+<script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
+</script>
+
+</body>
+</html>
