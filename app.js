@@ -116,6 +116,7 @@ app.get('/adminManagingUsers', function(req, res) {
     }
 });
 
+// THIS DOES NOT WORK YET
 app.post('/adminManagingListings/getListing', function(req, res) {
     const housingId = req.body;
     db.query('SELECT listingId, address, user email, date created, last modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
@@ -131,13 +132,27 @@ app.post('/adminManagingListings/getListing', function(req, res) {
 app.post('/adminManagingUsers/getUser', function(req, res) {
     const userId = req.body.username;
     //console.log(userId);
-    db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ?', [userId], function(error, results, fields) {
+    db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ? AND username != ?', [userId, req.session.username], function(error, results, fields) {
         if (results && results.length > 0) {
-            console.log(results);
             //res.send(results);
             return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
         } else {
-            res.send('No user found!');
+            return res.render('adminManagingUsers', {message: 'No user found!'});
+        }
+        res.end();
+    });
+});
+
+app.post('/adminManagingUsers/deleteUser', function(req, res) {
+    const userId = req.body.username;
+    console.log(userId);
+    db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
+        console.log(results);
+        if (results && error === null) {
+            //res.send('User deleted!');
+            return res.render('adminManagingUsers', {message: 'User deleted!'});
+        } else {
+            return res.render('adminManagingUsers', {message: 'No user found!'});
         }
         res.end();
     });

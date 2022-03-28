@@ -15,8 +15,6 @@
   }
 </style>
 <body>
-
-
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -55,14 +53,22 @@
   
   <div id="userProfile">
     <div class="container">
-      <h2>User Profile</h2>
+      <h2>Selected User Profile</h2>
       <p><b>Username</b>: {{username}}</p>
-      <p>Name: {{fullname}}</p>
-      <p>Email: {{email}}</p>
-      <p>Admin?: {{adminPerms}}</p>
-
-      <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#deleteUser">Delete User</button>
+      <p><b>Name</b> {{fullname}}</p>
+      <p><b>Email</b>: {{email}}</p>
+      <p><b>Admin?</b>: {{adminPerms}}</p>
   </div>
+
+  <form action="/adminManagingUsers/deleteUser" method="POST">
+      <input type="hidden" id="username" name="username" value="{{username}}">
+      <button type="submit" class="btn btn-danger" data-target="#deleteUser">Delete User</button>
+  </form>
+
+  {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+  {{/if}}
+
 </div>
 </body>
 </html>
