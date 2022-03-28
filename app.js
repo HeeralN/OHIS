@@ -118,12 +118,26 @@ app.get('/adminManagingUsers', function(req, res) {
 
 // THIS DOES NOT WORK YET
 app.post('/adminManagingListings/getListing', function(req, res) {
-    const housingId = req.body;
+    const housingId = req.body.listingID;
     db.query('SELECT listingId, address, user email, date created, last modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
         if (results.length > 0) {
-            res.send(results);
+            // CHANGE THESE FIELD NAMES
+            return res.render('adminManagingListings', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, date_created: results[0].date_created, last_modified: results[0].last_modified, link: results[0].link, description: results[0].description});
         } else {
-            res.send('No listing found!');
+            return res.render('adminManagingListings', {message: 'Listing not found!'});
+        }
+        res.end();
+    });
+});
+
+app.post('/adminManagingUsers/deleteListing', function(req, res) {
+    const userId = req.body.listingID;
+    db.query('DELETE FROM listing WHERE listingId = ?', [userId], function(error, results, fields) {
+        if (results && error === null) {
+            //res.send('User deleted!');
+            return res.render('adminManagingListings', {message: 'Listing deleted!'});
+        } else {
+            return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
         }
         res.end();
     });
@@ -131,13 +145,13 @@ app.post('/adminManagingListings/getListing', function(req, res) {
 
 app.post('/adminManagingUsers/getUser', function(req, res) {
     const userId = req.body.username;
-    //console.log(userId);
+    
     db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ? AND username != ?', [userId, req.session.username], function(error, results, fields) {
         if (results && results.length > 0) {
             //res.send(results);
             return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
         } else {
-            return res.render('adminManagingUsers', {message: 'No user found!'});
+            return res.render('adminManagingUsers', {message: 'User not found!'});
         }
         res.end();
     });
@@ -145,15 +159,13 @@ app.post('/adminManagingUsers/getUser', function(req, res) {
 
 app.post('/adminManagingUsers/deleteUser', function(req, res) {
     const userId = req.body.username;
-    console.log(userId);
+
     db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
-        //console.log(results);
-        //console.log(error);
         if (results && error === null) {
             //res.send('User deleted!');
             return res.render('adminManagingUsers', {message: 'User deleted!'});
         } else {
-            return res.render('adminManagingUsers', {message: 'There was an error deleting the user! They may have been deleted already.'});
+            return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
         }
         res.end();
     });

@@ -47,34 +47,35 @@
 <div class="container">
   <h2>Manage Listings</h2>
 
-  <div class="input-group" >
-    <input type="number" class="form-control" id="housingListingID" placeholder="Enter Housing Listing ID">
-    <span class="input-group-btn" style="width:0;">
-        <!--button href="#housingListingProfile" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button-->
-        <button href="/adminManagingListings/getListing" class="btn btn-default" type="button" id="housingListingSearch" data-toggle="collapse">Search</button>
-    </span>
-  </div>
+  <form action="/adminManagingUsers/getListing" method="POST">
+    <div class="form-group">
+      <label for="userID">Username</label>
+      <input type="text" class="form-control" id="listingID" name="listingID" placeholder="Enter housing listing ID">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+    <!--button type="submit" class="btn btn-default">Submit</button-->
+  </form> 
   
   <div id="housingListingProfile" class="collapse">
     <div class="container">
-      <h2>Housing Listing Profile</h2>
-      <p>ID: <span id="housingListingID"></span></p>
-      <p>Address: <span id="housingListingAddress"></span></p>
-      <p>User Email: <span id="housingListingUserEmail"></span></p>
-      <p>Date Created: <span id="housingListingState"></span></p>
-      <p>Last Modified: <span id="housingListingZip"></span></p>
-      <p>Link: <span id="housingListingPrice"></span></p>
-  
-      <button type="button" class="btn btn-danger" id="housingListingDelete">Delete Listing</button>
+      <h2>Selected Housing Listing Profile</h2>
+      <p>ID: {{listingId}}</p>
+      <p>Address: {{address}}</p>
+      <p>User Email: {{user email}}</p>
+      <p>Date Created: {{date created}}</p>
+      <p>Last Modified: {{last modified}}</p>
+      <p>Link: </p>
   </div>
+
+  <form action="/adminManagingUsers/deleteListing" method="POST">
+      <input type="hidden" id="listingID" name="listingID" value="{{listingId}}">
+      <button type="submit" class="btn btn-danger" data-target="#deleteUser">Delete Listing</button>
+  </form>
+
+  {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+  {{/if}}
+
 </div>
-
-<script>
-  function logout(){
-    alert("You have been logged out");
-    window.location='login.html';
-  }
-</script>
-
 </body>
 </html>
