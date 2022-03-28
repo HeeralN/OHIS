@@ -81,13 +81,15 @@ app.post('/auth/index', function(req, res) {
                 }
 
             } else {
-                res.send('Incorrect Username and/or Password!');
+                return res.render("index",{
+                    message: "Incorrect Username and/or Password"
+                });
             }
-            res.end();
         });
     } else {
-        res.send('Please enter Username and Password!');
-        res.end();
+        return res.render("studentCreateAccount",{
+            message: "Incorrect Username and/or Password"
+        });
     }
 });
 
@@ -96,8 +98,8 @@ app.get('/studentProfile', function(req, res) {
         // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
         //     res.render("studentProfile", {account: results});
         // });
-        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, student) => {
-            db.query("SELECT university FROM student WHERE username=?", [req.session.username], async (error, university)=>{
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
                 if (error){
                     console.log(student);
                     console.log(error);
