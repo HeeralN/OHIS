@@ -93,8 +93,17 @@ app.post('/auth/index', function(req, res) {
 
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
-        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
-            res.render("studentProfile", {account: results});
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, student) => {
+            db.query("SELECT university FROM student WHERE username=?", [req.session.username], async (error, university)=>{
+                if (error){
+                    console.log(student);
+                    console.log(error);
+                }
+                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+            })
         });
     } else {
         res.redirect('/');
