@@ -15,7 +15,7 @@ exports.studentCreateAccount = (req,res) => {
     //console.log(req.body);
     const {fullname, username, university, password, email, confirmpassword} = req.body;
 
-    db.query("SELECT email FROM login WHERE email= ?", [username], async (error, results) => {
+    db.query("SELECT username, email FROM account WHERE username =? and email= ?", [username, email], async (error, results) => {
         if (error) {
             console.log(error);
         }
@@ -31,10 +31,9 @@ exports.studentCreateAccount = (req,res) => {
             })
 
         }
-        //let hashedPassword = await bcrypt.hash(password, 8); //hashes the password for encryption
-        //console.log(hashedPassword);
+        //add university into other table
 
-        db.query("INSERT INTO login SET ?", {fullname:fullname, username:username, university: university, email: email, password: password}, (error,results)=>{
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
             if (error){
                 console.log(error);
             }

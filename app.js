@@ -66,12 +66,21 @@ app.listen(5001, () => {
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
-        db.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        db.query('SELECT username,password,adminPerms FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
                 //res.send("YAYYY!")
-                res.redirect('/studentProfile');
+                if (results[0].adminPerms === 0) {
+                    res.redirect("/studentProfile");
+                }
+                else if (results[0].adminPerms === 1) {
+                    res.redirect('/landlordProfile');
+                }
+                else if (results[0].adminPerms === 2) {
+                    res.redirect('/adminLanding');
+                }
+
             } else {
                 res.send('Incorrect Username and/or Password!');
             }
@@ -114,7 +123,6 @@ app.get("/createListingPage",(req,res)=>{
 
 app.get("/createSubletPage",(req,res)=>{
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
         res.render("createSubletPage");
     } else {
         res.redirect('/');
