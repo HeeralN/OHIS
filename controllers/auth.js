@@ -31,9 +31,14 @@ exports.studentCreateAccount = (req,res) => {
             })
 
         }
-        //add university into other table
 
         db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
+            db.query("INSERT INTO student SET ?", {university:university, username:username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
             if (error){
                 console.log(error);
             }
@@ -45,11 +50,47 @@ exports.studentCreateAccount = (req,res) => {
             }
         })
     });
- 
-    //res.send("Form submitted")
-    // res.json({ //to test form on front end
-    // 
-    // })
+}
+
+exports.landlordCreateAccount = (req,res) => {
+    const {fullname, username, phone, password, email, confirmpassword} = req.body;
+
+    db.query("SELECT username,email FROM account WHERE username=? and email= ?", [username, email], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("landlordCreateAccount",{
+                message: "That username or email is already in use"
+            })
+
+        }
+        else if(password!==confirmpassword) {
+            return res.render("landlordCreateAccount",{
+                message: "Passwords do not match"
+            })
+
+        }
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "1"}, (error,results)=>{
+            db.query("INSERT INTO landlord SET ?", {phone:phone, username:username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+            if (error){
+                console.log(results);
+                console.log(error);
+            }
+            else{
+                console.log(results);
+                return res.render("landlordCreateAccount", {
+                    message:"User registered"
+                });
+            }
+        })
+    });
 }
 
 exports.createListingPage = (req ,res) => {
@@ -122,50 +163,6 @@ exports.createSubletPage = (req,res) => {
                 console.log(results);
                 return res.render("createSubletPage", {
                     message:"Listing posted"
-                });
-            }
-        })
-    });
-
-    //res.send("Form submitted")
-    // res.json({ //to test form on front end
-    //
-    // })
-}
-
-
-exports.landlordCreateAccount = (req,res) => {
-    //console.log(req.body);
-    const {fullname, username, phone, password, email, confirmpassword} = req.body;
-
-    db.query("SELECT email FROM LandlordLogin WHERE email= ?", [username], async (error, results) => {
-        if (error) {
-            console.log(error);
-        }
-        if (results.length > 0) {
-            return res.render("landlordCreateAccount",{
-                message: "That username or email is already in use"
-            })
-
-        }
-        else if(password!==confirmpassword) {
-            return res.render("landlordCreateAccount",{
-                message: "Passwords do not match"
-            })
-
-        }
-        //let hashedPassword = await bcrypt.hash(password, 8); //hashes the password for encryption
-        //console.log(hashedPassword);
-
-        db.query("INSERT INTO LandlordLogin SET ?", {fullname:fullname, username:username, phone: phone, email: email, password: password}, (error,results)=>{
-            if (error){
-                console.log(results);
-                console.log(error);
-            }
-            else{
-                console.log(results);
-                return res.render("landlordCreateAccount", {
-                    message:"User registered"
                 });
             }
         })

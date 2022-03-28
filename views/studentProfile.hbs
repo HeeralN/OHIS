@@ -113,9 +113,13 @@
 <div class="container">
     <div class="left">
         <img class="img" src="images/student.png" alt="user" >
-        <h4>Full Name</h4>
-        <p>University</p>
-        <p>Email</p>
+        {{#each data}}
+            <tr>
+                <td>{{this.fullname}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.university}}</td>
+            </tr>
+        {{/each}}
     </div>
     <div class="right">
         <div class="info">

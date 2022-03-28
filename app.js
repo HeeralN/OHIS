@@ -70,14 +70,13 @@ app.post('/auth/index', function(req, res) {
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
-                //res.send("YAYYY!")
-                if (results[0].adminPerms === 0) {
+                if (results[0].adminPerms === 0) {  //0 is for student
                     res.redirect("/studentProfile");
                 }
-                else if (results[0].adminPerms === 1) {
+                else if (results[0].adminPerms === 1) {   //1 is for landlord
                     res.redirect('/landlordProfile');
                 }
-                else if (results[0].adminPerms === 2) {
+                else if (results[0].adminPerms === 2) {    //2 is for admin
                     res.redirect('/adminLanding');
                 }
 
@@ -99,7 +98,6 @@ app.get('/studentProfile', function(req, res) {
     } else {
         res.redirect('/');
     }
-    //res.end();
 });
 
 app.get('/landlordProfile', function(req, res) {
@@ -109,12 +107,10 @@ app.get('/landlordProfile', function(req, res) {
     } else {
         res.redirect('/');
     }
-    //res.end();
 });
 
 app.get("/createListingPage",(req,res)=>{
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
         res.render("createSubletPage");
     } else {
         res.redirect('/');
