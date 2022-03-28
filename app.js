@@ -147,7 +147,8 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
     const userId = req.body.username;
     console.log(userId);
     db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
-        console.log(results);
+        //console.log(results);
+        //console.log(error);
         if (results && error === null) {
             //res.send('User deleted!');
             return res.render('adminManagingUsers', {message: 'User deleted!'});
