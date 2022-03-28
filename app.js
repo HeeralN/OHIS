@@ -153,7 +153,7 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
             //res.send('User deleted!');
             return res.render('adminManagingUsers', {message: 'User deleted!'});
         } else {
-            return res.render('adminManagingUsers', {message: 'No user found!'});
+            return res.render('adminManagingUsers', {message: 'There was an error deleting the user! They may have been deleted already.'});
         }
         res.end();
     });
