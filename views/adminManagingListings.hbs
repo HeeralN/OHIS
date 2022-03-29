@@ -33,6 +33,7 @@
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
         <ul class="nav navbar-nav">
+          <li><a href="/adminLanding">Admin Dashboard</a></li>
           <li><a href="/adminManagingUsers">Manage Accounts</a></li>
           <li class="active"><a href="/adminManagingListings">Manage Listings</a></li>
         </ul>
@@ -47,29 +48,29 @@
 <div class="container">
   <h2>Manage Listings</h2>
 
-  <form action="/adminManagingUsers/getListing" method="POST">
+  <form action="/adminManagingListings/getListing" method="POST">
     <div class="form-group">
-      <label for="userID">Username</label>
+      <label for="listingID">Housing Listing ID</label>
       <input type="text" class="form-control" id="listingID" name="listingID" placeholder="Enter housing listing ID">
       <button type="submit" class="btn btn-default">Submit</button>
     </div>
     <!--button type="submit" class="btn btn-default">Submit</button-->
   </form> 
   
-  <div id="housingListingProfile" class="collapse">
+  <div id="housingListingProfile">
     <div class="container">
       <h2>Selected Housing Listing Profile</h2>
-      <p>ID: {{listingId}}</p>
-      <p>Address: {{address}}</p>
-      <p>User Email: {{user email}}</p>
-      <p>Date Created: {{date created}}</p>
-      <p>Last Modified: {{last modified}}</p>
-      <p>Link: </p>
+      <p><b>ID:</b> {{listingId}}</p>
+      <p><b>Address:</b> {{address}}</p>
+      <p><b>Username:</b> {{username}}</p>
+      <p><b>Date Created:</b> {{date_created}}</p>
+      <p><b>Last Modified:</b> {{last_modified}}</p>
+      <p><b>Link:</b> {{link}}</p>
   </div>
 
-  <form action="/adminManagingUsers/deleteListing" method="POST">
+  <form action="/adminManagingListings/deleteListing" method="POST">
       <input type="hidden" id="listingID" name="listingID" value="{{listingId}}">
-      <button type="submit" class="btn btn-danger" data-target="#deleteUser">Delete Listing</button>
+      <button type="submit" class="btn btn-danger" data-target="#deleteListing">Delete Listing</button>
   </form>
 
   {{#if message}}
