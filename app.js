@@ -119,28 +119,39 @@ app.get('/adminManagingUsers', function(req, res) {
 // THIS DOES NOT WORK YET
 app.post('/adminManagingListings/getListing', function(req, res) {
     const housingId = req.body.listingID;
-    db.query('SELECT listingId, address, user email, date created, last modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
-        if (results.length > 0) {
-            // CHANGE THESE FIELD NAMES
-            return res.render('adminManagingListings', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, date_created: results[0].date_created, last_modified: results[0].last_modified, link: results[0].link, description: results[0].description});
-        } else {
-            return res.render('adminManagingListings', {message: 'Listing not found!'});
-        }
-        res.end();
-    });
+    if (housingId) {
+        db.query('SELECT listingId, address, user email, date created, last modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
+            if (results.length > 0) {
+                // CHANGE THESE FIELD NAMES
+                return res.render('adminManagingListings', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, date_created: results[0].date_created, last_modified: results[0].last_modified, link: results[0].link, description: results[0].description});
+            } else {
+                return res.render('adminManagingListings', {message: 'Listing not found!'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingListings', {message: 'Please enter a value!'});
+    }
 });
 
+// DOES NOT WORK YET
 app.post('/adminManagingUsers/deleteListing', function(req, res) {
-    const userId = req.body.listingID;
-    db.query('DELETE FROM listing WHERE listingId = ?', [userId], function(error, results, fields) {
-        if (results && error === null) {
-            //res.send('User deleted!');
-            return res.render('adminManagingListings', {message: 'Listing deleted!'});
-        } else {
-            return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
-        }
-        res.end();
-    });
+    const housingId = req.body.listingID;
+    if (housingId) {
+        db.query('DELETE FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
+            if (results && error === null) {
+                //res.send('User deleted!');
+                return res.render('adminManagingListings', {message: 'Listing deleted!'});
+            } else {
+                return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingListings', {message: 'Please enter a value!'});
+    }
 });
 
 app.post('/adminManagingUsers/getUser', function(req, res) {
