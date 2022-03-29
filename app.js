@@ -93,6 +93,103 @@ app.post('/auth/index', function(req, res) {
     }
 });
 
+app.get('/adminLanding', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminLanding');
+    } else {
+        res.send('Please login to view this page!');
+    }
+});
+
+app.get('/adminManagingListings', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminManagingListings');
+    } else { 
+        res.send('Please login to view this page!');
+    }
+}); 
+
+app.get('/adminManagingUsers', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('adminManagingUsers');
+    } else { 
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/adminManagingListings/getListing', function(req, res) {
+    const housingId = req.body.listingID;
+
+    if (housingId) {
+        db.query('SELECT listingId, address, username, date_created, last_modified, link, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
+            if (results.length > 0) {
+                return res.render('adminManagingListings', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, date_created: results[0].date_created, last_modified: results[0].last_modified, link: results[0].link, description: results[0].description});
+            } else {
+                return res.render('adminManagingListings', {message: 'Listing not found!'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingListings', {message: 'Please enter a value!'}); 
+    }
+});
+
+app.post('/adminManagingListings/deleteListing', function(req, res) {
+    const housingId = req.body.listingID;
+
+    if (housingId) {
+        db.query('DELETE FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
+            if (results && error === null) {
+                return res.render('adminManagingListings', {message: 'Listing deleted!'});
+            } else {
+                return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingListings', {message: 'Please enter a value!'});
+    }
+});
+
+app.post('/adminManagingUsers/getUser', function(req, res) {
+    const userId = req.body.username;
+
+    if (userId) {
+        db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ? AND username != ?', [userId, req.session.username], function(error, results, fields) {
+            if (results && results.length > 0) {
+                return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
+            } else {
+                return res.render('adminManagingUsers', {message: 'User not found!'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingUsers', {message: 'Please enter a value!'});
+    }
+});
+
+app.post('/adminManagingUsers/deleteUser', function(req, res) {
+    const userId = req.body.username;
+    
+    if (userId) {
+        db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
+            console.log(results[0]);
+            if (results && error === null) {
+                return res.render('adminManagingUsers', {message: 'User deleted!'});
+            } else {
+                return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingUsers', {message: 'Please enter a value!'});
+    }
+});
+
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
         // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
