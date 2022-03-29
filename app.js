@@ -66,31 +66,50 @@ app.listen(5001, () => {
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
-        db.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        db.query('SELECT username,password,adminPerms FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
-                //res.send("YAYYY!")
-                res.redirect('/studentProfile');
+                if (results[0].adminPerms === 0) {  //0 is for student
+                    res.redirect("/studentProfile");
+                }
+                else if (results[0].adminPerms === 1) {   //1 is for landlord
+                    res.redirect('/landlordProfile');
+                }
+                else if (results[0].adminPerms === 2) {    //2 is for admin
+                    res.redirect('/adminLanding');
+                }
+
             } else {
-                res.send('Incorrect Username and/or Password!');
+                return res.render("index",{
+                    message: "Incorrect Username and/or Password"
+                });
             }
-            res.end();
         });
     } else {
-        res.send('Please enter Username and Password!');
-        res.end();
+        return res.render("studentCreateAccount",{
+            message: "Incorrect Username and/or Password"
+        });
     }
 });
 
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("studentProfile");
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                if (error){
+                    console.log(student);
+                    console.log(error);
+                }
+                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+            })
+        });
     } else {
         res.redirect('/');
     }
-    //res.end();
 });
 
 app.get('/landlordProfile', function(req, res) {
@@ -100,5 +119,39 @@ app.get('/landlordProfile', function(req, res) {
     } else {
         res.redirect('/');
     }
-    //res.end();
+});
+
+app.get("/createListingPage",(req,res)=>{
+    if (req.session.loggedin) {
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/createSubletPage",(req,res)=>{
+    if (req.session.loggedin) {
+        res.render("createSubletPage");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/viewStudentSublet",(req,res)=>{
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.session.username + '!');
+        res.render("viewStudentSublet");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err) => {
+        if(err){
+            return console.error(err)
+        }
+        console.log("The session has been destroyed!")
+        res.redirect("/");
+    })
 });

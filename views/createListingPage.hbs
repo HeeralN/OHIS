@@ -4,8 +4,8 @@
   <title>Landlord Create Listing</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -188,29 +188,29 @@
     </footer>
 
     <script>
-        function viewLandlordListings(){
-            // verifying all fields are entered
-            let email = document.forms["listingForm"]["email"].value;
-            
-            let street = document.forms["listingForm"]["street"].value;
-            let inputCity = document.forms["listingForm"]["inputCity"].value;
-            let inputState = document.forms["listingForm"]["inputState"].value;
-            let inputZip = document.forms["listingForm"]["inputZip"].value;
-            let inputCountry = document.forms["listingForm"]["inputCountry"].value;
-            
-            let squarefeet = document.forms["listingForm"]["squareFeet"].value;
-            let numberOfBath = document.forms["listingForm"]["numbeOfBath"].value;
-            let numTotalRooms = document.forms["listingForm"]["numTotalRooms"].value;
-            let occupancyDate = document.forms["listingForm"]["occupancyDate"].value;
-            let leaseType = document.forms["listingForm"]["leaseType"].value;
-            let rentalRate = document.forms["listingForm"]["rentalRate"].value;
-
-            if(email.length > 0 && street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0 
-            && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 && numTotalRooms.length > 0 
-            && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
-                window.location='viewLandlordListings.html';
-            }
-        }
+        // function viewLandlordListings.hbs(){
+        //     // verifying all fields are entered
+        //     let email = document.forms["listingForm"]["email"].value;
+        //
+        //     let street = document.forms["listingForm"]["street"].value;
+        //     let inputCity = document.forms["listingForm"]["inputCity"].value;
+        //     let inputState = document.forms["listingForm"]["inputState"].value;
+        //     let inputZip = document.forms["listingForm"]["inputZip"].value;
+        //     let inputCountry = document.forms["listingForm"]["inputCountry"].value;
+        //
+        //     let squarefeet = document.forms["listingForm"]["squareFeet"].value;
+        //     let numberOfBath = document.forms["listingForm"]["numbeOfBath"].value;
+        //     let numTotalRooms = document.forms["listingForm"]["numTotalRooms"].value;
+        //     let occupancyDate = document.forms["listingForm"]["occupancyDate"].value;
+        //     let leaseType = document.forms["listingForm"]["leaseType"].value;
+        //     let rentalRate = document.forms["listingForm"]["rentalRate"].value;
+        //
+        //     if(email.length > 0 && street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0
+        //     && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 && numTotalRooms.length > 0
+        //     && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
+        //         window.location='viewLandlordListings.hbs.html';
+        //     }
+        // }
         
         function logout(){
           alert("You have been logged out");

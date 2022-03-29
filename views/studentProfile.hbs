@@ -113,9 +113,15 @@
 <div class="container">
     <div class="left">
         <img class="img" src="images/student.png" alt="user" >
-        <h4>Full Name</h4>
-        <p>University</p>
-        <p>Email</p>
+
+<!--        {{#each account }}-->
+<!--            <p> {{ this.fullname }} </p>-->
+<!--            <p> {{ this.email }} </p>-->
+<!--            <p> {{ this.fullname }} </p>-->
+<!--        {{/each}}-->
+        <p>{{fullname}}</p>
+        <p>{{email}}</p>
+        <p>{{university}}</p>
     </div>
     <div class="right">
         <div class="info">
