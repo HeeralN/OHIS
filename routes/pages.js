@@ -26,4 +26,8 @@ router.get("/viewStudentSublet",(req,res)=>{
     res.render("viewStudentSublet");
 });
 
+router.get("/editStudentProfile",(req,res)=>{
+    res.render("editStudentProfile");
+});
+
 module.exports = router;

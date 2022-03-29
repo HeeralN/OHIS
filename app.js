@@ -23,8 +23,8 @@ app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
- 
-app.set("view engine", "hbs"); 
+
+app.set("view engine", "hbs");
 
 db.connect((error)=> {
     if(error) {
@@ -61,7 +61,7 @@ app.listen(5001, () => {
 //
 // app.get("/studentCreateAccount",(req,res)=>{
 //     res.render("studentCreateAccount");
-// }); 
+// });
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -112,10 +112,30 @@ app.get('/studentProfile', function(req, res) {
     }
 });
 
+
 app.get('/landlordProfile', function(req, res) {
     if (req.session.loggedin) {
         //res.send('Welcome back, ' + req.session.username + '!');
         res.render("landlordProfile");
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.get("/editStudentProfile",(req,res)=>{
+    if (req.session.loggedin) {
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                if (error){
+                    console.log(student);
+                    console.log(error);
+                }
+                res.render("editStudentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+            })
+        });
     } else {
         res.redirect('/');
     }
