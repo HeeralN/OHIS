@@ -145,30 +145,40 @@ app.post('/adminManagingUsers/deleteListing', function(req, res) {
 
 app.post('/adminManagingUsers/getUser', function(req, res) {
     const userId = req.body.username;
-    
-    db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ? AND username != ?', [userId, req.session.username], function(error, results, fields) {
-        if (results && results.length > 0) {
-            //res.send(results);
-            return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
-        } else {
-            return res.render('adminManagingUsers', {message: 'User not found!'});
-        }
-        res.end();
-    });
+
+    if (userId) {
+        db.query('SELECT username, email, fullname, adminPerms FROM account WHERE username = ? AND username != ?', [userId, req.session.username], function(error, results, fields) {
+            if (results && results.length > 0) {
+                //res.send(results);
+                return res.render('adminManagingUsers', {username: results[0].username, email: results[0].email, fullname: results[0].fullname, adminPerms: results[0].adminPerms});
+            } else {
+                return res.render('adminManagingUsers', {message: 'User not found!'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingUsers', {message: 'Please enter a value!'});
+    }
 });
 
 app.post('/adminManagingUsers/deleteUser', function(req, res) {
     const userId = req.body.username;
-
-    db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
-        if (results && error === null) {
-            //res.send('User deleted!');
-            return res.render('adminManagingUsers', {message: 'User deleted!'});
-        } else {
-            return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
-        }
-        res.end();
-    });
+    
+    if (userId) {
+        db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
+            console.log(results[0]);
+            if (results && error === null) {
+                return res.render('adminManagingUsers', {message: 'User deleted!'});
+            } else {
+                return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
+            }
+            res.end();
+        });
+    }
+    else {
+        return res.render('adminManagingUsers', {message: 'Please enter a value!'});
+    }
 });
 
 app.get('/studentProfile', function(req, res) {
