@@ -33,7 +33,7 @@ exports.studentCreateAccount = (req,res) => {
         }
         //add university into other table
 
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
+        db.query("INSERT INTO account (username, email, password, fullname, adminPerms) VALUES (?)", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
             if (error){
                 console.log(error);
             }
