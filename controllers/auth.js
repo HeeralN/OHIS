@@ -111,7 +111,7 @@ exports.createListingPage = (req ,res) => {
                 message: "A listing at the given address already exists"
             })
         }  
-        let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
+        let query = "INSERT INTO listing (address, username, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
         let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType, 
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
@@ -150,7 +150,7 @@ exports.createSubletPage = (req,res) => {
                 message: "A listing at the given address already exists"
             }) 
         } 
-        let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
+        let query = "INSERT INTO listing (address, username, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
         let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType, 
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
