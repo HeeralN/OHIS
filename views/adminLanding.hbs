@@ -70,9 +70,9 @@
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
         <ul class="nav navbar-nav">
-          <li><a href="adminManagingUsers.html">Manage Accounts</a></li>
+          <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
+          <li><a href="/adminManagingUsers">Manage Accounts</a></li>
           <li><a href="/adminManagingListings">Manage Listings</a></li>
-          <li><a href="masterAdminCreateAdminAccounts.html">Create a Admin Account</a></li>
         </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -81,43 +81,51 @@
         </div>
     </div>
   </nav>
+
+
   <h2>Admin Dashboard</h2>
 <div class="container1">
   <table class="styled-table">
     <thead>
-      <th>Active Admins</th>
-      <th># of Listings Managed</th>
-      <th># of Accounts Managed</th>
+      <th>Username</th>
+      <th>Full Name</th>
+      <th>Number of Listings</th>
+      <th>Account Type</th>
     </thead>
     <tbody>
-      <td>Alfreds Futterkiste</td>
-      <td>15</td>
-      <td>20</td>
+      {{#each listingData}}
+      <tr>
+        <td>{{this.username}}</td>
+        <td>{{this.fullname}}</td>
+        <td>{{this.numListings}}</td>
+        <td>{{this.accountType}}</td>
+      </tr>
+      {{/each}}
     </tbody>
-    <tr>
-      <td>Howdy Yall</td>
-      <td>28</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <td>Joe Smith</td>
-      <td>11</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td>Jane Green</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>Tiffany Blue</td>
-      <td>0</td>
-      <td>8</td>
-    </tr>
-
   </table>
 </div>
+
 <div class="container2">
+  <table class="styled-table">
+    <thead>
+      <th>Date</th>
+      <th># Registered</th>
+    </thead>
+    <tbody>
+      {{#each signupData}}
+      <tr>
+        <td>{{this.date}}</td>
+        <td>{{this.numAccountsRegistered}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+  {{/if}}
+
+<div class="container3">
   <img class="img" src="images/Sign-Ups.png" alt="signups" >
 </div>
 </body>
