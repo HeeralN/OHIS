@@ -132,8 +132,8 @@
         <div class="col-sm-4">
           <div class="thumbnail" onclick="openHousingProfile()">
             <img src="images/apt.jpg" alt="apt1">
-            <p><strong>{{address}}</strong></p>
-            <p>{{bath}} {{number of room}}</p>
+            <p><strong>t</strong></p>
+            <p>t</p>
           </div>
         </div>
         <div class="col-sm-4">
@@ -204,27 +204,31 @@
 </div>
   </div>
 
-  <label><%= title %></label>
+  <label></label>
 <table class="table table-bordered table-striped">
     <thead>
       <tr>
+        <th>ListingId</th>
         <th>Address</th>
         <th>Bath</th>
         <th>Number of Room</th>
-        <th>ListingId</th>
       </tr>
     </thead>
     <tbody id="propertyList">
     {{#each properties}}
-					<tr>    
+					<tr>  
+            <td>{{this.listingId}}</td>  
 						<td>{{this.address}}</td>
 						<td>{{this.bath}}</td>
-						<td>{{this.address}}</td>
-						<td>{{this.lisingId}}</td>
+						<td>{{this.number_of_room}}</td>
 					</tr>
 			{{/each}}
     </tbody>
 </table>
+
+  {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+  {{/if}}
   
   <footer class="container-fluid bg-4 text-center margin">
     <p>Contact us at support@ohis.com</p>

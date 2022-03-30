@@ -290,11 +290,18 @@ app.post('/housingProfileForLandlords/getListing', function(req, res) {
     });
 });
 
-app.post('/propertySearch/getListings', function(req, res) {
-    const housingId = req.body.listingID;
-    db.query('SELECT listingId, address, user email, bath, number of room, description FROM listing', function(error, results, fields) {
-        if (results.length > 0) {
-            return res.render('propetySearch', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});
+app.get('/propertySearch', function(req, res) {
+    var properties = NULL;
+    db.query('SELECT listingId, address, username, bath, number_of_room, description FROM listing', function(error, results, fields) {
+        if(error) throw error;
+        properties = results;
+        if (properties) {
+           // return res.render('properties', {
+          //      title : 'properties',
+          //      properties: rows
+           // })
+          return res.render('propertySearch', {properties: properties});
+              //listingID: results[0].listingId, address: results[0].address, username: results[0].username, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
