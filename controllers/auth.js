@@ -32,7 +32,7 @@ exports.studentCreateAccount = (req,res) => {
         }
 
         db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
-            db.query("INSERT INTO student SET ?", {university:university, username:username}, (error,results)=>{
+            db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
                 if (error){
                     console.log(results);
                     console.log(error);
@@ -90,11 +90,6 @@ exports.landlordCreateAccount = (req,res) => {
             }
         })
     });
-}
-exports.editStudentProfile = (req ,res) => {
-    const {editProfile}=req.body;
-    res.send("Hello");
-
 }
 
 exports.createListingPage = (req ,res) => {

@@ -99,12 +99,12 @@ app.get('/studentProfile', function(req, res) {
         //     res.render("studentProfile", {account: results});
         // });
         db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
-            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+            db.query("SELECT university, profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
                 if (error){
                     console.log(student);
                     console.log(error);
                 }
-                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
             })
         });
     } else {
@@ -122,23 +122,50 @@ app.get('/landlordProfile', function(req, res) {
     }
 });
 
+//not rendering username, fullname and university?
 app.get("/editStudentProfile",(req,res)=>{
     if (req.session.loggedin) {
         // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
         //     res.render("studentProfile", {account: results});
         // });
         db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
-            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+            db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
                 if (error){
                     console.log(student);
                     console.log(error);
                 }
-                res.render("editStudentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+                res.render("editStudentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
             })
         });
     } else {
         res.redirect('/');
     }
+});
+
+app.post("/editStudentProfile", (req ,res) => {
+    if (req.session.loggedin) {
+        const {editProfile}=req.body;
+        db.query('UPDATE student SET ? WHERE username = ?', [{ profile_description: editProfile }, req.session.username], (error,results)=>{
+            if (error){
+                console.log(results);
+                console.log(results);
+            }
+            db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+                db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                    if (error){
+                        console.log(student);
+                        console.log(error);
+                    }
+                    res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
+                })
+            });
+
+        });
+    }
+    else {
+        res.redirect('/');
+    }
+
 });
 
 app.get("/createListingPage",(req,res)=>{

@@ -8,6 +8,6 @@ router.post("/studentCreateAccount", authController.studentCreateAccount)
 router.post("/createListingPage", authController.createListingPage)
 router.post("/createSubletPage", authController.createSubletPage)
 router.post("/landlordCreateAccount", authController.landlordCreateAccount)
-router.post("/editStudentProfile", authController.editStudentProfile)
+//router.post("/editStudentProfile", authController.editStudentProfile)
 
 module.exports = router;
