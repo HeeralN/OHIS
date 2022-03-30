@@ -29,7 +29,7 @@
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="viewStudentSublet.html">My Listings</a></li>
-            <li><a href="propertySearch.html">Search Listings</a></li>
+            <li><a href="/propertySearch">Search Listings</a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
@@ -203,6 +203,28 @@
   </div>
 </div>
   </div>
+
+  <label><%= title %></label>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Bath</th>
+        <th>Number of Room</th>
+        <th>ListingId</th>
+      </tr>
+    </thead>
+    <tbody id="propertyList">
+    {{#each properties}}
+					<tr>    
+						<td>{{this.address}}</td>
+						<td>{{this.bath}}</td>
+						<td>{{this.address}}</td>
+						<td>{{this.lisingId}}</td>
+					</tr>
+			{{/each}}
+    </tbody>
+</table>
   
   <footer class="container-fluid bg-4 text-center margin">
     <p>Contact us at support@ohis.com</p>

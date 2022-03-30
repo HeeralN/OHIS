@@ -5,6 +5,7 @@ const session = require('express-session');
 const dotenv= require("dotenv");
 const path = require("path")
 const bodyParser = require("body-parser");
+const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 
 dotenv.config({path: './.env'})
 
@@ -131,6 +132,14 @@ app.get('/adminManagingUsers', function(req, res) {
     }
 });
 
+app.get('/propertySearch', function(req, res) {
+    if (req.session.loggedin) {
+        res.render('propertySearch');
+    } else { 
+        res.send('Please login to view this page!');
+    }
+}); 
+
 app.post('/adminManagingListings/getListing', function(req, res) {
     const housingId = req.body.listingID;
 
@@ -254,12 +263,20 @@ app.post('/housingProfile/getListing', function(req, res) {
     const housingId = req.body.listingID;
     db.query('SELECT listingId, address, user email, bath, number of room, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
         if (results.length > 0) {
-            return res.render('housingProfile', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});        } else {
+            return res.render('housingProfile', {
+                title : 'ALL LISTINGS',
+                properties: rows
+            })
+        }
+           // {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description}); 
+            //  }
+        else {
             return res.render('housingProfile', {message: 'Listing not found!'});
         }
         res.end();
     });
 });
+
 
 app.post('/housingProfileForLandlords/getListing', function(req, res) {
     const housingId = req.body.listingID;
@@ -284,6 +301,7 @@ app.post('/propertySearch/getListings', function(req, res) {
         res.end();
     });
 });
+
 app.get("/logout",(req,res)=>{
     req.session.destroy((err) => {
         if(err){
