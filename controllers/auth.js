@@ -172,11 +172,25 @@ exports.landlordCreateAccount = (req,res) => {
         })
     });
 
+ 
+        
+    
+
     //res.send("Form submitted")
     // res.json({ //to test form on front end
     //
     // })
 }
+
+// exports.propertySearch = (req,res) => {
+//             con.connect(function(err) {
+//                 if (err) throw err;
+//                 con.query("SELECT * FROM Listings ORDER BY 'rental price' DESC", function (err, result) {
+//                   if (err) throw err;
+//                   console.log(result);
+//                 });
+//               });
+//             }
 
 // exports.index = (req,res) => {
 //     const {username, password} = req.body;
