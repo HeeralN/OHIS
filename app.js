@@ -259,10 +259,12 @@ app.get("/viewStudentSublet",(req,res)=>{
     }
 });
 
-app.post('/housingProfile/getListing', function(req, res) {
+app.post('/housingProfile', function(req, res) {
     const housingId = req.body.listingID;
+    var listingInfo = NULL;
     db.query('SELECT listingId, address, user email, bath, number of room, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
-        if (results.length > 0) {
+        listingInfo=results;
+        if (listingInfo) {
             return res.render('housingProfile', {
                 title : 'ALL LISTINGS',
                 properties: rows
@@ -281,7 +283,7 @@ app.post('/housingProfile/getListing', function(req, res) {
 app.post('/housingProfileForLandlords/getListing', function(req, res) {
     const housingId = req.body.listingID;
     db.query('SELECT listingId, address, user email, bath, number of room, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
-        if (results.length > 0) {
+        if (results) {
             return res.render('housingProfileForLandlords', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});
         } else {
             return res.render('housingProfileForLandlords', {message: 'Listing not found!'});
