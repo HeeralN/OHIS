@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Admin Landing</title>
   <meta charset="utf-8">
@@ -8,52 +9,62 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style>
-  .container1 {
-    width:50%;
-    float:left;
-  }
-  .container2 {
-    width:50%;
-    float:right;
-  }
-  .container2 img{
-    height: 100%;
-    width: 70%;
-    margin-top:10px;
-    margin-left:40px;
-    object-fit: contain;
-  }
-  h2{
-    text-align: center;
-  }
-  body {
-    background: lavender;
-  }
-  .styled-table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 600px;
-    background-color: white;
-    margin-top:10px;
-    margin-left:90px;
-  }
-  .styled-table thead tr {
-    background-color: gray;
-    color: #ffffff;
-    text-align: left;
-  }
-  .styled-table th,
-  .styled-table td {
-    padding: 12px 15px;
-  }
-  .styled-table tbody tr {
-    border-bottom: 1px solid gray;
-  }
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+  <style>
+    .container1 {
+      width: 50%;
+      float: left;
+    }
 
-</style>
+    .container2 {
+      width: 50%;
+      float: right;
+    }
+
+    .container2 img {
+      height: 100%;
+      width: 70%;
+      margin-top: 10px;
+      margin-left: 40px;
+      object-fit: contain;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    body {
+      background: lavender;
+    }
+
+    .styled-table {
+      border-collapse: collapse;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 600px;
+      background-color: white;
+      margin-top: 10px;
+      margin-left: 90px;
+    }
+
+    .styled-table thead tr {
+      background-color: gray;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+      border-bottom: 1px solid gray;
+    }
+  </style>
 </head>
+
 <body>
 
 
@@ -63,70 +74,103 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
+          <span class="icon-bar"></span>
         </button>
         <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
-          <li><a href="/adminManagingUsers">Manage Accounts</a></li>
-          <li><a href="/adminManagingListings">Manage Listings</a></li>
+        <ul class="nav navbar-nav navbar-collpase">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
+            <li><a href="/adminManagingUsers">Manage Accounts</a></li>
+            <li><a href="/adminManagingListings">Manage Listings</a></li>
+          </ul>
         </ul>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
-        </div>
+      </div>
     </div>
   </nav>
 
-
   <h2>Admin Dashboard</h2>
-<div class="container1">
-  <table class="styled-table">
-    <thead>
-      <th>Username</th>
-      <th>Full Name</th>
-      <th>Number of Listings</th>
-      <th>Account Type</th>
-    </thead>
-    <tbody>
-      {{#each listingData}}
-      <tr>
-        <td>{{this.username}}</td>
-        <td>{{this.fullname}}</td>
-        <td>{{this.numListings}}</td>
-        <td>{{this.accountType}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+  <div class="container1">
+    <table class="styled-table">
+      <thead>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Number of Listings</th>
+        <th>Account Type</th>
+      </thead>
+      <tbody>
+        {{#each listingData}}
+        <tr>
+          <td>{{this.username}}</td>
+          <td>{{this.fullname}}</td>
+          <td>{{this.numListings}}</td>
+          <td>{{this.accountType}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 
-<div class="container2">
-  <table class="styled-table">
-    <thead>
-      <th>Date</th>
-      <th># Registered</th>
-    </thead>
-    <tbody>
+  <div class="container2">
+    <table class="styled-table">
+      <thead>
+        <th>Date</th>
+        <th># Registered</th>
+      </thead>
+      <tbody>
+        {{#each signupData}}
+        <tr>
+          <td>{{this.date}}</td>
+          <td>{{this.numAccountsRegistered}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container2">
+    <div id="myDiv" style="width:600px;height:250px;"></div>
+
+    <script>
+      var plotDates = [];
+      var plotNums = [];
+
       {{#each signupData}}
-      <tr>
-        <td>{{this.date}}</td>
-        <td>{{this.numAccountsRegistered}}</td>
-      </tr>
+      plotDates.push("{{this.date}}");
+      plotNums.push("{{this.numAccountsRegistered}}");
       {{/each}}
-    </tbody>
-  </table>
+
+      console.log(plotDates);
+      console.log(plotNums);
+
+      var data = [
+        {
+          x: plotDates, 
+          y: plotNums,
+          type: 'bar'
+        }
+      ];
+
+      var layout = {
+        title: 'Number of Users Registered (Past 7 Days)',
+        xaxis: {
+          title: 'Date'
+        },
+        yaxis: {
+          title: '# Users'
+        }
+      };
+      Plotly.newPlot('myDiv', data, layout);
+    </script>
+  </div>
 
   {{#if message}}
     <h4 class="alert alert-danger mt-4">{{message}}</h4>
   {{/if}}
 
-<div class="container3">
-  <img class="img" src="images/Sign-Ups.png" alt="signups" >
-</div>
 </body>
 </html>

@@ -98,10 +98,21 @@ app.get('/adminLanding', function(req, res) {
         var signupData = null;
         db.query('SELECT a.username, a.fullname, COUNT(*) AS numListings, CASE WHEN a.adminPerms = 0 THEN \'Student\' WHEN a.adminPerms = 1 THEN \'Landlord\' END AS accountType FROM account a INNER JOIN listing l ON a.username = l.username GROUP BY l.username ORDER BY COUNT(*) DESC', function(error, results, fields) {
             listingData = results;
-            db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered)', function(error, results, fields) {
+            db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered) LIMIT 7', function(error, results, fields) {
                 signupData = results;
+                var signupDates = [];
+                var signupNums = [];
+
+                for (var i = 0; i < results.length; i++) {
+                    signupDates.push(results[i].date);
+                    signupNums.push(results[i].numAccountsRegistered);
+                }
+
+                //console.log(signupDates);
+                //console.log(signupNums);
+
                 if (listingData && signupData) {
-                    return res.render('adminLanding', {listingData: listingData, signupData: signupData});
+                    return res.render('adminLanding', {listingData: listingData, signupData: signupData, signupDates: signupDates, signupNums: signupNums});
                 }
                 else {
                     return res.render('adminLanding', {message: 'There was an error fetching statistics!'});
