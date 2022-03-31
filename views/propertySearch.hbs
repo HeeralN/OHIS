@@ -212,15 +212,22 @@
         <th>Address</th>
         <th>Bath</th>
         <th>Number of Room</th>
+        <th>View</th>
       </tr>
     </thead>
-    <tbody id="propertyList">
+    <tbody id="propertyList" onclick="/housingProfile">
     {{#each properties}}
 					<tr>  
             <td>{{this.listingId}}</td>  
 						<td>{{this.address}}</td>
 						<td>{{this.bath}}</td>
 						<td>{{this.number_of_room}}</td>
+            <td>
+              <form action="/housingProfile" method="POST">
+      <input type="hidden" id="listingId" name="listingId" value="{{this.listingId}}">
+      <button type="submit" class="btn btn-danger" data-target="#housingProfile">View</button>
+  </form>
+  </td>
 					</tr>
 			{{/each}}
     </tbody>

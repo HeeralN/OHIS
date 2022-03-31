@@ -133,13 +133,7 @@ app.get('/adminManagingUsers', function(req, res) {
     }
 });
 
-app.get('/propertySearch', function(req, res) {
-    if (req.session.loggedin) {
-        res.render('propertySearch');
-    } else { 
-        res.send('Please login to view this page!');
-    }
-}); 
+
 
 app.post('/adminManagingListings/getListing', function(req, res) {
     const housingId = req.body.listingID;
@@ -316,11 +310,10 @@ app.get("/viewStudentSublet",(req,res)=>{
     }
 });
 
-app.get('/housingProfile', function(req, res) {
-    const housingId = req.body.listingID;
-  
-    db.query('SELECT listingId, address, bath, number_of_room, description FROM listing WHERE listingId = 122', function(error, results, fields) {
-        console.log(results);
+app.post('/housingProfile', function(req, res) {
+    const housingId = req.body.listingId;
+    console.log("ID: " + housingId);
+    db.query('SELECT listingId, address, bath, number_of_room, description FROM listing WHERE listingId = ?',[housingId], function(error, results, fields) {
         
             return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description}); 
               
@@ -331,6 +324,7 @@ app.get('/housingProfile', function(req, res) {
 
 app.post('/housingProfileForLandlords/getListing', function(req, res) {
     const housingId = req.body.listingID;
+    console.log("ID: " + housingId);
     db.query('SELECT listingId, address, user email, bath, number of room FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
         if (results) {
             return res.render('housingProfileForLandlords', {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});
@@ -342,15 +336,14 @@ app.post('/housingProfileForLandlords/getListing', function(req, res) {
 });
 
 app.get('/propertySearch', function(req, res) {
-    console.log("IN FUNCTION");
     if (req.session.loggedin) {
-    var properties = NULL;
-    db.query('SELECT listingId, address, username, bath, number_of_room FROM listing', function(error, results, fields) {
+   
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing', function(error, results, fields) {
         if(error){
             console.log(error);
         }
-        console.log("results: " + result);
-        properties = results;
+        
+        var properties = results;
         if (properties) {
            // return res.render('properties', {
           //      title : 'properties',
