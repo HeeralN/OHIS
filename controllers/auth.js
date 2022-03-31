@@ -23,7 +23,7 @@ exports.studentCreateAccount = (req,res) => {
                 message: "That username or email is already in use"
             })
 
-        }
+        } 
         else if(password!==confirmpassword) {
             return res.render("studentCreateAccount",{
                 message: "Passwords do not match"
@@ -38,6 +38,14 @@ exports.studentCreateAccount = (req,res) => {
                     console.log(error);
                 }
             })
+
+            db.query("INSERT INTO preference SET ?", {username: username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+
             if (error){
                 console.log(error);
             }
@@ -47,6 +55,7 @@ exports.studentCreateAccount = (req,res) => {
                     message:"User registered"
                 });
             }
+             
         })
     });
 }
@@ -130,7 +139,6 @@ exports.createListingPage = (req ,res) => {
 
 }
 
-
 exports.createSubletPage = (req,res) => {
     //console.log(req.body);
     const {email, street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms,
@@ -172,6 +180,7 @@ exports.createSubletPage = (req,res) => {
     //
     // })
 }
+
 
 // exports.index = (req,res) => {
 //     const {username, password} = req.body;
