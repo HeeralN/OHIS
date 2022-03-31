@@ -1,4 +1,3 @@
-//controller not working with index page
 
 const mysql = require('mysql');
 const jwt=require("jsonwebtoken");
@@ -24,7 +23,7 @@ exports.studentCreateAccount = (req,res) => {
                 message: "That username or email is already in use"
             })
 
-        }
+        } 
         else if(password!==confirmpassword) {
             return res.render("studentCreateAccount",{
                 message: "Passwords do not match"
@@ -33,12 +32,20 @@ exports.studentCreateAccount = (req,res) => {
         }
 
         db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
-            db.query("INSERT INTO student SET ?", {university:university, username:username}, (error,results)=>{
+            db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
                 if (error){
                     console.log(results);
                     console.log(error);
                 }
             })
+
+            db.query("INSERT INTO preference SET ?", {username: username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+
             if (error){
                 console.log(error);
             }
@@ -48,6 +55,7 @@ exports.studentCreateAccount = (req,res) => {
                     message:"User registered"
                 });
             }
+             
         })
     });
 }
@@ -95,9 +103,9 @@ exports.landlordCreateAccount = (req,res) => {
 
 exports.createListingPage = (req ,res) => {
     //console.log(req.body);
-    const {email, street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
+    const {email, street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms,
         occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
-     
+
     let fullAddress = street + ' ' + inputCity + ' ' + inputState + ' ' + inputZip + ' ' + inputCountry;
     let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
@@ -110,12 +118,12 @@ exports.createListingPage = (req ,res) => {
             return res.render("createListingPage",{
                 message: "A listing at the given address already exists"
             })
-        }  
+        }
         let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
-        let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType, 
+        let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType,
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
-        
+
         db.query(query, values, (error,results)=>{
             if (error){
                 console.log(error);
@@ -131,12 +139,11 @@ exports.createListingPage = (req ,res) => {
 
 }
 
-
 exports.createSubletPage = (req,res) => {
     //console.log(req.body);
-    const {email, street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
+    const {email, street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms,
         occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
-     
+
     let fullAddress = street + ' ' + inputCity + ' ' + inputState + ' ' + inputZip + ' ' + inputCountry;
     let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
@@ -144,17 +151,17 @@ exports.createSubletPage = (req,res) => {
     db.query("SELECT address FROM listing WHERE address= ?", [fulladdress], async (error, results) => {
         if (error) {
             console.log(error);
-        }   
+        }
         if (results.length > 0) {
             return res.render("createSubletPage",{
                 message: "A listing at the given address already exists"
-            }) 
-        } 
+            })
+        }
         let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
-        let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType, 
+        let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType,
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
-        
+
         db.query(query, values, (error,results)=>{
             if (error){
                 console.log(error);
@@ -173,6 +180,7 @@ exports.createSubletPage = (req,res) => {
     //
     // })
 }
+
 
 // exports.index = (req,res) => {
 //     const {username, password} = req.body;

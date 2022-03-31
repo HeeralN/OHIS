@@ -23,8 +23,8 @@ app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
- 
-app.set("view engine", "hbs"); 
+
+app.set("view engine", "hbs");
 
 db.connect((error)=> {
     if(error) {
@@ -61,7 +61,7 @@ app.listen(5001, () => {
 //
 // app.get("/studentCreateAccount",(req,res)=>{
 //     res.render("studentCreateAccount");
-// }); 
+// });
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -222,12 +222,58 @@ app.get('/studentProfile', function(req, res) {
         //     res.render("studentProfile", {account: results});
         // });
         db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
-            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+            db.query("SELECT university, profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
                 if (error){
                     console.log(student);
                     console.log(error);
                 }
-                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university});
+                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
+            })
+        });
+    } else {
+        res.redirect('/');
+    } 
+});
+
+ 
+app.get('/roommateMatchingForm', (req, res)=>{
+    if (req.session.loggedin) {
+        db.query("SELECT * FROM preference WHERE username =?", [req.session.username], (error, result) => {
+            if (error){
+                console.log(result);
+                console.log(error);
+            }
+            console.log(result);
+            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol}); 
+        });
+    } else {
+        res.redirect('/'); 
+    }
+});
+
+
+app.get('/landlordProfile', function(req, res) {
+    if (req.session.loggedin) {
+        //res.send('Welcome back, ' + req.sess ion.username + '!');
+        res.render("landlordProfile");
+    } else {
+        res.redirect('/');
+    }
+});
+
+//not rendering username, fullname and university?
+app.get("/editStudentProfile",(req,res)=>{
+    if (req.session.loggedin) {
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+            db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                if (error){
+                    console.log(student);
+                    console.log(error);
+                }
+                res.render("editStudentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
             })
         });
     } else {
@@ -235,13 +281,30 @@ app.get('/studentProfile', function(req, res) {
     }
 });
 
-app.get('/landlordProfile', function(req, res) {
+app.post("/editStudentProfile", (req ,res) => {
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("landlordProfile");
-    } else {
+        const {editProfile}=req.body;
+        db.query('UPDATE student SET ? WHERE username = ?', [{ profile_description: editProfile }, req.session.username], (error,results)=>{
+            if (error){
+                console.log(results);
+                console.log(results);
+            }
+            db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+                db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                    if (error){
+                        console.log(student);
+                        console.log(error);
+                    }
+                    res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
+                })
+            });
+
+        });
+    }
+    else {
         res.redirect('/');
     }
+
 });
 
 app.get("/createListingPage",(req,res)=>{
@@ -272,9 +335,37 @@ app.get("/viewStudentSublet",(req,res)=>{
 app.get("/logout",(req,res)=>{
     req.session.destroy((err) => {
         if(err){
-            return console.error(err)
+            return  console.error(err)
         }
         console.log("The session has been destroyed!")
         res.redirect("/");
-    })
+    }) 
 });
+
+app.get("/roommateMatchingFormEdit", (req, res) => {
+    if (req.session.loggedin) {
+        res.render("roommateMatchingFormEdit");
+    } else {
+        res.redirect('/');
+    }
+});
+ 
+
+app.post("/roommateMatchingFormEdit", (req, res) => {
+    console.log(req.body);
+    console.log(req.session);
+    const {gender, international, smoker, roomcare, bedtime, sleephabit, personality, studyhabit, musicvol} = req.body;
+    db.query("UPDATE preference SET ? WHERE username = ?", [{gender: gender, international: international, smoker: smoker, roomcare: roomcare, 
+        bedtime:bedtime, sleephabit:sleephabit, personality:personality, studyhabit:studyhabit, musicvol:musicvol}, req.session.username],
+        async (error, results) => {
+            if (error) {
+                console.log(error);
+            }   
+            else{ 
+                console.log(results);
+                return res.redirect("/roommateMatchingForm");
+            }
+        });
+        
+});
+

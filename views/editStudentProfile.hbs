@@ -97,7 +97,7 @@
                 </li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+                        <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
                         <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
                     </ul>
                 </li>
@@ -114,11 +114,11 @@
     <div class="left">
         <img class="img" src="images/student.png" alt="user" >
 
-<!--        {{#each account }}-->
-<!--            <p> {{ this.fullname }} </p>-->
-<!--            <p> {{ this.email }} </p>-->
-<!--            <p> {{ this.fullname }} </p>-->
-<!--        {{/each}}-->
+            <!--        {{#each account }}-->
+        <!--            <p> {{ this.fullname }} </p>-->
+        <!--            <p> {{ this.email }} </p>-->
+        <!--            <p> {{ this.fullname }} </p>-->
+            <!--        {{/each}}-->
         <p>{{fullname}}</p>
         <p>{{email}}</p>
         <p>{{university}}</p>
@@ -126,19 +126,21 @@
     <div class="right">
         <div class="info">
             <h3>About Me</h3>
-            <div class="info_data">
-                <p style="max-height:350px; max-width:800px;">{{profile_description}}</p>
-                <a href="/editStudentProfile">Edit Profile Description</a>
+            <form action="/editStudentProfile" method="POST" id="NewAccount">
+                <div class="form-group">
+                <textarea type="textarea" class="form-control" name="editProfile" id="editProfile"></textarea>
             </div>
+                <div class="submit-button">
+                    <button type="submit" class="Submit">Submit</button>
+                </div>
+
+            </form>
         </div>
 
     </div>
 </div>
 <script>
-    // function logout(){
-    //     alert("You have been logged out");
-    //     window.location='login.html';
-    // }
+
 </script>
 <footer class="container-fluid bg-4 text-center margin">
     <p>Contact us at support@ohis.com</p>

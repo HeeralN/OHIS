@@ -53,7 +53,7 @@
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
           </ul>
         </li>
       </ul>
@@ -67,81 +67,72 @@
 <div class="container mt-3">
   <h2>Your Roommate Preferences</h2>
   <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-
+  <p>{{gender}}</p>
   <table class="table">
     <tbody>
       <tr>
         <td>Gender Preference</td>
         <td>    
-          --
+          {{gender}}
       </td>
       </tr>
       <tr>
         <td>Prefer/Accept an international student?</td>
-        <td>
-          --
+        <td>{{international}}
         </td>
       </tr>
       <tr>
         <td>Are you a smoker?</td>
         <td>
-          --
+          {{smoker}}
         </td>
       </tr>
       <tr>
         <td>Room care</td>
         <td>
-          --
+          {{roomcare}}
         </td>
       </tr>
       <tr>
         <td>Bedtime</td>
         <td>
-          --
+          {{bedtime}}
         </td>
       </tr>
       <tr>
         <td>Sleeping Habits</td>
         <td>
-          --
+          {{sleephabit}}
         </td>
       </tr>
       <tr>
         <td>My Personality</td>
         <td>
-          --
+          {{personality}}
         </td>
       </tr>
       <tr>
         <td>Study Habits</td>
         <td>
-          --
+          {{studyhabit}}
         </td>
       </tr>
       <tr>
         <td>Music Volume Level Preference</td>
         <td>
-          --
+          {{musicvol}}
         </td>
       </tr>
     </tbody>
   </table>
 
-  <button class="btn btn-primary mt-3" onclick="/roommateMatchingFormEdit">Edit</button>
+  <a href="/roommateMatchingFormEdit"><button class="btn btn-primary mt-3" >Edit</button></a>
 
 </div>
 <footer class="container-fluid bg-4 text-center margin">
   <p>Contact us at support@ohis.com</p>
 </footer>
 <script>
-  function logout(){
-    alert("You have been logged out");
-    window.location='login.html';
-  }
-
-  function gotoEdit(){
-    window.location='roommateMatchingFormEdit.html';
-  }
 </script>
 </body>
 </html>
