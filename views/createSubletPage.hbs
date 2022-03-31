@@ -192,17 +192,17 @@
 <script>
     function publishListing(){
       // verifying all fields are entered
-      let street = document.forms["listingForm"]["street"].value;
-      let inputCity = document.forms["listingForm"]["inputCity"].value;
-      let inputState = document.forms["listingForm"]["inputState"].value;
-      let inputZip = document.forms["listingForm"]["inputZip"].value;
-      let inputCountry = document.forms["listingForm"]["inputCountry"].value;
-      let squarefeet = document.forms["listingForm"]["square-feet"].value;
-      let numberOfBath = document.forms["listingForm"]["number-of-bath"].value;
-      let numTotalRooms = document.forms["listingForm"]["num-total-rooms"].value;
-      let occupancyDate = document.forms["listingForm"]["occupancy-date"].value;
-      let leaseType = document.forms["listingForm"]["lease-type"].value;
-      let rentalRate = document.forms["listingForm"]["rental-rate"].value;
+      const street = document.forms["listingForm"]["street"].value;
+      const inputCity = document.forms["listingForm"]["inputCity"].value;
+      const inputState = document.forms["listingForm"]["inputState"].value;
+      const inputZip = document.forms["listingForm"]["inputZip"].value;
+      const inputCountry = document.forms["listingForm"]["inputCountry"].value;
+      const squarefeet = document.forms["listingForm"]["square-feet"].value;
+      const numberOfBath = document.forms["listingForm"]["number-of-bath"].value;
+      const numTotalRooms = document.forms["listingForm"]["num-total-rooms"].value;
+      const occupancyDate = document.forms["listingForm"]["occupancy-date"].value;
+      const leaseType = document.forms["listingForm"]["lease-type"].value;
+      const rentalRate = document.forms["listingForm"]["rental-rate"].value;
 
       if(street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0 && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 
           && numTotalRooms.length > 0 && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
