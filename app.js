@@ -24,8 +24,8 @@ app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
- 
-app.set("view engine", "hbs"); 
+
+app.set("view engine", "hbs");
 
 db.connect((error)=> {
     if(error) {
@@ -62,7 +62,7 @@ app.listen(5001, () => {
 //
 // app.get("/studentCreateAccount",(req,res)=>{
 //     res.render("studentCreateAccount");
-// }); 
+// });
 
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
@@ -220,7 +220,7 @@ app.get('/studentProfile', function(req, res) {
         //     res.render("studentProfile", {account: results});
         // });
         db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
-            db.query("SELECT university FROM student WHERE username=?", [req.session.username], (error, university)=>{
+            db.query("SELECT university, profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
                 if (error){
                     console.log(student);
                     console.log(error);
@@ -233,6 +233,7 @@ app.get('/studentProfile', function(req, res) {
     }
 });
 
+
 app.get('/landlordProfile', function(req, res) {
     if (req.session.loggedin) {
         //res.send('Welcome back, ' + req.session.username + '!');
@@ -240,6 +241,52 @@ app.get('/landlordProfile', function(req, res) {
     } else {
         res.redirect('/');
     }
+});
+
+//not rendering username, fullname and university?
+app.get("/editStudentProfile",(req,res)=>{
+    if (req.session.loggedin) {
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+            db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                if (error){
+                    console.log(student);
+                    console.log(error);
+                }
+                res.render("editStudentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
+            })
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.post("/editStudentProfile", (req ,res) => {
+    if (req.session.loggedin) {
+        const {editProfile}=req.body;
+        db.query('UPDATE student SET ? WHERE username = ?', [{ profile_description: editProfile }, req.session.username], (error,results)=>{
+            if (error){
+                console.log(results);
+                console.log(results);
+            }
+            db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, student) => {
+                db.query("SELECT university,profile_description FROM student WHERE username=?", [req.session.username], (error, university)=>{
+                    if (error){
+                        console.log(student);
+                        console.log(error);
+                    }
+                    res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
+                })
+            });
+
+        });
+    }
+    else {
+        res.redirect('/');
+    }
+
 });
 
 app.get("/createListingPage",(req,res)=>{
