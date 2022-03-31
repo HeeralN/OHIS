@@ -243,6 +243,8 @@ app.get('/landlordProfile', function(req, res) {
     }
 });
 
+
+
 //not rendering username, fullname and university?
 app.get("/editStudentProfile",(req,res)=>{
     if (req.session.loggedin) {
@@ -314,22 +316,14 @@ app.get("/viewStudentSublet",(req,res)=>{
     }
 });
 
-app.post('/housingProfile', function(req, res) {
+app.get('/housingProfile', function(req, res) {
     const housingId = req.body.listingID;
-    var listingInfo = NULL;
-    db.query('SELECT listingId, address, user email, bath, number of room, description FROM listing WHERE listingId = ?', [housingId], function(error, results, fields) {
-        listingInfo=results;
-        if (listingInfo) {
-            return res.render('housingProfile', {
-                title : 'ALL LISTINGS',
-                properties: rows
-            })
-        }
-           // {listingID: results[0].listingId, address: results[0].address, email: results[0].user_email, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description}); 
-            //  }
-        else {
-            return res.render('housingProfile', {message: 'Listing not found!'});
-        }
+  
+    db.query('SELECT listingId, address, bath, number_of_room, description FROM listing WHERE listingId = 122', function(error, results, fields) {
+        console.log(results);
+        
+            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description}); 
+              
         res.end();
     });
 });
@@ -347,7 +341,7 @@ app.post('/housingProfileForLandlords/getListing', function(req, res) {
     });
 });
 
-app.post('/propertySearch', function(req, res) {
+app.get('/propertySearch', function(req, res) {
     console.log("IN FUNCTION");
     if (req.session.loggedin) {
     var properties = NULL;
@@ -369,6 +363,9 @@ app.post('/propertySearch', function(req, res) {
         }
         res.end();
     });
+}
+else {
+    res.send('Please login to view this page!');
 }
 });
 

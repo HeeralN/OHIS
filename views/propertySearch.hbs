@@ -130,14 +130,14 @@
     <div class="container-fluid text-center bg-grey">
       <div class="row text-center">
         <div class="col-sm-4">
-          <div class="thumbnail" onclick="openHousingProfile()">
+          <div href="/housingProfile" class="thumbnail" onclick="openHousingProfile()">
             <img src="images/apt.jpg" alt="apt1">
             <p><strong>t</strong></p>
             <p>t</p>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="thumbnail">
+          <div href="/housingProfile" class="thumbnail">
             <img src="images/apt.jpg" alt="apt2">
             <p><strong>Louis St</strong></p>
             <p>2 bed 1 bath</p>
@@ -241,7 +241,7 @@
   </script>
    <script>
     function openHousingProfile() {
-        window.location = 'housingProfile.hbs.html?id=' + {{address}};
+        window.location = '/housingProfile';
     }
 </script>
 </body>
