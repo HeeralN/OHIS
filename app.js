@@ -251,6 +251,11 @@ app.get('/landlordProfile', function(req, res) {
     }
 });
 
+app.get('/resetPassword', function(req, res) {
+        res.render("resetPassword");
+
+});
+
 //not rendering username, fullname and university?
 app.get("/editStudentProfile",(req,res)=>{
     if (req.session.loggedin) {
@@ -294,8 +299,34 @@ app.post("/editStudentProfile", (req ,res) => {
     else {
         res.redirect('/');
     }
-
 });
+
+// app.post("/resetPassword", (req ,res) => {
+//     const {username, password, confirmpassword}=req.body;
+//     if (username && password) {
+//         db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
+//             if (error) {
+//                 console.log(error);
+//             }
+//             if ((results.length === undefined)) {
+//                 return res.render("resetPassword", {
+//                     message: "That username does not exist"
+//                 })
+//
+//             } else if (password !== confirmpassword) {
+//                 return res.render("resetPassword", {
+//                     message: "Passwords do not match"
+//                 })
+//
+//             } else {
+//                 return res.redirect("/");
+//             }
+//         });
+//     }
+//     else {
+//         res.redirect('/');
+//     }
+// });
 
 app.get("/createListingPage",(req,res)=>{
     if (req.session.loggedin) {
