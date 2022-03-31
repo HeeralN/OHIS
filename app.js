@@ -95,7 +95,33 @@ app.post('/auth/index', function(req, res) {
 
 app.get('/adminLanding', function(req, res) {
     if (req.session.loggedin) {
-        res.render('adminLanding');
+        var listingData = null;
+        var signupData = null;
+        db.query('SELECT a.username, a.fullname, COUNT(*) AS numListings, CASE WHEN a.adminPerms = 0 THEN \'Student\' WHEN a.adminPerms = 1 THEN \'Landlord\' END AS accountType FROM account a INNER JOIN listing l ON a.username = l.username GROUP BY l.username ORDER BY COUNT(*) DESC LIMIT 10', function(error, results, fields) {
+            listingData = results;
+            db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered) ORDER BY date_registered DESC LIMIT 7', function(error, results, fields) {
+                signupData = results;
+                var signupDates = [];
+                var signupNums = [];
+
+                for (var i = 0; i < results.length; i++) {
+                    signupDates.push(results[i].date);
+                    signupNums.push(results[i].numAccountsRegistered);
+                }
+
+                //console.log(signupDates);
+                //console.log(signupNums);
+
+                if (listingData && signupData) {
+                    return res.render('adminLanding', {listingData: listingData, signupData: signupData, signupDates: signupDates, signupNums: signupNums});
+                }
+                else {
+                    return res.render('adminLanding', {message: 'There was an error fetching statistics!'});
+                }
+            });
+        });
+        //return res.render('adminLanding', {listingData: listingData, signupData: signupData});
+        //res.render('adminLanding');
     } else {
         res.send('Please login to view this page!');
     }
