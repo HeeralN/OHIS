@@ -100,19 +100,9 @@ app.get('/adminLanding', function(req, res) {
             listingData = results;
             db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered) ORDER BY date_registered DESC LIMIT 7', function(error, results, fields) {
                 signupData = results;
-                var signupDates = [];
-                var signupNums = [];
-
-                for (var i = 0; i < results.length; i++) {
-                    signupDates.push(results[i].date);
-                    signupNums.push(results[i].numAccountsRegistered);
-                }
-
-                //console.log(signupDates);
-                //console.log(signupNums);
 
                 if (listingData && signupData) {
-                    return res.render('adminLanding', {listingData: listingData, signupData: signupData, signupDates: signupDates, signupNums: signupNums});
+                    return res.render('adminLanding', {listingData: listingData, signupData: signupData});
                 }
                 else {
                     return res.render('adminLanding', {message: 'There was an error fetching statistics!'});
