@@ -301,32 +301,38 @@ app.post("/editStudentProfile", (req ,res) => {
     }
 });
 
-// app.post("/resetPassword", (req ,res) => {
-//     const {username, password, confirmpassword}=req.body;
-//     if (username && password) {
-//         db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
-//             if (error) {
-//                 console.log(error);
-//             }
-//             if ((results.length === undefined)) {
-//                 return res.render("resetPassword", {
-//                     message: "That username does not exist"
-//                 })
-//
-//             } else if (password !== confirmpassword) {
-//                 return res.render("resetPassword", {
-//                     message: "Passwords do not match"
-//                 })
-//
-//             } else {
-//                 return res.redirect("/");
-//             }
-//         });
-//     }
-//     else {
-//         res.redirect('/');
-//     }
-// });
+app.post("/resetPassword", (req ,res) => {
+    const {username, password, confirmpassword} = req.body;
+    if (username && password) {
+        db.query('SELECT username FROM account WHERE username = ?', [username], function(error, results) {
+            if (results.length > 0) {
+                db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
+                    if (error) {
+                        console.log(error);
+                    } else if (password !== confirmpassword) {
+                        return res.render("resetPassword", {
+                            message: "Passwords do not match"
+                        })
+
+                    } else {
+                        return res.render("index", {
+                            message: "Password is updated"
+                        })
+                    }
+                });
+
+            } else {
+                return res.render("index",{
+                    message: "Username does not exist"
+                });
+            }
+        });
+    } else {
+        return res.render("studentCreateAccount",{
+            message: "Incorrect Username and/or Password"
+        });
+    }
+});
 
 app.get("/createListingPage",(req,res)=>{
     if (req.session.loggedin) {
