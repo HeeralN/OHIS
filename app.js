@@ -6,6 +6,7 @@ const dotenv= require("dotenv");
 const path = require("path")
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
+const { NULL } = require('mysql/lib/protocol/constants/types');
 
 dotenv.config({path: './.env'})
 
@@ -311,11 +312,73 @@ app.get("/viewStudentSublet",(req,res)=>{
 });
 
 app.post('/housingProfile', function(req, res) {
-    const housingId = req.body.listingId;
+    const housingId = req.body.listingId; 
     console.log("ID: " + housingId);
-    db.query('SELECT listingId, address, bath, number_of_room, description FROM listing WHERE listingId = ?',[housingId], function(error, results, fields) {
-        
-            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description}); 
+    var restrictionBool = null;
+    var gymBool = null;
+    var poolBool = null;
+    var laundryBool = null;
+    var parkingBool = null; 
+    var furnishedBool = null;
+    var dishwasherBool = null;
+    var hardwood_floorsBool = null;
+    var carpeted_floorsBool = null;
+    db.query('SELECT listingId, address, username, square_feet, bath, number_of_room, rental_price, restriction, gym, pool, laundry, parking, furnished, dishwasher, hardwood_floors, carpeted_floors, description FROM listing WHERE listingId = ?',[housingId], function(error, results, fields) {
+            if(results[0].restriction){
+                restrictionBool = "Pets allowed";
+            }
+            else{
+                restrictionBool = "Pets not allowed";
+            }
+            if(results[0].gym){
+                gymBool = "Gym";
+            }
+            else{
+                gymBool = "No gym";
+            }
+            if(results[0].pool){
+                poolBool = "Pool";
+            }
+            else{
+                poolBool = "No pool";
+            }
+            if(results[0].laundry){
+                laundryBool = "Laundry";
+            }
+            else{
+                laundryBool = "No laundry";
+            }
+            if(results[0].parking){
+                parkingBool = "Parking on premises";
+            }
+            else{
+                parkingBool = "No parking included";
+            }
+            if(results[0].furnished){
+                furnishedBool = "Furnished";
+            }
+            else{
+                furnishedBool = "Unfurnished";
+            }
+            if(results[0].dishwasher){
+                dishwasherBool = "Dishwasher";
+            }
+            else{
+                dishwasherBool = "No dishwasher";
+            }
+            if(results[0].hardwood_floors){
+                hardwood_floorsBool = "Hardwood floors";
+            }
+            else{
+                hardwood_floorsBool = "No hardwood floors";
+            }
+            if(results[0].carpeted_floors){
+                carpeted_floorsBool = "Carpeted floors";
+            }
+            else{
+                carpeted_floorsBool = "No carpeted floors";
+            }
+            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description}); 
               
         res.end();
     });
@@ -337,20 +400,119 @@ app.post('/housingProfileForLandlords/getListing', function(req, res) {
 
 app.get('/propertySearch', function(req, res) {
     if (req.session.loggedin) {
-   
     db.query('SELECT listingId, address, bath, number_of_room FROM listing', function(error, results, fields) {
         if(error){
             console.log(error);
         }
-        
         var properties = results;
         if (properties) {
-           // return res.render('properties', {
-          //      title : 'properties',
-          //      properties: rows
-           // })
           return res.render('propertySearch', {properties: properties});
-              //listingID: results[0].listingId, address: results[0].address, username: results[0].username, bath: results[0].bath, number_of_room: results[0].number_of_room, description: results[0].description});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearch/sort1', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearch/sort2', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price DESC', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearch/sort3', function(req, res) {
+    
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing WHERE number_of_room = 1', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearch/sort4', function(req, res) {
+    
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing WHERE number_of_room BETWEEN 2 AND 5', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearch/sort5', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing WHERE number_of_room > 5', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }

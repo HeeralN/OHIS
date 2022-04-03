@@ -8,6 +8,54 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+  body {
+    background-color: grey;
+    padding-top: 50px; 
+}
+.navbar {
+    margin-bottom: 0;
+    background-color: #b2a7cc !important;
+    z-index: 9999;
+    border: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: rgb(53, 18, 90) !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #8b699b !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #c9c4d5 !important;
+  }
+
+  .bg-4 {
+    color: rgb(53, 18, 90);
+    margin-bottom: 500;
+    margin-top: 50;
+    padding-top: 50;
+    background-color: #b2a7cc !important;
+  }
+
+  .row {
+    padding-left: 25px;
+    padding-right: 25px;
+    justify-content: center;
+    background-color: #EDE1F2;
+    align-content: center;
+  }
+
+
+</style>
 </head>
 <body>
 <div class="container-fluid">
@@ -19,23 +67,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <img src="images/logo.png" width="50" height="50" alt="Logo">
+      <img src="src\images\logo.png" width="50" height="50" alt="Logo">
     </div>
     <div id="myNavbar">
     <ul class="nav navbar-nav navbar-collpase">
-      <li><a href="studentProfile.html">Profile</a></li>
-      <li><a href="studentMessaging.html">Messaging</a></li>
-      <li><a href="appointmentListStudents.html">Appointments</a></li>
+      <li><a href="/studentProfile">Profile</a></li>
+      <li><a href="/studentMessaging">Messaging</a></li>
+      <li><a href="/appointmentListStudents">Appointments</a></li>
       <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="viewStudentSublet.html">My Listings</a></li>
-          <li><a href="propertySearch.html">Search Listings</a></li>
+          <li><a href="/viewStudentSublet">My Listings</a></li>
+          <li><a href="/propertySearch">Search Listings</a></li>
         </ul>
       </li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
-          <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+          <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+          <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
         </ul>
       </li>
     </ul>
@@ -45,16 +93,6 @@
       </div>
   </div>
 </nav>
-
-<form action="/housingProfile/getListing" method="POST">
-    <div class="form-group">
-      <label for="listingID">listingID</label>
-      <input type="text" class="form-control" id="listingID" name="listingID" placeholder="Enter housing listing ID">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-    <!--button type="submit" class="btn btn-default">Submit</button-->
-  </form> 
-
 <!--<button type="button" class="btn btn-secondary btn-xs" href="propertySearch.html" style="margin-left: 10px; margin-bottom: 10px;">
 <button><span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br>-->
 <div class="row">
@@ -111,11 +149,6 @@
       &nbsp;
       {{address}}</li>
     <li class="list-group-item">
-      <span class="glyphicon glyphicon-user"></span>
-      &nbsp;
-      &nbsp;
-        Up to 5 Residents</li>
-    <li class="list-group-item">
       <span class="glyphicon glyphicon-bed"></span>
       &nbsp;
       &nbsp;
@@ -125,46 +158,66 @@
           &nbsp;
           &nbsp;
             {{bath}} bath(s)</li>
+             <li class="list-group-item">
+              <span class="glyphicon glyphicon-resize-horizontal"></span>
+              &nbsp;
+              &nbsp;
+                {{square_feet}} square feet</li>
        <li class="list-group-item">
               <span class="glyphicon glyphicon-usd"></span>
               &nbsp;
               &nbsp;
-                1200/Month</li>
+                {{rental_price}}/Month</li>
   </ul> 
   </div>
   <div class="panel panel-warning">
-    <div class="panel-heading">Included Amenities</div>
+    <div class="panel-heading">Amenities</div>
     <ul class="list-group">
+         <li class="list-group-item">
+                    <span class="glyphicon glyphicon-heart"></span>
+                    &nbsp;
+                    &nbsp;
+                      {{restriction}}</li>
       <li class="list-group-item">
-        <span class="glyphicon glyphicon-signal"></span>
+        <span class="glyphicon glyphicon-lamp"></span>
         &nbsp;
         &nbsp;
-        Wifi Included in Rent</li>
-      <li class="list-group-item">
-        <span class="glyphicon glyphicon-trash"></span>
-        &nbsp;
-        &nbsp;
-          Landlord Takes Care of Trash</li>
+          {{dishwasher}}</li>
       <li class="list-group-item">
         <span class="glyphicon glyphicon-road"></span>
         &nbsp;
         &nbsp;
-          2 Street Parking Passes Included</li>
+          {{parking}}</li>
           <li class="list-group-item">
             <span class="glyphicon glyphicon-tint"></span>
             &nbsp;
             &nbsp;
-              Water Included in Rent</li>
+              {{pool}}</li>
          <li class="list-group-item">
-                <span class="glyphicon glyphicon-flash"></span>
+                <span class="glyphicon glyphicon-menu-right"></span>
                 &nbsp;
                 &nbsp;
-                  Electricity Included</li>
-                  <li class="list-group-item">
-                    <span class="glyphicon glyphicon-heart"></span>
+                  {{laundry}}</li>
+                      <li class="list-group-item">
+                    <span class="glyphicon glyphicon-menu-right"></span>
                     &nbsp;
                     &nbsp;
-                      Pet Friendly</li>
+                      {{gym}}</li>
+                      <li class="list-group-item">
+                    <span class="glyphicon glyphicon-menu-right"></span>
+                    &nbsp;
+                    &nbsp;
+                      {{hardwood_floors}}</li>
+                      <li class="list-group-item">
+                    <span class="glyphicon glyphicon-menu-right"></span>
+                    &nbsp;
+                    &nbsp;
+                      {{carpeted_floors}}</li>
+                       <li class="list-group-item">
+        <span class="glyphicon glyphicon-menu-right"></span>
+        &nbsp;
+        &nbsp;
+        {{furnished}}</li>
     </ul> 
   </div>
   </div>

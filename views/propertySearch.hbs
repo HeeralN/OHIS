@@ -8,6 +8,53 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+  body {
+    background-color: lavender;
+    padding-top: 50px; 
+}
+.navbar {
+    margin-bottom: 0;
+    background-color: #b2a7cc !important;
+    z-index: 9999;
+    border: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: rgb(53, 18, 90) !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #8b699b !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #c9c4d5 !important;
+  }
+
+  .bg-4 {
+    color: rgb(53, 18, 90);
+    margin-bottom: 500;
+    margin-top: 50;
+    padding-top: 50;
+    background-color: #b2a7cc !important;
+  }
+
+  .row {
+    padding-left: 25px;
+    padding-right: 25px;
+    justify-content: center;
+    align-content: center;
+  }
+
+
+</style>
 </head>
 <body>
 
@@ -23,19 +70,19 @@
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="studentProfile.html">Profile</a></li>
-        <li><a href="studentMessaging.html">Messaging</a></li>
-        <li><a href="appointmentListStudents.html">Appointments</a></li>
+        <li><a href="/studentProfile">Profile</a></li>
+        <li><a href="/studentMessaging">Messaging</a></li>
+        <li><a href="/appointmentListStudents">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="viewStudentSublet.html">My Listings</a></li>
+            <li><a href="/viewStudentSublet">My Listings</a></li>
             <li><a href="/propertySearch">Search Listings</a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
-            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
           </ul>
         </li>
       </ul>
@@ -50,45 +97,46 @@
 <div class="row">
   <div class="col-sm-4" style="background-color:lavender;">
     <div class="form-group">
-      <label for="sel1">
-        <br>Select your college:</label>
-      <select class="form-control" id="sel1">
-        <option>Rutgers New Brunswick</option>
-        <option>Rutgers Newark</option>
-        <option>Rutgers Camden</option>
+      <form name="filtersForm" onsubmit="return validateForm()" method="post">
+      <label for="groupSize">
+        <br>Group size:</label>
+      <select class="form-control" id="groupSize">
+        <option value="1"><a id="groupSize1">1</a></option>
+        <option value="2"><a id="groupSize25">2-5</a></option>
+        <option value="3"><a id="groupSize5">5+</a></option>
       </select>
     </div>
     <label>Select Amenities</label>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Heat</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">AC</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">Washer Dryer</label>
+      <label><input type="checkbox" value="">Dishwasher</label>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" value="">Pet Friendly</label>
     </div>
     <div class="checkbox">
+      <label><input type="checkbox" value="">Parking</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">Pool</label>
+    </div>
+    <div class="checkbox">
       <label><input type="checkbox" value="">Oven</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Driveway Parking</label>
+      <label><input type="checkbox" value="">Laundry</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Street Parking</label>
+      <label><input type="checkbox" value="">Gym</label>
     </div>
-    <label> Select Lease Length </label>
+    <label> Select Lease Types </label>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Summer Sublet</label>
+      <label><input type="checkbox" value="">1 Month</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">3 Months</label>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" value="">6 Months</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">Fall Semester</label>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" value="">Spring Semester</label>
@@ -105,9 +153,10 @@
     <div class="checkbox">
       <label><input type="checkbox" value="">Less than a semester</label>
     </div>
+    <input type="submit" value="Submit">
     <br><br><br><br><br><br><br><br><br><br>
-  </div>
-  <div class="col-sm-8" style="background-color:lightblue;">
+  </div></form>
+  <div class="col-sm-8" style="background-color:lavender;">
     <br>
     <form>
       <div class="input-group">
@@ -119,120 +168,31 @@
           </button>
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Sort by <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Price low to high</a></li>
-            <li><a href="#">Price high to low</a></li>
-            <li><a href="#">Lease length low to high</a></li>
-            <li><a href="#">Lease length high to low</a></li>
+            <li><a href="/propertySearch/sort1">Price low to high</a></li>
+            <li><a href="/propertySearch/sort2">Price high to low</a></li>
         </div>
       </div>
     </form>
     <br>
     <div class="container-fluid text-center bg-grey">
       <div class="row text-center">
-        <div class="col-sm-4">
-          <div href="/housingProfile" class="thumbnail" onclick="openHousingProfile()">
-            <img src="images/apt.jpg" alt="apt1">
-            <p><strong>t</strong></p>
-            <p>t</p>
+        {{#each properties}}
+        <div class="col-sm-4" style="background-color:lavender;">
+          <div class="thumbnail" style="background-color:rgb(230, 200, 205);">
+            <img src="images/apt.jpg">
+            <p><strong>{{this.address}}</strong></p>
+            <p>{{this.number_of_room}} bed(s) {{this.bath}} bath(s)</p>
+            <form action="/housingProfile" method="POST">
+      <input type="hidden" id="listingId" name="listingId" value="{{this.listingId}}">
+      <button type="submit" class="btn" data-target="#housingProfile">View</button>
+    </form>
           </div>
-        </div>
-        <div class="col-sm-4">
-          <div href="/housingProfile" class="thumbnail">
-            <img src="images/apt.jpg" alt="apt2">
-            <p><strong>Louis St</strong></p>
-            <p>2 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="images/apt.jpg" alt="apt3">
-            <p><strong>George St</strong></p>
-            <p>3 bed 1 bath</p>
-          </div>
-        </div>
+        </div>     
+        {{/each}}
     </div>
   </div>
 </div>
   </div>
-
-  <label></label>
-<table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>ListingId</th>
-        <th>Address</th>
-        <th>Bath</th>
-        <th>Number of Room</th>
-        <th>View</th>
-      </tr>
-    </thead>
-    <tbody id="propertyList" onclick="/housingProfile">
-    {{#each properties}}
-					<tr>  
-            <td>{{this.listingId}}</td>  
-						<td>{{this.address}}</td>
-						<td>{{this.bath}}</td>
-						<td>{{this.number_of_room}}</td>
-            <td>
-              <form action="/housingProfile" method="POST">
-      <input type="hidden" id="listingId" name="listingId" value="{{this.listingId}}">
-      <button type="submit" class="btn btn-danger" data-target="#housingProfile">View</button>
-  </form>
-  </td>
-					</tr>
-			{{/each}}
-    </tbody>
-</table>
-
   {{#if message}}
     <h4 class="alert alert-danger mt-4">{{message}}</h4>
   {{/if}}
@@ -252,4 +212,13 @@
     }
 </script>
 </body>
+<script>
+function validateForm() {
+  let x = document.forms["filtersForm"]["groupSize"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+
+  </script>
 </html>
