@@ -100,10 +100,11 @@ app.get('/adminLanding', function(req, res) {
     if (req.session.loggedin) {
         var listingData = null;
         var signupData = null;
-        db.query('SELECT a.username, a.fullname, COUNT(*) AS numListings, CASE WHEN a.adminPerms = 0 THEN \'Student\' WHEN a.adminPerms = 1 THEN \'Landlord\' END AS accountType FROM account a INNER JOIN listing l ON a.username = l.username GROUP BY l.username ORDER BY COUNT(*) DESC', function(error, results, fields) {
+        db.query('SELECT a.username, a.fullname, COUNT(*) AS numListings, CASE WHEN a.adminPerms = 0 THEN \'Student\' WHEN a.adminPerms = 1 THEN \'Landlord\' END AS accountType FROM account a INNER JOIN listing l ON a.username = l.username GROUP BY l.username ORDER BY COUNT(*) DESC LIMIT 10', function(error, results, fields) {
             listingData = results;
-            db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered)', function(error, results, fields) {
+            db.query('SELECT DATE_FORMAT(date_registered, \'%W %m/%d/%Y\') AS date, COUNT(*) AS numAccountsRegistered FROM account GROUP BY DATE(date_registered) ORDER BY date_registered DESC LIMIT 7', function(error, results, fields) {
                 signupData = results;
+
                 if (listingData && signupData) {
                     return res.render('adminLanding', {listingData: listingData, signupData: signupData});
                 }
@@ -226,20 +227,39 @@ app.get('/studentProfile', function(req, res) {
         });
     } else {
         res.redirect('/');
+    } 
+});
+
+ 
+app.get('/roommateMatchingForm', (req, res)=>{
+    if (req.session.loggedin) {
+        db.query("SELECT * FROM preference WHERE username =?", [req.session.username], (error, result) => {
+            if (error){
+                console.log(result);
+                console.log(error);
+            }
+            console.log(result);
+            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol}); 
+        });
+    } else {
+        res.redirect('/'); 
     }
 });
 
 
 app.get('/landlordProfile', function(req, res) {
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
+        //res.send('Welcome back, ' + req.sess ion.username + '!');
         res.render("landlordProfile");
     } else {
         res.redirect('/');
     }
 });
 
+app.get('/resetPassword', function(req, res) {
+        res.render("resetPassword");
 
+});
 
 //not rendering username, fullname and university?
 app.get("/editStudentProfile",(req,res)=>{
@@ -284,7 +304,39 @@ app.post("/editStudentProfile", (req ,res) => {
     else {
         res.redirect('/');
     }
+});
 
+app.post("/resetPassword", (req ,res) => {
+    const {username, password, confirmpassword} = req.body;
+    if (username && password) {
+        db.query('SELECT username FROM account WHERE username = ?', [username], function(error, results) {
+            if (results.length > 0) {
+                db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
+                    if (error) {
+                        console.log(error);
+                    } else if (password !== confirmpassword) {
+                        return res.render("resetPassword", {
+                            message: "Passwords do not match"
+                        })
+
+                    } else {
+                        return res.render("index", {
+                            message: "Password is updated"
+                        })
+                    }
+                });
+
+            } else {
+                return res.render("index",{
+                    message: "Username does not exist"
+                });
+            }
+        });
+    } else {
+        return res.render("studentCreateAccount",{
+            message: "Incorrect Username and/or Password"
+        });
+    }
 });
 
 app.get("/createListingPage",(req,res)=>{
@@ -631,9 +683,37 @@ else {
 app.get("/logout",(req,res)=>{
     req.session.destroy((err) => {
         if(err){
-            return console.error(err)
+            return  console.error(err)
         }
         console.log("The session has been destroyed!")
         res.redirect("/");
-    })
+    }) 
 });
+
+app.get("/roommateMatchingFormEdit", (req, res) => {
+    if (req.session.loggedin) {
+        res.render("roommateMatchingFormEdit");
+    } else {
+        res.redirect('/');
+    }
+});
+ 
+
+app.post("/roommateMatchingFormEdit", (req, res) => {
+    console.log(req.body);
+    console.log(req.session);
+    const {gender, international, smoker, roomcare, bedtime, sleephabit, personality, studyhabit, musicvol} = req.body;
+    db.query("UPDATE preference SET ? WHERE username = ?", [{gender: gender, international: international, smoker: smoker, roomcare: roomcare, 
+        bedtime:bedtime, sleephabit:sleephabit, personality:personality, studyhabit:studyhabit, musicvol:musicvol}, req.session.username],
+        async (error, results) => {
+            if (error) {
+                console.log(error);
+            }   
+            else{ 
+                console.log(results);
+                return res.redirect("/roommateMatchingForm");
+            }
+        });
+        
+});
+
