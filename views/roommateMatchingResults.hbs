@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Roommate Matching Form</title>
+  <title>Roommate Matching Results</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -29,6 +29,7 @@
   </style>
 </head>
 <body>
+
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -52,8 +53,8 @@
         </li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
+            <li><a href="roommateMatchingForm">Roommate Matching Form</a></li>
+            <li><a href="roommateMatchingResults">Roommate Matching Results</a></li>
           </ul>
         </li>
       </ul>
@@ -64,75 +65,39 @@
     </div>
   </nav>
 
+
+
+
 <div class="container mt-3">
-  <h2>Your Roommate Preferences</h2>
-  <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-  <p>{{gender}}</p>
+  <h2>Your Roommate Results</h2>
+  <p>Below is a list of TOP 5 students who had similar preferences!</p>  
   <table class="table">
     <tbody>
       <tr>
-        <td>Gender Preference</td>
-        <td>    
-          {{gender}}
-      </td>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Roommate Matching Percentage</th>
       </tr>
+      {{#each list}}
       <tr>
-        <td>Prefer/Accept an international student?</td>
-        <td>{{international}}
-        </td>
+        <td>{{this.username}}</td>
+        <td>{{this.fullname}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.percentage}}%</td>
       </tr>
-      <tr>
-        <td>Are you a smoker?</td>
-        <td>
-          {{smoker}}
-        </td>
-      </tr>
-      <tr>
-        <td>Room care</td>
-        <td>
-          {{roomcare}}
-        </td>
-      </tr>
-      <tr>
-        <td>Bedtime</td>
-        <td>
-          {{bedtime}}
-        </td>
-      </tr>
-      <tr>
-        <td>Sleeping Habits</td>
-        <td>
-          {{sleephabit}}
-        </td>
-      </tr>
-      <tr>
-        <td>My Personality</td>
-        <td>
-          {{personality}}
-        </td>
-      </tr>
-      <tr>
-        <td>Study Habits</td>
-        <td>
-          {{studyhabit}}
-        </td>
-      </tr>
-      <tr>
-        <td>Music Volume Level Preference</td>
-        <td>
-          {{musicvol}}
-        </td>
-      </tr>
+      {{/each}}
     </tbody>
   </table>
-
-  <a href="/roommateMatchingFormEdit"><button class="btn btn-primary mt-3" >Edit</button></a>
-
 </div>
 <footer class="container-fluid bg-4 text-center margin">
   <p>Contact us at support@ohis.com</p>
 </footer>
 <script>
+  function logout(){
+    alert("You have been logged out");
+    window.location='login.html';
+  }
 </script>
 </body>
 </html>

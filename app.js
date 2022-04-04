@@ -244,11 +244,26 @@ app.get('/roommateMatchingForm', (req, res)=>{
 
 app.get('/landlordProfile', function(req, res) {
     if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.sess ion.username + '!');
-        res.render("landlordProfile");
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, landlord) => {
+            db.query("SELECT phone FROM landlord WHERE username=?", [req.session.username], (error, phone)=>{
+                if (error){
+                    console.log(error);
+                }
+                db.query("SELECT address from listing where username = ?", [req.session.username], (error, listings) => {
+                    console.log(listings);
+                    if (error){
+                        console.log(error);
+                    }
+                    res.render("landlordProfile", {fullname: landlord[0].fullname, email: landlord[0].email, phone: phone[0].phone, listings: listings});
+                });
+            });
+        });
     } else {
         res.redirect('/');
-    }
+    } 
 });
 
 app.get('/resetPassword', function(req, res) {
@@ -379,8 +394,6 @@ app.get("/roommateMatchingFormEdit", (req, res) => {
  
 
 app.post("/roommateMatchingFormEdit", (req, res) => {
-    console.log(req.body);
-    console.log(req.session);
     const {gender, international, smoker, roomcare, bedtime, sleephabit, personality, studyhabit, musicvol} = req.body;
     db.query("UPDATE preference SET ? WHERE username = ?", [{gender: gender, international: international, smoker: smoker, roomcare: roomcare, 
         bedtime:bedtime, sleephabit:sleephabit, personality:personality, studyhabit:studyhabit, musicvol:musicvol}, req.session.username],
@@ -389,10 +402,61 @@ app.post("/roommateMatchingFormEdit", (req, res) => {
                 console.log(error);
             }   
             else{ 
-                console.log(results);
                 return res.redirect("/roommateMatchingForm");
             }
         });
         
 });
 
+app.get("/roommateMatchingResults", (req, res) => {
+    // 8~9 perfect roommates, 6~7 potentail roommates 5 maybe
+    if (req.session.loggedin) {
+        db.query("select * from preference where username = ?", [req.session.username], async (error, selfpref) => {
+            if (error) {
+                console.log(error);
+            }   
+            else{ 
+                db.query("select * from preference where username <> ?", [req.session.username], async (error, preflist) => {
+                    var percentage = {};
+                    for (let i = 0; i < preflist.length; i++){
+                        let count = 0;
+                        for (let option in preflist[i]){
+                            if (preflist[i][option] == selfpref[0][option] && option != "username"){
+                                count++;
+                            }
+                        }
+                        let percent = (count / 9) * 100;
+                        percentage[preflist[i].username] = percent.toFixed(2);
+                    }
+
+                    var ordered = Object.keys(percentage).map(function(key) {
+                        return [key, percentage[key]];
+                      });
+                      
+                      ordered.sort(function(first, second) {
+                        return second[1] - first[1];
+                      });
+                      let info = [];
+                      for (let i = 0; i <ordered.slice(0, 5).length; i++){
+                        db.query("SELECT account.username, email, fullname FROM account join student where account.username = ? group by account.username;", [ordered.slice(0, 5)[i][0]], async (error, results) => {
+                            var infoToPush = {
+                                username: results[0]['username'],
+                                email: results[0]['email'],
+                                fullname: results[0]['fullname'],
+                                percentage: ordered.slice(0, 5)[i][1],
+                            };
+                            info.push(infoToPush);
+                            console.log(info);
+                            
+                            if (i == ordered.slice(0, 5).length - 1){
+                                return res.render("roommateMatchingResults", {list: info});
+                            }
+                        });
+                      }
+                });
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+});

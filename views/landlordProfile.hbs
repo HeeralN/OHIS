@@ -106,15 +106,27 @@
 <div class="container">
   <div class="left">
     <img class="img" src="images/landlord.jpg" alt="user" >
-    <h4>Full Name</h4>
-    <p>Email</p>
+    <h4>{{fullname}}</h4>
+    <p>{{email}}</p>
+    <p>{{phone}}</p>
   </div>
   <div class="right">
     <div class="info">
-      <h3>Information about Listings</h3>
+      <h3>This Landlord's Current Listings</h3>
       <div class="info_data">
-        <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-      </div>
+        <table class="table">
+    <tbody>
+      <tr>
+        <th>Address</th>
+      </tr>
+      {{#each list}}
+      <tr>
+        <td>{{this.address}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+        </div>
     </div>
   </div>
   <footer class="container-fluid bg-4 text-center margin">
