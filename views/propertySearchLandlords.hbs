@@ -70,19 +70,13 @@
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="/studentProfile">Profile</a></li>
-        <li><a href="/studentMessaging">Messaging</a></li>
-        <li><a href="/appointmentListStudents">Appointments</a></li>
-        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+        <li class="active"><a href="/landlordProfile">Profile</a></li>
+        <li><a href="/landlordMessaging">Messaging</a></li>
+        <li><a href="/appointmentListLandlords">Appointments</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/viewStudentSublet">My Listings</a></li>
-            <li><a href="/propertySearch">Search Listings</a></li>
-          </ul>
-        </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
+            <li><a href="/viewLandlordListings">My Listings</a></li>
+            <li><a href="/propertySearchLandlords">Search Listings</a></li>
           </ul>
         </li>
       </ul>
@@ -93,11 +87,12 @@
     </div>
   </nav>
 
+
 <div container-fluid>
 <div class="row">
   <div class="col-sm-4" style="background-color:lavender;">
     <div class="form-group">
-      <form name="filtersForm" id="filtersForm" action="/propertySearch/sort" method="POST">
+      <form name="filtersForm" id="filtersForm" action="/propertySearchLandlords/sort" method="POST">
       <label for="groupSize">
         <br>Group size:</label>
       <select class="form-control" name="groupSize" id="groupSize">
@@ -162,8 +157,8 @@
           </button>
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Sort by <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/propertySearch/sort1">Price low to high</a></li>
-            <li><a href="/propertySearch/sort2">Price high to low</a></li>
+            <li><a href="/propertySearchLandlords/sort1">Price low to high</a></li>
+            <li><a href="/propertySearchLandlords/sort2">Price high to low</a></li>
         </div>
       </div>
     </form>
@@ -176,9 +171,9 @@
             <img src="images/apt.jpg">
             <p><strong>{{this.address}}</strong></p>
             <p>{{this.number_of_room}} bed(s) {{this.bath}} bath(s)</p>
-            <form action="/housingProfile" method="POST">
+            <form action="/housingProfileForLandlords" method="POST">
       <input type="hidden" id="listingId" name="listingId" value="{{this.listingId}}">
-      <button type="submit" class="btn" data-target="#housingProfile">View</button>
+      <button type="submit" class="btn" data-target="#housingProfileLandlords">View</button>
     </form>
           </div>
         </div>     
@@ -197,12 +192,12 @@
   <script>
     function logout(){
       alert("You have been logged out");
-      window.location='login.html';
+      window.location='index';
     }
   </script>
    <script>
     function openHousingProfile() {
-        window.location = '/housingProfile';
+        window.location = '/housingProfileForLandlords';
     }
 </script>
 </body>

@@ -58,41 +58,34 @@
 </style>
 </head>
 <body>
-<div class="container-fluid">
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <img src="src\images\logo.png" width="50" height="50" alt="Logo">
-    </div>
-    <div id="myNavbar">
-    <ul class="nav navbar-nav navbar-collpase">
-      <li><a href="/studentProfile">Profile</a></li>
-      <li><a href="/studentMessaging">Messaging</a></li>
-      <li><a href="/appointmentListStudents">Appointments</a></li>
-      <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/viewStudentSublet">My Listings</a></li>
-          <li><a href="/propertySearch">Search Listings</a></li>
-        </ul>
-      </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-          <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
+ <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
-  </div>
-</nav>
+      <div id="myNavbar">
+      <ul class="nav navbar-nav navbar-collpase">
+        <li class="active"><a href="/landlordProfile">Profile</a></li>
+        <li><a href="/landlordMessaging">Messaging</a></li>
+        <li><a href="/appointmentListLandlords">Appointments</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/viewLandlordListings">My Listings</a></li>
+            <li><a href="/propertySearchLandlords">Search Listings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
 <!--<button type="button" class="btn btn-secondary btn-xs" href="propertySearch.html" style="margin-left: 10px; margin-bottom: 10px;">
 <button><span class="glyphicon glyphicon-triangle-left"></span> Back</button> <br>-->
 <div class="row">
@@ -101,9 +94,9 @@
     <label style="margin-top: 10px; margin-bottom: 10px"><span class="label label-default">New</span> Private and Safe 3 Bedroom Apartment Close to Campus</label><br>
     <img src="images/apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
     <div class="btn-group-vertical">
-    <button class="btn btn-primary" href="/studentMessaging">Contact Landlord</button>
-    <button type="button" class="btn btn-primary">Book Viewing</button>
-    <button class="btn btn-primary" href="/landlordProfile">View Landlord's Page</button>
+    <button type="button" class="btn btn-primary disabled" href="/landlordMessaging">Contact Landlord</button>
+    <button type="button" class="btn btn-primary disabled">Book Viewing</button>
+    <button type="button" class="btn btn-primary" href="/landlordProfile">View Landlord's Page</button>
    </div>
    <br><br>
   </div>
