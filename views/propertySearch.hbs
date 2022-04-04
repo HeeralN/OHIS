@@ -97,7 +97,7 @@
 <div class="row">
   <div class="col-sm-4" style="background-color:lavender;">
     <div class="form-group">
-      <form name="filtersForm" onsubmit="return validateForm()" method="post">
+      <form name="filtersForm" action="/propertySearch/sort" method="POST">
       <label for="groupSize">
         <br>Group size:</label>
       <select class="form-control" id="groupSize">
@@ -108,50 +108,44 @@
     </div>
     <label>Select Amenities</label>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Dishwasher</label>
+      <label><input type="checkbox" name="dishwasher" id="dishwasher">Dishwasher</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Pet Friendly</label>
+      <label><input type="checkbox" name="petfriendly" id="petfriendly">Pet Friendly</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Parking</label>
+      <label><input type="checkbox" name="parking" id="parking">Parking</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Pool</label>
+      <label><input type="checkbox" name="pool" id="pool">Pool</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Oven</label>
+      <label><input type="checkbox" name="oven" id="oven">Oven</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Laundry</label>
+      <label><input type="checkbox" name="laundry" id="laundry">Laundry</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Gym</label>
+      <label><input type="checkbox" name="gym" id="gym">Gym</label>
     </div>
     <label> Select Lease Types </label>
     <div class="checkbox">
-      <label><input type="checkbox" value="">1 Month</label>
+      <label><input type="checkbox" id="length1" value="1">1 Month</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">3 Months</label>
+      <label><input type="checkbox" id="length3" value="3">3 Months</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">6 Months</label>
+      <label><input type="checkbox" id="length6" value="6">6 Months</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Spring Semester</label>
+      <label><input type="checkbox" id="length12" value="12">12 Months</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">11 Months</label>
+      <label><input type="checkbox" id="length13" value="13">Longer than 1 year</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">12 Months</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">Longer than 1 year</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" value="">Less than a semester</label>
+      <label><input type="checkbox" id="length2" value="2">Less than a semester</label>
     </div>
     <input type="submit" value="Submit">
     <br><br><br><br><br><br><br><br><br><br>

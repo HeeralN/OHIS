@@ -312,7 +312,7 @@ app.get("/viewStudentSublet",(req,res)=>{
 });
 
 app.post('/housingProfile', function(req, res) {
-    const housingId = req.body.listingId; 
+    const housingId = req.body.listingId;
     console.log("ID: " + housingId);
     var restrictionBool = null;
     var gymBool = null;
@@ -418,6 +418,37 @@ else {
 }
 });
 
+app.post('/propertySearch/sort', function(req, res) {
+    const groupSize = req.body.groupSize;
+    console.log("groupsize: " + groupSize);
+    const dishwasher = req.body.dishwasher;
+    console.log("dishwasher: " + dishwasher);
+    const petfriendly = req.body.petfriendly;
+    const parking = req.body.parking; 
+    const pool = req.body.pool;
+    const gym = req.body.gym;
+    const oven = req.body.oven;
+    const laundry = req.body.laundry;
+
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearch', {properties: properties});
+        } else {
+            return res.render('propertySearch', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
 app.get('/propertySearch/sort1', function(req, res) {
     if (req.session.loggedin) {
     db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price', function(error, results, fields) {
@@ -460,7 +491,6 @@ else {
 });
 
 app.get('/propertySearch/sort3', function(req, res) {
-    
     if (req.session.loggedin) {
     db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing WHERE number_of_room = 1', function(error, results, fields) {
         console.log(results);
