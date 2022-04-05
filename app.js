@@ -63,6 +63,7 @@ app.listen(5001, () => {
 //     res.render("studentCreateAccount");
 // });
 
+// LOGIN
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
@@ -93,6 +94,55 @@ app.post('/auth/index', function(req, res) {
     }
 });
 
+app.get('/resetPassword', function(req, res) {
+        res.render("resetPassword");
+
+});
+
+app.post("/resetPassword", (req ,res) => {
+    const {username, password, confirmpassword} = req.body;
+    if (username && password) {
+        db.query('SELECT username FROM account WHERE username = ?', [username], function(error, results) {
+            if (results.length > 0) {
+                db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
+                    if (error) {
+                        console.log(error);
+                    } else if (password !== confirmpassword) {
+                        return res.render("resetPassword", {
+                            message: "Passwords do not match"
+                        })
+
+                    } else {
+                        return res.render("index", {
+                            message: "Password is updated"
+                        })
+                    }
+                });
+
+            } else {
+                return res.render("index",{
+                    message: "Username does not exist"
+                });
+            }
+        });
+    } else {
+        return res.render("studentCreateAccount",{
+            message: "Incorrect Username and/or Password"
+        });
+    }
+});
+
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err) => {
+        if(err){
+            return  console.error(err)
+        }
+        console.log("The session has been destroyed!")
+        res.redirect("/");
+    }) 
+});
+
+// ADMIN
 app.get('/adminLanding', function(req, res) {
     if (req.session.loggedin) {
         var listingData = null;
@@ -206,6 +256,8 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
     }
 });
 
+
+// STUDENT
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
         // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
@@ -223,52 +275,6 @@ app.get('/studentProfile', function(req, res) {
     } else {
         res.redirect('/');
     } 
-});
-
- 
-app.get('/roommateMatchingForm', (req, res)=>{
-    if (req.session.loggedin) {
-        db.query("SELECT * FROM preference WHERE username =?", [req.session.username], (error, result) => {
-            if (error){
-                console.log(result);
-                console.log(error);
-            }
-            console.log(result);
-            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol}); 
-        });
-    } else {
-        res.redirect('/'); 
-    }
-});
-
-
-app.get('/landlordProfile', function(req, res) {
-    if (req.session.loggedin) {
-        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
-        //     res.render("studentProfile", {account: results});
-        // });
-        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, landlord) => {
-            db.query("SELECT phone FROM landlord WHERE username=?", [req.session.username], (error, phone)=>{
-                if (error){
-                    console.log(error);
-                }
-                db.query("SELECT address from listing where username = ?", [req.session.username], (error, listings) => {
-                    console.log(listings);
-                    if (error){
-                        console.log(error);
-                    }
-                    res.render("landlordProfile", {fullname: landlord[0].fullname, email: landlord[0].email, phone: phone[0].phone, listings: listings});
-                });
-            });
-        });
-    } else {
-        res.redirect('/');
-    } 
-});
-
-app.get('/resetPassword', function(req, res) {
-        res.render("resetPassword");
-
 });
 
 //not rendering username, fullname and university?
@@ -316,72 +322,98 @@ app.post("/editStudentProfile", (req ,res) => {
     }
 });
 
-app.post("/resetPassword", (req ,res) => {
-    const {username, password, confirmpassword} = req.body;
-    if (username && password) {
-        db.query('SELECT username FROM account WHERE username = ?', [username], function(error, results) {
-            if (results.length > 0) {
-                db.query('UPDATE account SET ? WHERE username = ?', [{password: password}, username], function (error, results) {
-                    if (error) {
-                        console.log(error);
-                    } else if (password !== confirmpassword) {
-                        return res.render("resetPassword", {
-                            message: "Passwords do not match"
-                        })
-
-                    } else {
-                        return res.render("index", {
-                            message: "Password is updated"
-                        })
-                    }
-                });
-
-            } else {
-                return res.render("index",{
-                    message: "Username does not exist"
-                });
+app.get('/viewStudentSublet', function(req,res) {  // TODO check if this works, should populate listings on view listings page
+    if (req.session.loggedin) {
+        db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
+            if(results.length > 0){ 
+                return res.render('viewStudentSublet', {listing: results});
+            }
+            else{
+                return res.render('viewStudentSublet');
             }
         });
     } else {
-        return res.render("studentCreateAccount",{
-            message: "Incorrect Username and/or Password"
-        });
+        res.redirect('Please login to view this page!');
     }
 });
 
-app.get("/createListingPage",(req,res)=>{
+app.post('/viewStudentSublet/studentDeleteSublet', function(req,res) {
     if (req.session.loggedin) {
-        res.render("createSubletPage");
-    } else {
-        res.redirect('/');
-    }
-});
+        const housingId = req.body.listingID;
 
-app.get("/createSubletPage",(req,res)=>{
-    if (req.session.loggedin) {
-        res.render("createSubletPage");
-    } else {
-        res.redirect('/');
-    }
-});
-
-app.get("/viewStudentSublet",(req,res)=>{
-    if (req.session.loggedin) {
-        //res.send('Welcome back, ' + req.session.username + '!');
-        res.render("viewStudentSublet");
-    } else {
-        res.redirect('/');
-    }
-});
-
-app.get("/logout",(req,res)=>{
-    req.session.destroy((err) => {
-        if(err){
-            return  console.error(err)
+        if (housingId) {
+            db.query('DELETE FROM listing WHERE username = ? AND listingId = ? AND isSublet = 1', [req.session.username, housingId], function(error, results, fields) {
+                console.log(results);
+                if (results && error === null) {
+                    // when attempting to delete a landlord listing, this message comes up. the message should not pop up, especially since the listing is correctly not deleted from the DB
+                    return res.render('viewStudentSublet', {message: 'Sublet listing deleted!'});
+                } else {
+                    return res.render('viewStudentSublet', {message: 'There was an error deleting this listing! It may have been deleted already.'});
+                }
+            });
+        } else {
+            res.redirect('Please login to view this page!');
         }
-        console.log("The session has been destroyed!")
-        res.redirect("/");
-    }) 
+    }
+});
+
+app.get('/createSubletPage', function(req, res){
+    if (req.session.loggedin) {
+        res.render("createSubletPage");
+    } else { 
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/createSubletPage', function(req, res) {
+    console.log(req.session.username);
+    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
+        occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
+    
+    const fullAddress = street + ', ' + inputCity + ', ' + inputState + ', ' + inputZip + ', ' + inputCountry;
+    let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    
+    // make sure the student doesn't have more than one sublet already
+    db.query("SELECT COUNT(*) AS total FROM listing WHERE username= ?", [req.session.username], function(error, results, fields) {
+        //console.log(results[0].total);
+        if(results[0].total < 1){
+            // checking to make sure primary key address doesn't already exist
+            db.query("SELECT address FROM listing WHERE address= ?", [fullAddress], async(error, results) => {
+                if (error) {
+                    console.log(error);
+                }
+                if (results.length > 0) {
+                    return res.render("createSubletPage",{
+                        message: "A listing at the given address already exists"
+                    })
+                }
+                //console.log("Got to before insert statement");
+                db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet, 
+                    bath: numberOfBath, number_of_room: numTotalRooms, occupancy_date: occupancyDate, lease_type: leaseType, rental_price: rentalRate, restriction: restrictions,
+                    gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors, 
+                    carpeted_floors: carpetedFloors, isSublet: 1, imagePath: ""} , (error,results) => {
+                    
+                    if (error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log(results);
+                        return res.render("createSubletPage", {
+                            message:"Sublet listing posted"
+                        })
+                    }
+                });
+            });
+        } else{
+            return res.render("createSubletPage", {
+                message:"Max number of sublets created already."
+            })
+        }
+    });
+    //res.send("Form submitted")
+    // res.json({ //to test form on front end
+    //
+    // })
 });
 
 app.get("/roommateMatchingFormEdit", (req, res) => {
@@ -405,7 +437,6 @@ app.post("/roommateMatchingFormEdit", (req, res) => {
                 return res.redirect("/roommateMatchingForm");
             }
         });
-        
 });
 
 app.get("/roommateMatchingResults", (req, res) => {
@@ -460,3 +491,123 @@ app.get("/roommateMatchingResults", (req, res) => {
         res.redirect('/');
     }
 });
+
+app.get('/roommateMatchingForm', (req, res)=>{
+    if (req.session.loggedin) {
+        db.query("SELECT * FROM preference WHERE username =?", [req.session.username], (error, result) => {
+            if (error){
+                console.log(result);
+                console.log(error);
+            }
+            console.log(result);
+            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol}); 
+        });
+    } else {
+        res.redirect('/'); 
+    }
+});
+
+// LANDLORD
+app.get('/landlordProfile', function(req, res) {
+    if (req.session.loggedin) {
+        // db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], async (error, results) => {
+        //     res.render("studentProfile", {account: results});
+        // });
+        db.query("SELECT fullname, email FROM account WHERE username =?", [req.session.username], (error, landlord) => {
+            db.query("SELECT phone FROM landlord WHERE username=?", [req.session.username], (error, phone)=>{
+                if (error){
+                    console.log(error);
+                }
+                db.query("SELECT address from listing where username = ?", [req.session.username], (error, listings) => {
+                    console.log(listings);
+                    if (error){
+                        console.log(error);
+                    }
+                    res.render("landlordProfile", {fullname: landlord[0].fullname, email: landlord[0].email, phone: phone[0].phone, listings: listings});
+                });
+            });
+        });
+    } else {
+        res.redirect('/');
+    } 
+});
+
+
+app.get('/viewLandlordListings', function(req,res) {  // TODO check if this works, should populate listings on view listings page
+    if (req.session.loggedin) {
+        db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
+            if(results.length > 0){ 
+                return res.render('viewLandlordListings', {listing: results});
+            }
+            else{
+                return res.redirect('viewLandlordListings');
+            }
+        });
+    } else {
+        res.redirect('Please login to view this page!');
+    }
+});
+
+app.get('/createListingPage', function(req, res){
+    if (req.session.loggedin) {
+        res.render("createListingPage");
+    } else { 
+        res.send('Please login to view this page!');
+    }
+});
+app.post('/createListingPage',function(req ,res) {
+    //console.log(req.session.username);
+    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
+        occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
+    
+    const fullAddress = street + ', ' + inputCity + ', ' + inputState + ', ' + inputZip + ', ' + inputCountry;
+    let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    // checking to make sure primary key address doesn't already exist
+    db.query("SELECT address FROM listing WHERE address= ?", [fullAddress], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("createListingPage",{
+                message: "A listing at the given address already exists"
+            })
+        }
+        
+        db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet, 
+            bath: numberOfBath, number_of_room: numTotalRooms, occupancy_date: occupancyDate, lease_type: leaseType, rental_price: rentalRate, restriction: restrictions,
+            gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors, 
+            carpeted_floors: carpetedFloors, isSublet: 0, imagePath: ""} , (error,results)=>{
+            
+            if (error){
+                console.log(error);
+            }
+            else{
+                console.log(results);
+                return res.render("createListingPage", {
+                    message:"Listing posted"
+                })
+            }
+        });
+    });
+
+});
+
+app.post("/viewLandlordListings/landlordDeleteListing", function(req,res) {
+    if (req.session.loggedin) {
+        const housingId = req.body.listingID;
+
+        if (housingId) {
+            db.query('DELETE FROM listing WHERE username = ? AND listingId = ? AND isSublet = 0', [req.session.username, housingId], function(error, results, fields) {
+                if (results && error === null) {
+                    return res.render('viewLandlordListings', {message: 'Listing deleted!'});
+                } else {
+                    return res.render('viewLandlordListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
+                }
+            });
+        } else {
+            res.redirect('Please login to view this page!');
+        }
+    }
+});
+
