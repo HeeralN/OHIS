@@ -50,7 +50,7 @@ exports.studentCreateAccount = (req,res) => {
             }
             else{
                 console.log(results);
-                return res.render("studentCreateAccount", {
+                return res.render("index", {
                     message:"User registered"
                 });
             }
@@ -92,7 +92,7 @@ exports.landlordCreateAccount = (req,res) => {
             }
             else{
                 console.log(results);
-                return res.render("landlordCreateAccount", {
+                return res.render("index", {
                     message:"User registered"
                 });
             }
