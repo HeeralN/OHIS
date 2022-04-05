@@ -259,7 +259,6 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
     }
 });
 
-
 // STUDENT
 app.get('/studentProfile', function(req, res) {
     if (req.session.loggedin) {
