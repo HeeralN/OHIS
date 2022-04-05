@@ -271,12 +271,12 @@ app.get('/studentProfile', function(req, res) {
                     console.log(student);
                     console.log(error);
                 }
-                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: student[0].university});
+                res.render("studentProfile", {fullname: student[0].fullname, email: student[0].email, university: university[0].university, profile_description: university[0].profile_description});
             })
         });
     } else {
         res.redirect('/');
-    } 
+    }
 });
 
 //not rendering username, fullname and university?
