@@ -1044,3 +1044,148 @@ else {
     res.send('Please login to view this page!');
 }
 });
+
+app.get('/propertySearchAdmin', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearchAdmin/sort1', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearchAdmin/sort2', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price DESC', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.post('/propertySearchAdmin/sort', function(req, res) {
+
+    var {groupSize, dishwasher, parking, pool, laundry, gym, length1, length3, length6, length12, length13, length2} = req.body;
+    if (req.session.loggedin) {
+        var queryString = "WHERE "
+        var count = 0;
+        if(dishwasher==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="dishwasher = 1";
+            count++;
+        }
+        if(parking==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="parking = 1";
+            count++;
+        }
+        if(pool==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="pool = 1";
+            count++;
+        }
+        if(laundry==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="laundry = 1";
+            count++;
+        }
+        if(gym==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="gym = 1";
+            count++;
+        }
+        if(groupSize==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 1");
+            queryString += "number_of_room = 1";
+            count++;
+        }
+        else if(groupSize==2){
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 2");
+            queryString += "number_of_room > 1 AND number_of_room < 5";
+            count++;
+        }
+        else{
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 3");
+            queryString += "number_of_room >= 5";
+            count++;
+        }
+        console.log("SELECT listingId, address, bath, number_of_room FROM listing " + queryString);
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing ' + queryString, function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
