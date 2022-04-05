@@ -59,18 +59,18 @@
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="landlordProfile.html">Profile</a></li>
-        <li><a href="landlordMessaging.html">Messaging</a></li>
-        <li><a href="appointmentListLandlords.html">Appointments</a></li>
-        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+        <li><a href="/landlordProfile">Profile</a></li>
+        <li><a href="/landlordMessaging">Messaging</a></li>
+        <li><a href="/appointmentListLandlords">Appointments</a></li>
+        <li class="dropdown-active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="viewLandlordListings.html">My Listings</a></li>
-            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+            <li class="active"><a href="/viewLandlordListings">My Listings</a></li>
+            <li><a href="/propertySearchLandlords">Search Listings</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
         </div>
     </div>
@@ -79,68 +79,64 @@
 <div container-fluid>
     <div class="row">
         <div class="col-sm-4" style="background-color:lavender;">
-            <h4>Landlord Jane Doe</h4>
+            <!--h4>Landlord Jane Doe</h4-->
             <img class="img" src="images/landlord.jpg" width="150" height="150" alt="user">
         </div>
         
         <div class="col-sm-8" style="background-color:lightblue;">
         
             <div class="rendered-form">
-                <h1 id="control-8418835">Make a listing</h1>
+                <h1>Make a listing</h1>
 
-                <form method="POST" id="listingForm">
-                    <div class="form-group">
-                        <label for="email" class="formbuilder-text-label">Profile Email: *</label>
-                        <input type="email" class="form-control" name="email" id="email" required="required" aria-required="true">
-                    </div>
+                <form action="/createListingPage" method="POST" id="listingForm">
                     <!-- Address -->
+                    <label for="address" class="">Address of Listing: *</label>
                     <div class="form-group">
-                        <label for="address" class="">Address of Listing: *</label>
-                        <input type="text" class="form-control" id="street" placeholder="Street" required>
-                        <input type="text" class="form-control" id="inputCity" placeholder="City" required>
-                        <input type="text" class="form-control" id="inputState" placeholder="State" value="NJ" required>
-                        <input type="number" class="form-control" id="inputZip" placeholder="Zip" pattern="[0-9]{5}" required>
-                        <input type="country" class="form-control" id="inputCountry" placeholder="Country" value="USA" required>
+                        <input type="text" class="form-control" name="street" id="street" placeholder="Street" required>
+                        <input type="text" class="form-control" name="inputCity" id="inputCity" placeholder="City" required>
+                        <input type="text" class="form-control" name="inputState" id="inputState" placeholder="State" value="NJ" required>
+                        <input type="number" class="form-control" name="inputZip" id="inputZip" placeholder="Zip" pattern="[0-9]{5}" required>
+                        <input type="country" class="form-control" name="inputCountry" id="inputCountry" placeholder="Country" value="USA" required>
                     </div>
                     <br><br><br><br><br><br>
                     <!-- Website -->
                     <div class="form-group">
-                        <label for="buildingWebsite" class="formbuilder-text-label">Link to Building Website:</label>
+                        <label for="building-website" class="formbuilder-text-label">Link to Building Website:</label>
                         <input type="text" class="form-control" name="buildingWebsite" id="buildingWebsite">
                     </div>
                     <!-- Description -->
                     <div class="form-group">
-                        <label for="descriptionOfListing" class="formbuilder-textarea-label">Description of Listing:</label>
+                        <label for="description-of-listing" class="formbuilder-textarea-label">Description of Listing:</label>
                         <textarea type="textarea" class="form-control" name="descriptionOfListing" id="descriptionOfListing"></textarea>
                     </div>
                     <!-- Square Feet -->
                     <div class="form-group">
-                        <label class="form-label" for="squareFeet">Square Feet: *</label>
-                        <input type="number" class="form-control" name="squareFeet" id="squareFeet"  required="required" aria-required="true" />
+                        <label class="form-label" for="square-feet">Square Feet: *</label>
+                        <input type="number" name="squareFeet" id="squareFeet" class="form-control" required="required" aria-required="true" />
                     </div>
                     <!-- Number of Bath -->
                     <div class="form-group">
-                        <label for="numberOfBath" class="formbuilder-text-label"># of Bath: *</label>
+                        <label for="number-of-bath" class="formbuilder-text-label"># of Bath: *</label>
                         <input type="number" class="form-control" name="numberOfBath" id="numberOfBath" required="required" aria-required="true">
                     </div>
                     <!-- Total Rooms -->
                     <div class="form-group">
-                        <label for="numTotalRooms" class="formbuilder-text-label"># of Total Rooms *</label>
+                        <label for="num-total-rooms" class="formbuilder-text-label"># of Total Rooms *</label>
                         <input type="number" class="form-control" name="numTotalRooms" id="numTotalRooms" required="required" aria-required="true">
                     </div>
                     <!-- Occupancy Date -->
                     <div class="form-group">
-                        <label for="occupancyDate" class="text-label">Occupancy Date *</label>
+                        <label for="occupancy-date" class="text-label">Occupancy Date *</label>
                         <input type="date" class="form-control" name="occupancyDate" id="occupancyDate" required="required" aria-required="true">
                     </div>
                     <!-- Lease Type -->
                     <div class="form-group">
-                        <label for="leaseType" class="text-label">Lease Type: *</label>
+                        <label for="lease-type" class="text-label">Lease Type: *</label>
                         <input type="text" class="form-control" name="leaseType" id="leaseType" required="required" aria-required="true" required>
                     </div>
                     <!-- Rental Rate of prices -->
                     <div class="form-group">
-                        <label for="rentalRate" class="text-label">Rental Rate: *</label>
+                        <label for="rental-rate" class="text-label">Rental Rate: *</label>
                         <input type="number" class="form-control" name="rentalRate" id="rentalRate" required="required" aria-required="true">
                     </div>
                     <!-- Restrictions - Text Area -->
@@ -152,32 +148,32 @@
                     <!-- Ammenities -->
                     <label> Select Amenities </label>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="gym">Gym</label>
+                        <label><input type="checkbox" id="gym" name="gym" value=1>Gym</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="pool">Pool</label>
+                        <label><input type="checkbox" id="pool" name="pool" value=1>Pool</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="laundry">Laundry</label>
+                        <label><input type="checkbox" id="laundry" name="laundry" value=1>Laundry</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="parking">Parking</label>
+                        <label><input type="checkbox" id="parking" name="parking" value=1>Parking</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="furnished">Furnished</label>
+                        <label><input type="checkbox" id="furnished" name="furnished" value=1>Furnished</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="dishwasher">Dishwasher</label>
+                        <label><input type="checkbox" id="dishwasher" name="dishwasher" value=1>Dishwasher</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="hardwoodFloors">Hardwood Floors</label>
+                        <label><input type="checkbox" id="hardwood-floors" name="hardwood-floors" value=1>Hardwood Floors</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="carpetedFloors">Carpeted Floors</label>
+                        <label><input type="checkbox" id="carpeted-floors" name="carpeted-floors" value=1>Carpeted Floors</label>
                     </div>
-                    
-                    <button type="submit" class="btn-default btn" name="publish-listing" id="publish-listing" 
-                        onclick="viewLandlordListings()">Publish Listing</button>
+                    <div class="submit-button">
+                        <button type="submit" class="Submit">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -186,37 +182,6 @@
     <footer class="container-fluid bg-4 text-center margin">
         <p>Contact us at support@ohis.com</p>
     </footer>
-
-    <script>
-        // function viewLandlordListings.hbs(){
-        //     // verifying all fields are entered
-        //     let email = document.forms["listingForm"]["email"].value;
-        //
-        //     let street = document.forms["listingForm"]["street"].value;
-        //     let inputCity = document.forms["listingForm"]["inputCity"].value;
-        //     let inputState = document.forms["listingForm"]["inputState"].value;
-        //     let inputZip = document.forms["listingForm"]["inputZip"].value;
-        //     let inputCountry = document.forms["listingForm"]["inputCountry"].value;
-        //
-        //     let squarefeet = document.forms["listingForm"]["squareFeet"].value;
-        //     let numberOfBath = document.forms["listingForm"]["numbeOfBath"].value;
-        //     let numTotalRooms = document.forms["listingForm"]["numTotalRooms"].value;
-        //     let occupancyDate = document.forms["listingForm"]["occupancyDate"].value;
-        //     let leaseType = document.forms["listingForm"]["leaseType"].value;
-        //     let rentalRate = document.forms["listingForm"]["rentalRate"].value;
-        //
-        //     if(email.length > 0 && street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0
-        //     && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 && numTotalRooms.length > 0
-        //     && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
-        //         window.location='viewLandlordListings.hbs.html';
-        //     }
-        // }
-        
-        function logout(){
-          alert("You have been logged out");
-          window.location='login.html';
-        }
-      </script>
 </body>
 
 </html>
