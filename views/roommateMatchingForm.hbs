@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Roommate Matching Form</title>
   <meta charset="utf-8">
@@ -9,25 +10,63 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-  body {
-    display:flex;
-    height:100vh;
-    justify-content: center;
-    align-items: center;
-    padding:20px;
-    background: linear-gradient(#8b699b, gray);
-  
-}
-  footer {
-    margin-left:0;
-    bottom:0;
-    left:0px; right:0px;
-    position:absolute;
-    padding:5px;
-    width:100%;
-  }
+    .navbar {
+      margin-bottom: 0;
+      background-color: #b2a7cc !important;
+      z-index: 9999;
+      border: 0;
+      font-family: Montserrat, sans-serif;
+      font-size: 15px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 2px;
+      border-radius: 0;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+      color: rgb(53, 18, 90) !important;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+      color: #8b699b !important;
+      background-color: rgb(255, 255, 255) !important;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #c9c4d5 !important;
+    }
+
+    .bg-4 {
+      color: rgb(53, 18, 90);
+      margin-bottom: 500;
+      margin-top: 50;
+      padding-top: 50;
+      background-color: #b2a7cc !important;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(#8b699b, gray);
+
+    }
+
+    footer {
+      margin-left: 0;
+      bottom: 0;
+      left: 0px;
+      right: 0px;
+      position: absolute;
+      padding: 5px;
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -35,104 +74,105 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
+          <span class="icon-bar"></span>
         </button>
         <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="studentProfile">Profile</a></li>
-        <li><a href="studentMessaging.html">Messaging</a></li>
-        <li><a href="appointmentListStudents.html">Appointments</a></li>
-        <li ><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="viewStudentSublet">My Listings</a></li>
-            <li><a href="propertySearch.html">Search Listings</a></li>
-          </ul>
-        </li>
-        <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <ul class="nav navbar-nav navbar-collpase">
+          <li><a href="/studentProfile">Profile</a></li>
+          <li><a href="/studentMessaging">Messaging</a></li>
+          <li><a href="/appointmentListStudents">Appointments</a></li>
+          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/viewStudentSublet">My Listings</a></li>
+              <li><a href="/propertySearch">Search Listings</a></li>
+            </ul>
+          </li>
+          <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span
+                class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+              <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
+            </ul>
+          </li>
         </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-<div class="container mt-3">
-  <h2>Your Roommate Preferences</h2>
-  <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>        
-  <p>{{gender}}</p>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Gender Preference</td>
-        <td>    
-          {{gender}}
-      </td>
-      </tr>
-      <tr>
-        <td>Prefer/Accept an international student?</td>
-        <td>{{international}}
-        </td>
-      </tr>
-      <tr>
-        <td>Are you a smoker?</td>
-        <td>
-          {{smoker}}
-        </td>
-      </tr>
-      <tr>
-        <td>Room care</td>
-        <td>
-          {{roomcare}}
-        </td>
-      </tr>
-      <tr>
-        <td>Bedtime</td>
-        <td>
-          {{bedtime}}
-        </td>
-      </tr>
-      <tr>
-        <td>Sleeping Habits</td>
-        <td>
-          {{sleephabit}}
-        </td>
-      </tr>
-      <tr>
-        <td>My Personality</td>
-        <td>
-          {{personality}}
-        </td>
-      </tr>
-      <tr>
-        <td>Study Habits</td>
-        <td>
-          {{studyhabit}}
-        </td>
-      </tr>
-      <tr>
-        <td>Music Volume Level Preference</td>
-        <td>
-          {{musicvol}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container mt-3">
+    <h2>Your Roommate Preferences</h2>
+    <p>You may edit your roommate preferences by clicking the Edit button in the bottom of the page.</p>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Gender</td>
+          <td>
+            {{gender}}
+          </td>
+        </tr>
+        <tr>
+          <td>Prefer/Accept an international student?</td>
+          <td>{{international}}
+          </td>
+        </tr>
+        <tr>
+          <td>Are you a smoker?</td>
+          <td>
+            {{smoker}}
+          </td>
+        </tr>
+        <tr>
+          <td>Room care</td>
+          <td>
+            {{roomcare}}
+          </td>
+        </tr>
+        <tr>
+          <td>Bedtime</td>
+          <td>
+            {{bedtime}}
+          </td>
+        </tr>
+        <tr>
+          <td>Sleeping Habits</td>
+          <td>
+            {{sleephabit}}
+          </td>
+        </tr>
+        <tr>
+          <td>My Personality</td>
+          <td>
+            {{personality}}
+          </td>
+        </tr>
+        <tr>
+          <td>Study Habits</td>
+          <td>
+            {{studyhabit}}
+          </td>
+        </tr>
+        <tr>
+          <td>Music Volume Level Preference</td>
+          <td>
+            {{musicvol}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <a href="/roommateMatchingFormEdit"><button class="btn btn-primary mt-3" >Edit</button></a>
+    <a href="/roommateMatchingFormEdit"><button class="btn btn-primary mt-3">Redo</button></a>
 
-</div>
-<footer class="container-fluid bg-4 text-center margin">
-  <p>Contact us at support@ohis.com</p>
-</footer>
-<script>
-</script>
+  </div>
+  <footer class="container-fluid bg-4 text-center margin">
+    <p>Contact us at support@ohis.com</p>
+  </footer>
+  <script>
+  </script>
 </body>
+
 </html>
