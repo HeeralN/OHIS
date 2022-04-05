@@ -818,13 +818,11 @@ app.post("/viewLandlordListings/landlordDeleteListing", function(req,res) {
 
         if (housingId) {
             db.query('DELETE FROM listing WHERE username = ? AND listingId = ? AND isSublet = 0', [req.session.username, housingId], function(error, results, fields) {
-                db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
-                    if (results && error === null) {
-                        return res.render('viewLandlordListings', {listing: results}, {message: 'Listing deleted!'});
-                    } else {
-                        return res.render('viewLandlordListings', {listing: results}, {message: 'There was an error deleting this listing! It may have been deleted already.'});
-                    }
-                });
+                if (results && error === null) {
+                    return res.render('viewLandlordListings', {message: 'Listing deleted!'});
+                } else {
+                    return res.render('viewLandlordListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
+                }
             });
         } else {
             res.redirect('Please login to view this page!');
