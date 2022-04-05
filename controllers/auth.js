@@ -118,8 +118,8 @@ exports.createListingPage = (req ,res) => {
             return res.render("createListingPage",{
                 message: "A listing at the given address already exists"
             })
-        }
-        let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
+        }  
+        let query = "INSERT INTO listing (address, username, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
         let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType,
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
@@ -155,9 +155,9 @@ exports.createSubletPage = (req,res) => {
         if (results.length > 0) {
             return res.render("createSubletPage",{
                 message: "A listing at the given address already exists"
-            })
-        }
-        let query = "INSERT INTO listing (address, user email, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
+            }) 
+        } 
+        let query = "INSERT INTO listing (address, username, date created, last modified, link, description, square feet, bath, number of rooms, occupancy date,"+
             " lease type, rental price, restrictions, gym, pool, laundry, parking, furnished, dishwasher, hardwood floors, carpeted floors) VALUES ?;"
         let values = [fullAddress, email, date, date, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, occupancyDate, leaseType,
             rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors]
@@ -181,6 +181,63 @@ exports.createSubletPage = (req,res) => {
     // })
 }
 
+
+exports.landlordCreateAccount = (req,res) => {
+    //console.log(req.body);
+    const {fullname, username, phone, password, email, confirmpassword} = req.body;
+
+    db.query("SELECT email FROM LandlordLogin WHERE email= ?", [username], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("landlordCreateAccount",{
+                message: "That username or email is already in use"
+            })
+
+        }
+        else if(password!==confirmpassword) {
+            return res.render("landlordCreateAccount",{
+                message: "Passwords do not match"
+            })
+
+        }
+        //let hashedPassword = await bcrypt.hash(password, 8); //hashes the password for encryption
+        //console.log(hashedPassword);
+
+        db.query("INSERT INTO LandlordLogin SET ?", {fullname:fullname, username:username, phone: phone, email: email, password: password}, (error,results)=>{
+            if (error){
+                console.log(results);
+                console.log(error);
+            }
+            else{
+                console.log(results);
+                return res.render("landlordCreateAccount", {
+                    message:"User registered"
+                });
+            }
+        })
+    });
+
+ 
+        
+    
+
+    //res.send("Form submitted")
+    // res.json({ //to test form on front end
+    //
+    // })
+}
+
+// exports.propertySearch = (req,res) => {
+//             con.connect(function(err) {
+//                 if (err) throw err;
+//                 con.query("SELECT * FROM Listings ORDER BY 'rental price' DESC", function (err, result) {
+//                   if (err) throw err;
+//                   console.log(result);
+//                 });
+//               });
+//             }
 
 // exports.index = (req,res) => {
 //     const {username, password} = req.body;

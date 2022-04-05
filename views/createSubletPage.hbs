@@ -53,25 +53,25 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
+          <span class="icon-bar"></span>
         </button>
         <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="studentProfile.html">Profile</a></li>
-        <li><a href="studentMessaging.html">Messaging</a></li>
-        <li><a href="appointmentListStudents.html">Appointments</a></li>
+        <li><a href="/studentProfile">Profile</a></li>
+        <li><a href="/studentMessaging">Messaging</a></li>
+        <li><a href="/appointmentListStudents">Appointments</a></li>
         <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="viewStudentSublet.html">My Listings</a></li>
-            <li><a href="propertySearch.html">Search Listings</a></li>
+            <li><a href="/viewStudentSublet">My Listings</a></li>
+            <li><a href="/propertySearch">Search Listings</a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="roommateMatchingForm.html">Roommate Matching Form</a></li>
-            <li><a href="roommateMatchingResults.html">Roommate Matching Results</a></li>
+            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
           </ul>
         </li>
       </ul>
@@ -192,17 +192,17 @@
 <script>
     function publishListing(){
       // verifying all fields are entered
-      let street = document.forms["listingForm"]["street"].value;
-      let inputCity = document.forms["listingForm"]["inputCity"].value;
-      let inputState = document.forms["listingForm"]["inputState"].value;
-      let inputZip = document.forms["listingForm"]["inputZip"].value;
-      let inputCountry = document.forms["listingForm"]["inputCountry"].value;
-      let squarefeet = document.forms["listingForm"]["square-feet"].value;
-      let numberOfBath = document.forms["listingForm"]["number-of-bath"].value;
-      let numTotalRooms = document.forms["listingForm"]["num-total-rooms"].value;
-      let occupancyDate = document.forms["listingForm"]["occupancy-date"].value;
-      let leaseType = document.forms["listingForm"]["lease-type"].value;
-      let rentalRate = document.forms["listingForm"]["rental-rate"].value;
+      const street = document.forms["listingForm"]["street"].value;
+      const inputCity = document.forms["listingForm"]["inputCity"].value;
+      const inputState = document.forms["listingForm"]["inputState"].value;
+      const inputZip = document.forms["listingForm"]["inputZip"].value;
+      const inputCountry = document.forms["listingForm"]["inputCountry"].value;
+      const squarefeet = document.forms["listingForm"]["square-feet"].value;
+      const numberOfBath = document.forms["listingForm"]["number-of-bath"].value;
+      const numTotalRooms = document.forms["listingForm"]["num-total-rooms"].value;
+      const occupancyDate = document.forms["listingForm"]["occupancy-date"].value;
+      const leaseType = document.forms["listingForm"]["lease-type"].value;
+      const rentalRate = document.forms["listingForm"]["rental-rate"].value;
 
       if(street.length > 0 && inputCity.length > 0 && inputState.length > 0 && inputZip.length > 0 && inputCountry.length > 0 && squarefeet.length > 0 && numberOfBath.length > 0 
           && numTotalRooms.length > 0 && occupancyDate.length > 0 && leaseType.length > 0 && rentalRate.length > 0 ){
