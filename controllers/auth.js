@@ -29,7 +29,9 @@ exports.studentCreateAccount = (req,res) => {
 
         }
 
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
+        let hashedPassword = await bcrypt.hash(password, 8);
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "0"}, (error,results)=>{
             db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
                 if (error){
                     console.log(results);
@@ -53,7 +55,7 @@ exports.studentCreateAccount = (req,res) => {
                     message:"User registered"
                 });
             }
-             
+
         })
     });
 }
@@ -78,7 +80,9 @@ exports.landlordCreateAccount = (req,res) => {
 
         }
 
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "1"}, (error,results)=>{
+        let hashedPassword = await bcrypt.hash(password, 8);
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "1"}, (error,results)=>{
             db.query("INSERT INTO landlord SET ?", {phone:phone, username:username}, (error,results)=>{
                 if (error){
                     console.log(results);
@@ -99,32 +103,3 @@ exports.landlordCreateAccount = (req,res) => {
     });
 }
 
-// exports.propertySearch = (req,res) => {
-//             con.connect(function(err) {
-//                 if (err) throw err;
-//                 con.query("SELECT * FROM Listings ORDER BY 'rental price' DESC", function (err, result) {
-//                   if (err) throw err;
-//                   console.log(result);
-//                 });
-//               });
-//             }
-
-// exports.index = (req,res) => {
-//     const {username, password} = req.body;
-//     if (username && password) {
-//         db.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-//             if (results.length > 0) {
-//                 req.session.loggedin = true;
-//                 req.session.username = username;
-//                 res.send('YAYY!');
-//                 //res.redirect('/studentCreateAccount');
-//             } else {
-//                 res.send('Incorrect Username and/or Password!');
-//             }
-//             res.end();
-//         });
-//     } else {
-//         res.send('Please enter Username and Password!');
-//         res.end();
-//     }
-// }

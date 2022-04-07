@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
+const bcrypt = require("bcryptjs");
 
 dotenv.config({path: './.env'})
 
@@ -66,23 +67,29 @@ app.listen(5001, () => {
 //     res.render("studentCreateAccount");
 // });
 
+
 // LOGIN/LOGOUT
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
+
     if (username && password) {
-        db.query('SELECT username,password,adminPerms FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        db.query('SELECT username,password,adminPerms FROM account WHERE username = ?', [username], function(error, results, fields) {
             if (results.length > 0) {
-                req.session.loggedin = true;
-                req.session.username = username;
-                if (results[0].adminPerms === 0) {  //0 is for student
-                    res.redirect("/studentProfile");
+                const comparison = bcrypt.compare(password, results[0].password)
+                if (comparison){
+                    req.session.loggedin = true;
+                    req.session.username = username;
+                    if (results[0].adminPerms === 0) {  //0 is for student
+                        res.redirect("/studentProfile");
+                    }
+                    else if (results[0].adminPerms === 1) {   //1 is for landlord
+                        res.redirect('/landlordProfile');
+                    }
+                    else if (results[0].adminPerms === 2) {    //2 is for admin
+                        res.redirect('/adminLanding');
+                    }
                 }
-                else if (results[0].adminPerms === 1) {   //1 is for landlord
-                    res.redirect('/landlordProfile');
-                }
-                else if (results[0].adminPerms === 2) {    //2 is for admin
-                    res.redirect('/adminLanding');
-                }
+
 
             } else {
                 return res.render("index",{
