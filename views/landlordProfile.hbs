@@ -10,6 +10,38 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
+  .navbar {
+    margin-bottom: 0;
+    background-color: #b2a7cc !important;
+    z-index: 9999;
+    border: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: rgb(53, 18, 90) !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #8b699b !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #c9c4d5 !important;
+  }
+
+  .bg-4 {
+    color: rgb(53, 18, 90);
+    margin-bottom: 500;
+    margin-top: 50;
+    padding-top: 50;
+    background-color: #b2a7cc !important;
+  }
   body {
     display:flex;
     height:100vh;
@@ -73,7 +105,7 @@
 </style>
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+ <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -85,13 +117,13 @@
       </div>
       <div id="myNavbar">
       <ul class="nav navbar-nav navbar-collpase">
-        <li class="active"><a href="landlordProfile.html">Profile</a></li>
-        <li><a href="landlordMessaging.html">Messaging</a></li>
-        <li><a href="appointmentListLandlords.html">Appointments</a></li>
+        <li class="active"><a href="/landlordProfile">Profile</a></li>
+        <li><a href="/landlordMessaging">Messaging</a></li>
+        <li><a href="/appointmentListLandlords">Appointments</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="viewLandlordListings.html">My Listings</a></li>
-            <li><a href="propertySearchLandlords.html">Search Listings</a></li>
+            <li><a href="/viewLandlordListings">My Listings</a></li>
+            <li><a href="/propertySearchLandlords">Search Listings</a></li>
           </ul>
         </li>
       </ul>
@@ -102,19 +134,30 @@
     </div>
   </nav>
 
-
 <div class="container">
   <div class="left">
-    <img class="img" src="images/landlord.jpg" alt="user" >
-    <h4>Full Name</h4>
-    <p>Email</p>
+    <!--img class="img" src="images/landlord.jpg" alt="user" -->
+    <h4>{{fullname}}</h4>
+    <p>{{email}}</p>
+    <p>{{phone}}</p>
   </div>
   <div class="right">
     <div class="info">
-      <h3>Information about Listings</h3>
+      <h3>This Landlord's Current Listings</h3>
       <div class="info_data">
-        <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-      </div>
+        <table class="table">
+    <tbody>
+      <tr>
+        <th>Address</th>
+      </tr>
+      {{#each list}}
+      <tr>
+        <td>{{this.address}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+        </div>
     </div>
   </div>
   <footer class="container-fluid bg-4 text-center margin">

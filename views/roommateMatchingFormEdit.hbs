@@ -19,7 +19,38 @@
       background: linear-gradient(#8b699b, gray);
 
     }
+    .navbar {
+    margin-bottom: 0;
+    background-color: #b2a7cc !important;
+    z-index: 9999;
+    border: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: rgb(53, 18, 90) !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #8b699b !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #c9c4d5 !important;
+  }
 
+  .bg-4 {
+    color: rgb(53, 18, 90);
+    margin-bottom: 500;
+    margin-top: 50;
+    padding-top: 50;
+    background-color: #b2a7cc !important;
+  }
     footer {
       margin-left: 0;
       bottom: 0;
@@ -45,13 +76,13 @@
       </div>
       <div id="myNavbar">
         <ul class="nav navbar-nav navbar-collpase">
-          <li><a href="studentProfile.html">Profile</a></li>
-          <li><a href="studentMessaging.html">Messaging</a></li>
-          <li><a href="appointmentListStudents.html">Appointments</a></li>
+          <li><a href="/studentProfile">Profile</a></li>
+          <li><a href="/studentMessaging">Messaging</a></li>
+          <li><a href="/appointmentListStudents">Appointments</a></li>
           <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="viewStudentSublet.html">My Listings</a></li>
-              <li><a href="propertySearch.html">Search Listings</a></li>
+              <li><a href="/viewStudentSublet">My Listings</a></li>
+              <li><a href="/propertySearch">Search Listings</a></li>
             </ul>
           </li>
           <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span
@@ -63,7 +94,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </div>
@@ -77,13 +108,13 @@
       <table class="table table-hover">
         <tbody>
           <tr>
-            <td>Gender Preference</td>
+            <td>Gender</td>
             <td>
-              <select multiple class="form-select" id="sel1" name="gender">
-                <option>Female</option>
-                <option>Male</option>
-                <option>Non-binary</option>
-                <option>No preference</option>
+              <select id="sel1" name="gender">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="No preference">No preference</option>
               </select>
             </td>
           </tr>
