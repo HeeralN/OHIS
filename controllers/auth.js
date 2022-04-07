@@ -29,7 +29,9 @@ exports.studentCreateAccount = (req,res) => {
 
         }
 
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "0"}, (error,results)=>{
+        let hashedPassword = await bcrypt.hash(password,8);
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "0"}, (error,results)=>{
             db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
                 if (error){
                     console.log(results);
@@ -78,7 +80,9 @@ exports.landlordCreateAccount = (req,res) => {
 
         }
 
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: password, adminPerms: "1"}, (error,results)=>{
+        let hashedPassword = await bcrypt.hash(password,8);
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "1"}, (error,results)=>{
             db.query("INSERT INTO landlord SET ?", {phone:phone, username:username}, (error,results)=>{
                 if (error){
                     console.log(results);
