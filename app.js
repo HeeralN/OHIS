@@ -3,11 +3,12 @@ const app = express();
 const mysql = require('mysql');
 const session = require('express-session');
 const dotenv= require("dotenv");
-const path = require("path")
+const path = require("path");
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
+const { query } = require('express');
 
 dotenv.config({path: './.env'})
 
@@ -513,6 +514,7 @@ app.post('/propertySearch/sort', function(req, res) {
     if (req.session.loggedin) {
         var queryString = "WHERE "
         var count = 0;
+        var isLengthSel = false;
         if(dishwasher==1){
             if(count>0){
                 queryString += " AND ";
@@ -571,6 +573,87 @@ app.post('/propertySearch/sort', function(req, res) {
             console.log("in case 3");
             queryString += "number_of_room >= 5";
             count++;
+        }
+        if(length1==1){
+          
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (1";
+            isLengthSel = true;
+            }
+            else{
+            queryString += ", 1";
+            }
+        }
+        if(length2==1){
+
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (1, 2, 3";
+            isLengthSel = true;
+            }
+            else{
+            queryString += " , 1, 2, 3";
+            }
+        }
+        if(length3==1){
+
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (3";
+            isLengthSel = true;
+            }
+            else{
+            queryString += ", 3";
+            }
+        }
+        if(length6==1){
+
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (6";
+            isLengthSel = true;
+            }
+            else{
+            queryString += " , 6";
+            }
+        }
+        if(length12==1){
+
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (12";
+            isLengthSel = true;
+            }
+            else{
+            queryString += " , 12";
+            }
+        }
+        if(length13==1){
+
+            if(isLengthSel=false){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24";
+            isLengthSel = true;
+            }
+            else{
+            queryString += ", 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24";
+            }
+        }
+        if(isLengthSel=true){
+            queryString += ")";
         }
         console.log("SELECT listingId, address, bath, number_of_room FROM listing " + queryString);
     db.query('SELECT listingId, address, bath, number_of_room FROM listing ' + queryString, function(error, results, fields) {
@@ -970,6 +1053,7 @@ app.post('/propertySearchLandlords/sort', function(req, res) {
     if (req.session.loggedin) {
         var queryString = "WHERE "
         var count = 0;
+        var isLengthSel = 0;
         if(dishwasher==1){
             if(count>0){
                 queryString += " AND ";
@@ -1028,6 +1112,87 @@ app.post('/propertySearchLandlords/sort', function(req, res) {
             console.log("in case 3");
             queryString += "number_of_room >= 5";
             count++;
+        }
+        if(length1==1){
+          
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (1";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 1";
+            }
+        }
+        if(length2==1){
+
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (1, 2, 3";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 1, 2, 3";
+            }
+        }
+        if(length3==1){
+
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (3";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 3";
+            }
+        }
+        if(length6==1){
+
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (6";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 6";
+            }
+        }
+        if(length12==1){
+
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (12";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 12";
+            }
+        }
+        if(length13==1){
+
+            if(isLengthSel==0){
+                if(count>0){
+                    queryString+= " AND ";
+                }
+            queryString += "lease_length IN (13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24";
+            isLengthSel = 1;
+            }
+            else{
+            queryString += ", 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24";
+            }
+        }
+        if(isLengthSel==1){
+            queryString += ")";
         }
         console.log("SELECT listingId, address, bath, number_of_room FROM listing " + queryString);
     db.query('SELECT listingId, address, bath, number_of_room FROM listing ' + queryString, function(error, results, fields) {
