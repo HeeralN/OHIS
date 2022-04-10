@@ -137,8 +137,8 @@
     </div>
 </nav>
 
-<!--button type="button" class="btn" id="button">
-    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a-->
+<button type="button" class="btn" id="button">
+    <a href="/"><span class="glyphicon glyphicon-triangle-left"></span> Back</a></button>
 <div class="container">
     <div class="title">Student Registration</div>
     <form action="/auth/studentCreateAccount" method="POST" id="NewAccount">
@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="submit-button">
-            <button type="submit" class="Submit">Submit</button>
+            <button type="submit" class="Submit" >Submit</button>
         </div>
     </form>
     {{#if message}}
@@ -183,6 +183,7 @@
     function viewProfile(){
         window.location='studentProfile.hbs.html';
     }
+
 </script>
 </body>
 </html>

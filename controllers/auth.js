@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const jwt=require("jsonwebtoken");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,  //put ip address if not running on localhost
@@ -13,18 +13,17 @@ exports.studentCreateAccount = (req,res) => {
     //console.log(req.body);
     const {fullname, username, university, password, email, confirmpassword} = req.body;
 
-    db.query("SELECT username, email FROM account WHERE username =? and email= ?", [username, email], async (error, results) => {
+    db.query("SELECT username, email FROM account WHERE username =? or email= ?", [username, email], async (error, results) => {
         if (error) {
             console.log(error);
         }
         if (results.length > 0) {
-            return res.render("studentCreateAccount",{
+            return res.render("studentCreateAccount", {
                 message: "That username or email is already in use"
             })
 
-        } 
-        else if(password!==confirmpassword) {
-            return res.render("studentCreateAccount",{
+        } else if (password !== confirmpassword) {
+            return res.render("studentCreateAccount", {
                 message: "Passwords do not match"
             })
 
@@ -62,7 +61,7 @@ exports.studentCreateAccount = (req,res) => {
 exports.landlordCreateAccount = (req,res) => {
     const {fullname, username, phone, password, email, confirmpassword} = req.body;
 
-    db.query("SELECT username,email FROM account WHERE username=? and email= ?", [username, email], async (error, results) => {
+    db.query("SELECT username,email FROM account WHERE username=? or email= ?", [username, email], async (error, results) => {
         if (error) {
             console.log(error);
         }
