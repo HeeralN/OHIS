@@ -54,7 +54,22 @@
     align-content: center;
   }
 
+.modal{
+  margin-top: 100px;
 
+}
+.well{
+        background-color: #EDE1F2;
+}
+.well-block {
+    background-color: #fff;
+    border: 1px solid #e9e6e8;
+    padding: 40px;
+}
+
+.well-title {
+    margin-bottom: 40px;
+}
 </style>
 </head>
 <body>
@@ -102,9 +117,68 @@
     <img src="images/apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
     <div class="btn-group-vertical">
     <button class="btn btn-primary" href="/studentMessaging">Contact Landlord</button>
-    <button type="button" class="btn btn-primary">Book Viewing</button>
+    <button type="button" class="btn btn-primary" onClick="openModal()" data-toggle="modal" data-target="#myModal">Book Viewing</button>
     <button class="btn btn-primary" href="/landlordProfile">View Landlord's Page</button>
    </div>
+
+  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Book a Tour</h4>
+      </div>
+      <div class="modal-body">
+                    <div class="well-block">
+                        <form>
+                            <div class="row" style="background-color: white;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Name</label>
+                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="email">Email</label>
+                                        <input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="date">Preferred Date</label>
+                                        <input id="date" name="date" type="text" placeholder="Preferred Date" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="time">Preferred Time</label>
+                                        <select id="time" name="time" class="form-control">
+                                            <option value="8:00 to 10:00">8:00am to 10:00am</option>
+                                            <option value="10:00 to 12:00">10:00am to 12:00pm</option>
+                                            <option value="12:00 to 2:00">12:00pm to 2:00pm</option>
+                                            <option value="2:00 to 4:00">2:00pm to 4:00pm</option>
+                                            <option value="4:00 to 6:00">4:00pm to 6:00pm</option>
+                                            <option value="6:00 to 8:00">6:00pm to 8:00pm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default" onClick="bookAppt()">Make An Appointment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
    <br><br>
   </div>
   <div class="col-sm-9 col-sm-offset-4.5">
@@ -232,6 +306,19 @@
     alert("You have been logged out");
     window.location='login.html';
   }
+  function oopenModal(){
+    var modal = document.getElementById("myModal");
+     modal.classList.toggle("show");
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+  modal.style.display = "none";
+}
+
+<script>
+// When the user clicks on <div>, open the popup
+
+</script>
 </script>
 </body>
 </html>

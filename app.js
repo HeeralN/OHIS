@@ -24,7 +24,7 @@ app.use(express.static(publicDirectory))
 
 //parse URL-encoded bodies (as sent by html forms)
 app.use(express.urlencoded({extended:false}));
-//parse JSON bodies (as sent by API clients)
+//parse JSON bodies (as sent by API cients)
 app.use(express.json());
 
 
