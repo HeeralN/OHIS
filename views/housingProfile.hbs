@@ -130,18 +130,12 @@
       </div>
       <div class="modal-body">
                     <div class="well-block">
-                        <form>
+                        <form name="bookAppt" id="bookAppt" action="/housingProfile/bookAppt" method="POST">
                             <div class="row" style="background-color: white;">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="name">Name</label>
-                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="email">Email</label>
-                                        <input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md">
+                                        <label class="control-label" for="name">Landlord Username</label>
+                                        <input id="landlord_username" name="landlord_username" type="text" value="{{username}}" readonly="readonly" class="form-control input-md">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -150,22 +144,21 @@
                                         <input id="date" name="date" type="text" placeholder="Preferred Date" class="form-control input-md">
                                     </div>
                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="listingID">listingID</label>
+                                        <input id="listingId" name="listingId" type="text" value="{{listingId}}" readonly="readonly" class="form-control input-md">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="time">Preferred Time</label>
-                                        <select id="time" name="time" class="form-control">
-                                            <option value="8:00 to 10:00">8:00am to 10:00am</option>
-                                            <option value="10:00 to 12:00">10:00am to 12:00pm</option>
-                                            <option value="12:00 to 2:00">12:00pm to 2:00pm</option>
-                                            <option value="2:00 to 4:00">2:00pm to 4:00pm</option>
-                                            <option value="4:00 to 6:00">4:00pm to 6:00pm</option>
-                                            <option value="6:00 to 8:00">6:00pm to 8:00pm</option>
-                                        </select>
+                                        <input id="time" name="time" type="text" placeholder="time" class="form-control input-md">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default" onClick="bookAppt()">Make An Appointment</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Make An Appointment</button>
                                     </div>
                                 </div>
                             </div>
@@ -217,6 +210,16 @@
   <div class="panel panel-info">
     <div class="panel-heading">About the Property</div>
   <ul class="list-group">
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-home"></span>
+      &nbsp;
+      &nbsp;
+      {{listingId}}</li>
+      <li class="list-group-item">
+      <span class="glyphicon glyphicon-home"></span>
+      &nbsp;
+      &nbsp;
+      {{username}}</li>
     <li class="list-group-item">
       <span class="glyphicon glyphicon-home"></span>
       &nbsp;
