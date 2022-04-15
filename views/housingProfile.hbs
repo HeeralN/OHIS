@@ -135,7 +135,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="name">Landlord Username</label>
-                                        <input id="landlord_username" name="landlord_username" type="text" value="{{username}}" readonly="readonly" class="form-control input-md">
+                                        <input id="landlord_id" name="landlord_id" type="text" value="{{username}}" readonly="readonly" class="form-control input-md">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -153,8 +153,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="time">Preferred Time</label>
-                                        <input id="time" name="time" type="text" placeholder="time" class="form-control input-md">
+                                        <input id="time" name="time" type="datetime" class="form-control input-md">
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                   <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+                                    <input placeholder="Select date" type="text" id="example" class="form-control">
+                                    <label for="example">Try me...</label>
+                                    <i class="fas fa-calendar input-prefix"></i>
+                                  </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -317,9 +324,11 @@
   span.onclick = function() {
   modal.style.display = "none";
 }
-
+$('.datepicker').datepicker({
+  inline: true
+});
 <script>
-// When the user clicks on <div>, open the popup
+
 
 </script>
 </script>

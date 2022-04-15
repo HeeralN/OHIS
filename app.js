@@ -491,7 +491,7 @@ app.post('/housingProfile', function(req, res) {
 app.post('/housingProfile/bookAppt', function(req, res) {
     const {landlord_id, listingId, date, time} = req.body;
     var dateTime = date + " " + time;
-    db.query("INSERT INTO appointment SET ?",  {student_username: session.username, landlord_username: landlord_id, listingID: listingId, date: dateTime} , (error,results) => {
+    db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: dateTime} , (error,results) => {
         if (error){
             console.log(error);
         }
