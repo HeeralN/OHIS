@@ -3,14 +3,20 @@ const app = express();
 const mysql = require('mysql');
 const session = require('express-session');
 const dotenv= require("dotenv");
+dotenv.config({path: './.env'})
 const path = require("path")
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
 const bcrypt = require("bcryptjs");
+const jwt=require("jsonwebtoken");
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
+var crypto = require("crypto");
 
-dotenv.config({path: './.env'})
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,  //put ip address if not running on localhost
@@ -55,27 +61,19 @@ app.listen(5001, () => {
     console.log("Sever started on Port 5001")
 });
 
-// app.get("/",(req,res)=>{
-//     res.render("index");
-// });
-//
-// app.get("/landlordCreateAccount",(req,res)=>{
-//     res.render("landlordCreateAccount");
-// });
-//
-// app.get("/studentCreateAccount",(req,res)=>{
-//     res.render("studentCreateAccount");
-// });
-
 
 // LOGIN/LOGOUT
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
-
     if (username && password) {
-        db.query('SELECT username,password,adminPerms FROM account WHERE username = ?', [username], function(error, results, fields) {
+        db.query('SELECT username,password,adminPerms,active FROM account WHERE username = ?', [username], function(error, results, fields) {
             if (results.length > 0) {
-                const comparison = bcrypt.compare(password, results[0].password)
+                if (results[0].active===0){
+                    return res.render("index",{
+                        message: "Account is not activated. Check email to activate account."
+                    });
+                }
+                const comparison = bcrypt.compare(password, results[0].password);
                 if (comparison){
                     req.session.loggedin = true;
                     req.session.username = username;
@@ -203,7 +201,6 @@ app.post('/adminManagingListings/getListing', function(req, res) {
             } else {
                 return res.render('adminManagingListings', {message: 'Listing not found!'});
             }
-            res.end();
         });
     }
     else {
@@ -221,7 +218,6 @@ app.post('/adminManagingListings/deleteListing', function(req, res) {
             } else {
                 return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
             }
-            res.end();
         });
     }
     else {
@@ -239,7 +235,6 @@ app.post('/adminManagingUsers/getUser', function(req, res) {
             } else {
                 return res.render('adminManagingUsers', {message: 'User not found!'});
             }
-            res.end();
         });
     }
     else {
@@ -258,7 +253,6 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
             } else {
                 return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
             }
-            res.end();
         });
     }
     else {
@@ -489,8 +483,7 @@ app.post('/housingProfile', function(req, res) {
                 carpeted_floorsBool = "No carpeted floors";
             }
             return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description}); 
-              
-        res.end();
+
     });
 });
 
@@ -506,7 +499,6 @@ app.get('/propertySearch', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -590,7 +582,6 @@ app.post('/propertySearch/sort', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -611,7 +602,6 @@ app.get('/propertySearch/sort1', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -631,7 +621,6 @@ app.get('/propertySearch/sort2', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -905,8 +894,7 @@ app.post('/housingProfileForLandlords', function(req, res) {
                 carpeted_floorsBool = "No carpeted floors";
             }
             return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description}); 
-              
-        res.end();
+
     });
 });
 
@@ -922,7 +910,6 @@ app.get('/propertySearchLandlords', function(req, res) {
         } else {
             return res.render('propertySearchLandlords', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -943,7 +930,6 @@ app.get('/propertySearchLandlords/sort1', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -963,7 +949,6 @@ app.get('/propertySearchLandlords/sort2', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
@@ -1047,10 +1032,212 @@ app.post('/propertySearchLandlords/sort', function(req, res) {
         } else {
             return res.render('propertySearchLandlords', {message: 'Listings not found!'});
         }
-        res.end();
     });
 }
 else {
     res.send('Please login to view this page!');
 }
 });
+
+// var options = {
+//     auth: {
+//         api_user: 'krishna_p1611',
+//         api_key: 'ohissupport12345'
+//     }
+// }
+
+// var client = nodemailer.createTransport({
+//     service: 'SendGrid',
+//     auth: {
+//         user: 'krishna_p1611',
+//         pass: 'ohissupport12345'
+//     }
+// });
+
+const transporter = nodemailer.createTransport({
+    port: 465,               // true for 465, false for other ports
+    host: "smtp.gmail.com",
+    auth: {
+        user: 'offcampushousinginfosystem@gmail.com',
+        pass: 'ohissupport12345',
+    },
+    secure: true,
+});
+
+app.get('/studentCreateAccount', function(req, res) {
+    res.render("studentCreateAccount");
+});
+
+app.get('/landlordCreateAccount', function(req, res) {
+    res.render("landlordCreateAccount");
+});
+
+app.post('/studentCreateAccount', function(req, res) {
+    //console.log(req.body);
+    const {fullname, username, university, password, email, confirmpassword} = req.body;
+    var re = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\\.edu$");
+    if (!re.test(email)) {
+        return res.render("studentCreateAccount", {
+            message: "Email is not an university email (.edu) or valid format"
+        })
+    }
+    const myRnId = parseInt(Date.now() + Math.random()*10)
+    db.query("SELECT username, email FROM account WHERE username =? or email= ?", [username, email], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("studentCreateAccount", {
+                message: "That username or email is already in use"
+            })
+
+        } else if (password !== confirmpassword) {
+            return res.render("studentCreateAccount", {
+                message: "Passwords do not match"
+            })
+
+        }
+
+        let hashedPassword = await bcrypt.hash(password, 8);
+
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "0", temptoken: myRnId, active:0}, (error,results)=>{
+            db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+
+            db.query("INSERT INTO preference SET ?", {username: username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+
+
+            if (error){
+                console.log(error);
+            }
+            else{
+                console.log(results);
+                const mailData = {
+                    from: 'offcampushousinginfosystem@gmail.com',  // sender address
+                    to: req.body.email,   // list of receivers
+                    subject: 'OHIS Activation Link',
+                    text: 'Hello ' + req.body.username + '. Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.Please click on the following link below to complete your activation: http://localhost:5001/activate/' ,
+                    html: 'Hello <strong>' + req.body.username + '</strong>,<br><br>Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.<br>Please click on the link below to complete your activation: <br><a href="http://localhost:5001/activate/">http://localhost:5001/activate/</a>'
+                };
+                transporter.sendMail(mailData, function (err, info) {
+                    if(err)
+                        console.log(err)
+                    else
+                        return res.render("index", {
+                            message: "Click on Email Link to Verify Account."
+                        })
+                });
+            }
+
+        })
+    });
+});
+
+app.get('/activate', function(req, res) {
+    return res.render('activate');
+});
+
+
+//if username is correct, check if it matches the activation code
+    //if it matches activation code, then submit and change active to true; redirect to login page and say user is now active
+    //if does not match the activation code, then render page again with message that activation code for user is incorrect
+//if username is incorrect, then say that it is incorrect
+app.post('/activate', function(req, res) {
+    const {username, activation} = req.body;
+    db.query("SELECT username, temptoken FROM account WHERE username =?", [username], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            if (activation===results[0].temptoken) {
+                db.query('UPDATE account SET ? WHERE username = ?', [{active: 1}, username], (error,results)=>{
+                    return res.render("index", {
+                        message: "Your account is activated"
+                    })
+                });
+            }
+            else {
+                return res.render("activate", {
+                    message: "Username or Activation Code is incorrect"
+                })
+            }
+
+        } else {
+            return res.render("activate", {
+                message: "That username does not exist."
+            })
+
+        }
+    });
+});
+
+app.post('/landlordCreateAccount', function(req, res) {
+    const {fullname, username, phone, password, email, confirmpassword} = req.body;
+
+    db.query("SELECT username,email FROM account WHERE username=? or email= ?", [username, email], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            return res.render("landlordCreateAccount",{
+                message: "That username or email is already in use"
+            })
+
+        }
+        else if(password!==confirmpassword) {
+            return res.render("landlordCreateAccount",{
+                message: "Passwords do not match"
+            })
+
+        }
+
+        let hashedPassword = await bcrypt.hash(password, 8);
+        const myRnId = parseInt(Date.now() + Math.random()*10)
+        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "1", temptoken: myRnId, active:0}, (error,results)=>{
+            db.query("INSERT INTO landlord SET ?", {phone:phone, username:username}, (error,results)=>{
+                if (error){
+                    console.log(results);
+                    console.log(error);
+                }
+            })
+            if (error){
+                console.log(results);
+                console.log(error);
+            }
+            else{
+                if (error){
+                    console.log(error);
+                }
+                else{
+                    console.log(results);
+                    const mailData = {
+                        from: 'offcampushousinginfosystem@gmail.com',  // sender address
+                        to: req.body.email,   // list of receivers
+                        subject: 'OHIS Activation Link',
+                        text: 'Hello ' + req.body.username + '. Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.Please click on the following link below to complete your activation: http://localhost:5001/activate/' ,
+                        html: 'Hello <strong>' + req.body.username + '</strong>,<br><br>Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.<br>Please click on the link below to complete your activation: <br><a href="http://localhost:5001/activate/">http://localhost:5001/activate/</a>'
+                    };
+                    transporter.sendMail(mailData, function (err, info) {
+                        if(err)
+                            console.log(err)
+                        else
+                            return res.render("index", {
+                                message: "Click on Email Link to Verify Account."
+                            })
+                    });
+                }
+            }
+        })
+    });
+});
+
+//var id = crypto.randomBytes(20).toString('hex');
