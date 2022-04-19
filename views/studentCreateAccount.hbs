@@ -28,16 +28,16 @@
             letter-spacing: 2px;
             border-radius: 0;
         }
-        
+
         .navbar li a, .navbar .navbar-brand {
             color: rgb(53, 18, 90) !important;
         }
-        
+
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: #8b699b !important;
             background-color: rgb(255, 255, 255) !important;
         }
-        
+
         .dropdown-menu li a:hover {
             background-color: #c9c4d5 !important;
         }
@@ -141,7 +141,7 @@
     <a href="/"><span class="glyphicon glyphicon-triangle-left"></span> Back</a></button>
 <div class="container">
     <div class="title">Student Registration</div>
-    <form action="/auth/studentCreateAccount" method="POST" id="NewAccount">
+    <form action="/studentCreateAccount" method="POST" id="NewAccount">
         <div class="user-info">
             <div class="reg-box">
                 <label for="fullname">Full Name</label>
@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="submit-button">
-            <button type="submit" class="Submit" >Submit</button>
+            <button type="submit" class="Submit">Submit</button>
         </div>
     </form>
     {{#if message}}
@@ -183,7 +183,6 @@
     function viewProfile(){
         window.location='studentProfile.hbs.html';
     }
-
 </script>
 </body>
 </html>
