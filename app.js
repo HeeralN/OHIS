@@ -1228,3 +1228,121 @@ else {
     res.send('Please login to view this page!');
 }
 });
+
+
+app.post('/housingProfile/bookAppt', function(req, res) {
+    const {landlord_id, listingId, date, time} = req.body;
+    var dateTime = date + " " + time;
+    db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, date: dateTime} , (error,results) => {
+        if (error){
+            console.log(error);
+        }
+        else{
+            console.log(results);
+            return res.render("housingProfile", {
+                message:"Sublet listing posted"
+            })
+        }
+    });
+});
+
+
+app.get('/appointmentListStudents', function(req, res){
+    if (req.session.loggedin) {
+        db.query("select * from appointment where student_username = ?", [req.session.username], async (error, applist) => {
+            if (error) {
+                console.log(error);
+            }   
+            else{ 
+                let list = [];
+                for (let i = 0; i < applist.length; i++){
+                    var infoToPush = {
+                        landlord: applist[i]['landlord_username'],
+                        listingId: applist[i]['listingId'],
+                        time: applist[i]['time']
+                    };
+                    list.push(infoToPush);              
+                }
+                return res.render("appointmentListStudents", {list: list});
+                }
+            });
+    } else {
+        return res.redirect('/');
+    }
+});
+
+app.post('/appointmentListStudents', function(req, res){
+    if (req.session.loggedin) {
+            if (typeof req.body['checkbox'] === 'string'){
+                db.query("delete from appointment where student_username = ? and listingId = ? ", [req.session.username, parseInt(req.body['checkbox'])], async (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    }   
+                });
+            }
+            else{
+                for (let i = 0; i < req.body['checkbox'].length; i++){
+                    db.query("delete from appointment where student_username = ? and listingId = ? ", [req.session.username, parseInt(req.body['checkbox'][i])], async (error, result) => {
+                        if (error) {
+                            console.log(error);
+                        }   
+                    });
+                }
+            }
+            return res.redirect('appointmentListStudents');
+    }
+    else{
+        return res.redirect('/');  
+    }
+});
+
+
+
+app.get('/appointmentListLandlords', function(req, res){
+    if (req.session.loggedin) {
+        db.query("select * from appointment where landlord_username = ?", [req.session.username], async (error, applist) => {
+            if (error) {
+                console.log(error);
+            }   
+            else{ 
+                let list = [];
+                for (let i = 0; i < applist.length; i++){
+                    var infoToPush = {
+                        landlord: applist[i]['student_username'],
+                        listingId: applist[i]['listingId'],
+                        time: applist[i]['time']
+                    };
+                    list.push(infoToPush);              
+                }
+                return res.render("appointmentListLandlords", {list: list});
+                }
+            });
+    } else {
+        return res.redirect('/');
+    }
+});
+
+app.post('/appointmentListLandlords', function(req, res){
+    if (req.session.loggedin) {
+            if (typeof req.body['checkbox'] === 'string'){
+                db.query("delete from appointment where landlord_username = ? and listingId = ? ", [req.session.username, parseInt(req.body['checkbox'])], async (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    }   
+                });
+            }
+            else{
+                for (let i = 0; i < req.body['checkbox'].length; i++){
+                    db.query("delete from appointment where landlord_username = ? and listingId = ? ", [req.session.username, parseInt(req.body['checkbox'][i])], async (error, result) => {
+                        if (error) {
+                            console.log(error);
+                        }   
+                    });
+                }
+            }
+            return res.redirect('appointmentListLandlords');
+    }
+    else{
+        return res.redirect('/');  
+    }
+});
