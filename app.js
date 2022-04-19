@@ -99,8 +99,6 @@ app.post('/auth/index', function(req, res) {
                         res.redirect('/adminLanding');
                     }
                 }
-
-
             } else {
                 return res.render("index",{
                     message: "Incorrect Username and/or Password"

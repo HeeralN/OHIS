@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create Student Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display:flex;
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+            padding:20px;
+            background: linear-gradient(#8b699b, gray);
+        }
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a, .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+        .container{
+            max-width:700px;
+            width:100%;
+            max-height:300px;
+            height:100%;
+            background: white;
+            padding: 30px 35px;
+            border-radius:8px;
+        }
+
+        .container .title{
+            font-size: 30px;
+            font-weight:100;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container form .user-info{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        form .user-info .reg-box{
+            margin-bottom:25px;
+            width:calc(100%/2 - 25px);
+        }
+
+        .user-info .reg-box .info {
+            display:block;
+            font-weight:500;
+            margin-bottom:5px;
+        }
+        .user-info .reg-box input {
+            height:35px;
+            width:100%;
+            border-radius:8px;
+            padding-left: 8px;
+            font-size: 14px;
+        }
+        form .submit-button {
+            height:40px;
+            width:100%;
+            margin: 30px 0;
+            text-align: center;
+        }
+        form .submit-button input{
+            height:100%;
+            width:30%;
+            font-size: 19px;
+... (72 lines left)
+Collapse
+message.txt
+6 KB
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create Student Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display:flex;
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+            padding:20px;
+            background: linear-gradient(#8b699b, gray);
+        }
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a, .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+        .container{
+            max-width:700px;
+            width:100%;
+            max-height:300px;
+            height:100%;
+            background: white;
+            padding: 30px 35px;
+            border-radius:8px;
+        }
+
+        .container .title{
+            font-size: 30px;
+            font-weight:100;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container form .user-info{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        form .user-info .reg-box{
+            margin-bottom:25px;
+            width:calc(100%/2 - 25px);
+        }
+
+        .user-info .reg-box .info {
+            display:block;
+            font-weight:500;
+            margin-bottom:5px;
+        }
+        .user-info .reg-box input {
+            height:35px;
+            width:100%;
+            border-radius:8px;
+            padding-left: 8px;
+            font-size: 14px;
+        }
+        form .submit-button {
+            height:40px;
+            width:100%;
+            margin: 30px 0;
+            text-align: center;
+        }
+        form .submit-button input{
+            height:100%;
+            width:30%;
+            font-size: 19px;
+            color: black;
+            background-color: white;
+            outline:10px;
+            outline-color: #000;
+            border-color:black;
+            border-width: 2px;
+            border-radius: 50px;
+            font-weight:100;
+        }
+        form .submit-button input:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            opacity: 0.5;
+        }
+        #button {
+            position:absolute; top:60px; left:10px;
+        }
+        footer {
+            margin-left:0;
+            bottom:0;
+            left:0px; right:0px;
+            position:absolute;
+            padding:5px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar navbar-light" style="background-color: #e3f2fd">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="images/logo.png" width="50" height="50" alt="Logo">
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+    </div>
+</nav>
+
+<button type="button" class="btn" id="button">
+    <a href="/"><span class="glyphicon glyphicon-triangle-left"></span> Login Page</a></button>
+<div class="container">
+    <div class="title">Activate Account</div>
+    <form action="/activate" method="POST" id="NewAccount">
+        <div class="user-info">
+            <div class="reg-box">
+                <label for="username">Username</label>
+                <input type=”text” id="username" placeholder="Username" id="username" name="username" required>
+            </div>
+            <div class="reg-box">
+                <label for="activation">Activation Code</label>
+                <input type="text" id="activation" placeholder="Activation Code" id="activation" name="activation" required>
+            </div>
+        </div>
+        <div class="submit-button"> 
+            <button type="submit" class="Submit">Submit</button>
+        </div>
+    </form>
+    {{#if message}}
+        <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+</div>
+<footer class="container-fluid bg-4 text-center margin">
+    <p>Contact us at support@ohis.com</p>
+</footer>
+<script>
+    function viewProfile(){
+        window.location='studentProfile.hbs.html';
+    }
+</script>
+</body>
+</html>
