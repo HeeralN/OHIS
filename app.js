@@ -324,6 +324,23 @@ app.post("/editStudentProfile", (req ,res) => {
     }
 });
 
+app.get('/studentMessaging', function (req, res) {
+    if (req.session.loggedin) {
+        // res.render('studentMessaging');
+        db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+            if (results) {
+                return res.render('studentMessaging', { studentMessages: results });
+            }
+            else {
+                return res.render('studentProfile', { message: 'There was an error fetching messages!' });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+
 app.get('/viewStudentSublet', function(req,res) {  // TODO check if this works, should populate listings on view listings page
     if (req.session.loggedin) {
         db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
@@ -747,6 +764,22 @@ app.get('/landlordProfile', function(req, res) {
     } 
 });
 
+app.get('/landlordMessaging', function (req, res) {
+    if (req.session.loggedin) {
+        // res.render('studentMessaging');
+        db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+            if (results) {
+                return res.render('landlordMessaging', { landlordMessages: results });
+            }
+            else {
+                return res.render('LandlordProfile', { message: 'There was an error fetching messages!' });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
 
 app.get('/viewLandlordListings', function(req,res) {  // TODO check if this works, should populate listings on view listings page
     if (req.session.loggedin) {
@@ -1047,3 +1080,216 @@ else {
     res.send('Please login to view this page!');
 }
 });
+
+app.get('/propertySearchAdmin', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearchAdmin/sort1', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price', function(error, results, fields) {
+        console.log(results);
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.get('/propertySearchAdmin/sort2', function(req, res) {
+    if (req.session.loggedin) {
+    db.query('SELECT listingId, address, bath, number_of_room, rental_price FROM listing ORDER BY rental_price DESC', function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+app.post('/propertySearchAdmin/sort', function(req, res) {
+
+    var {groupSize, dishwasher, parking, pool, laundry, gym, length1, length3, length6, length12, length13, length2} = req.body;
+    if (req.session.loggedin) {
+        var queryString = "WHERE "
+        var count = 0;
+        if(dishwasher==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="dishwasher = 1";
+            count++;
+        }
+        if(parking==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="parking = 1";
+            count++;
+        }
+        if(pool==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="pool = 1";
+            count++;
+        }
+        if(laundry==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="laundry = 1";
+            count++;
+        }
+        if(gym==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            queryString+="gym = 1";
+            count++;
+        }
+        if(groupSize==1){
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 1");
+            queryString += "number_of_room = 1";
+            count++;
+        }
+        else if(groupSize==2){
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 2");
+            queryString += "number_of_room > 1 AND number_of_room < 5";
+            count++;
+        }
+        else{
+            if(count>0){
+                queryString += " AND ";
+            }
+            console.log("in case 3");
+            queryString += "number_of_room >= 5";
+            count++;
+        }
+        console.log("SELECT listingId, address, bath, number_of_room FROM listing " + queryString);
+    db.query('SELECT listingId, address, bath, number_of_room FROM listing ' + queryString, function(error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        var properties = results;
+        if (properties) {
+          return res.render('propertySearchAdmin', {properties: properties});
+        } else {
+            return res.render('propertySearchAdmin', {message: 'Listings not found!'});
+        }
+        res.end();
+    });
+}
+else {
+    res.send('Please login to view this page!');
+}
+});
+
+// Shared messages
+app.post('/createMessage', function (req, res) {
+    if (req.session.loggedin) {
+        //console.log("Init "+req.body);
+        //console.log("Init Username: "+req.session.username+", Receiver: "+ req.body.receiver);
+        res.render('createMessage', { sender: req.session.username, receiver: req.body.receiver });
+    } else {
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/createMessage', function (req, res) {
+    if (req.session.loggedin) {
+        const { sender, receiver, subject, message_body } = req.body;
+        db.query("SELECT * FROM account WHERE username =?", [req.session.username], (error, sender_username) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                // res.render('studentMessaging');
+                db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                        return res.render('studentMessaging');
+                    }
+                    else {
+                        db.query("SELECT * FROM account WHERE username = ?", [receiver], (error, receiver_username) => {
+                            if (error) {
+                                console.log(error);
+                            }
+                            else if (sender_username && receiver_username) {
+                                db.query("INSERT INTO message SET ?", {
+                                    sender: sender, receiver: receiver, subject: subject,
+                                    message_body: message_body
+                                }, (error, results) => {
+
+                                    if (error) {
+                                        console.log(error);
+                                    }
+                                    // sender is a student
+                                    else if (sender_username[0].adminPerms == 0) {
+                                        return res.render("studentMessaging", {
+                                            message: "Message sent."
+                                        })
+                                    }
+                                    // sender is a landlord
+                                    else if (sender_username[0].adminPerms == 1) {
+                                        return res.render("landlordMessaging", {
+                                            message: "Message sent."
+                                        })
+                                    }
+                                });
+                            }
+                            else {
+                                return res.render("createListingPage", { message: "Unable to create message." })
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+

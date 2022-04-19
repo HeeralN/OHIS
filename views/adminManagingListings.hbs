@@ -54,6 +54,45 @@
     margin-top: 30px;
     margin-right:50px;
   }
+  .navbar {
+    margin-bottom: 0;
+    background-color: #b2a7cc !important;
+    z-index: 9999;
+    border: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: rgb(53, 18, 90) !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #8b699b !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #c9c4d5 !important;
+  }
+
+  .bg-4 {
+    color: rgb(53, 18, 90);
+    margin-bottom: 500;
+    margin-top: 50;
+    padding-top: 50;
+    background-color: #b2a7cc !important;
+  }
+
+  .row {
+    padding-left: 25px;
+    padding-right: 25px;
+    justify-content: center;
+    align-content: center;
+  }
 </style>
 <body>
 
@@ -73,6 +112,11 @@
           <li><a href="/adminLanding">Admin Dashboard</a></li>
           <li><a href="/adminManagingUsers">Manage Accounts</a></li>
           <li class="active"><a href="/adminManagingListings">Manage Listings</a></li>
+          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/propertySearchAdmin">Search Listings</a></li>
+              </ul>
+          </li>
         </ul>
       </ul>
       <ul class="nav navbar-nav navbar-right">
