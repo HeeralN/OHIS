@@ -105,6 +105,60 @@
     <button type="button" class="btn btn-primary">Book Viewing</button>
     <button class="btn btn-primary" href="/landlordProfile">View Landlord's Page</button>
    </div>
+
+   <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Book a Tour</h4>
+      </div>
+      <div class="modal-body">
+                    <div class="well-block">
+                        <form name="bookAppt" id="bookAppt" action="/housingProfile/bookAppt" method="POST">
+                            <div class="row" style="background-color: white;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Landlord Username</label>
+                                        <input id="landlord_id" name="landlord_id" type="text" value="{{username}}" readonly="readonly" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="date">Preferred Date</label>
+                                        <input id="date" name="date" type="text" placeholder="Preferred Date" class="form-control input-md">
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="listingID">listingID</label>
+                                        <input id="listingId" name="listingId" type="text" value="{{listingId}}" readonly="readonly" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="time">Preferred Time</label>
+                                        <input id="time" name="time" type="datetime" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Make An Appointment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
    <br><br>
   </div>
   <div class="col-sm-9 col-sm-offset-4.5">
@@ -232,6 +286,15 @@
     alert("You have been logged out");
     window.location='login.html';
   }
+
+  function openModal(){
+    var modal = document.getElementById("myModal");
+     modal.classList.toggle("show");
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+  modal.style.display = "none";
+}
 </script>
 </body>
 </html>

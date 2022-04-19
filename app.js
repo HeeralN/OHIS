@@ -1449,6 +1449,21 @@ app.post('/activate', function(req, res) {
         }
     });
 });
+app.post('/housingProfile/bookAppt', function(req, res) {
+    const {landlord_id, listingId, date, time} = req.body;
+    var dateTime = date + " " + time;
+    db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, date: dateTime} , (error,results) => {
+        if (error){
+            console.log(error);
+        }
+        else{
+            console.log(results);
+            return res.render("housingProfile", {
+                message:"Sublet listing posted"
+            })
+        }
+    });
+});
 
 app.post('/landlordCreateAccount', function(req, res) {
     const {fullname, username, phone, password, email, confirmpassword} = req.body;
