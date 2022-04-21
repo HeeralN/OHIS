@@ -688,12 +688,12 @@ app.post("/roommateMatchingFormEdit", (req, res) => {
 app.get("/roommateMatchingResults", (req, res) => {
     // 8~9 perfect roommates, 6~7 potentail roommates 5 maybe
     if (req.session.loggedin) {
-        db.query("select * from preference where username = ?", [req.session.username], async (error, selfpref) => {
+        db.query("SELECT * FROM preference WHERE username = ?", [req.session.username], async (error, selfpref) => {
             if (error) {
                 console.log(error);
             }   
             else{ 
-                db.query("select * from preference where username <> ?", [req.session.username], async (error, preflist) => {
+                db.query("SELECT * FROM preference WHERE username <> ?", [req.session.username], async (error, preflist) => {
                     var percentage = {};
                     for (let i = 0; i < preflist.length; i++){
                         let count = 0;
@@ -715,12 +715,15 @@ app.get("/roommateMatchingResults", (req, res) => {
                       });
                       let info = [];
                       for (let i = 0; i <ordered.slice(0, 5).length; i++){
-                        db.query("SELECT account.username, email, fullname FROM account join student where account.username = ? group by account.username;", [ordered.slice(0, 5)[i][0]], async (error, results) => {
+                        db.query("SELECT account.username, email, fullname, student.profile_description FROM OHIS.account JOIN student WHERE account.username = ? GROUP BY account.username;", 
+                            [ordered.slice(0, 5)[i][0]], async (error, results) => {
+
                             var infoToPush = {
                                 username: results[0]['username'],
                                 email: results[0]['email'],
                                 fullname: results[0]['fullname'],
                                 percentage: ordered.slice(0, 5)[i][1],
+                                desc: results[0]['profile_description']
                             };
                             info.push(infoToPush);
                             console.log(info);

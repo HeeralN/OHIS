@@ -1,171 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Landlord Profile</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Landlord Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-  .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
+    .navbar {
+        margin-bottom: 0;
+        background-color: #b2a7cc !important;
+        z-index: 9999;
+        border: 0;
+        font-family: Montserrat, sans-serif;
+        font-size: 15px !important;
+        line-height: 1.42857143 !important;
+        letter-spacing: 2px;
+        border-radius: 0;
+    }
 
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-  body {
-    display:flex;
-    height:100vh;
-    justify-content: center;
-    align-items: center;
-    padding:20px;
-    background: linear-gradient(#8b699b, gray);
-    overflow: hidden;
-  }
-  .container{
-    display:flex;
-    max-width:800px;
-    max-height:450px;
-    height:100%;
-    border: 3px solid black;
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    background: white;
-    padding: 20px 20px;
-  }
-  .container .left{
-    width:30%;
-    max-height:450px;
-    height:100%;
-    border: 2px solid black;
-    border-radius: 10px;
-    background: white;
-    padding: 30px 35px;
-    margin:0px;
-    text-align: center;
-  }
-  .container .left .img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 80px;
-    border: 1px solid gray;
-    width:100px;
-  }
+    .navbar li a,
+    .navbar .navbar-brand {
+        color: rgb(53, 18, 90) !important;
+    }
 
-  .container .left img:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-    opacity: 0.5;
-  }
-  .container .right{
-    width:60%;
-    max-height:450px;
-    height:100%;
-    padding: 30px 35px;
-    border-radius:80px;
-  }
-  footer {
-    margin-left:0;
-    bottom:0;
-    left:0px; right:0px;
-    position:absolute;
-    padding:5px;
-    width:100%;
-  }
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+        color: #8b699b !important;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: #c9c4d5 !important;
+    }
+
+    .bg-4 {
+        color: rgb(53, 18, 90);
+        margin-bottom: 500;
+        margin-top: 50;
+        padding-top: 50;
+        background-color: #b2a7cc !important;
+    }
+
+    body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: linear-gradient(#8b699b, gray);
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        max-width: 800px;
+        max-height: 450px;
+        height: 100%;
+        border: 3px solid black;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        background: white;
+        padding: 20px 20px;
+    }
+
+    .container .left {
+        width: 30%;
+        max-height: 450px;
+        height: 100%;
+        border: 2px solid black;
+        border-radius: 10px;
+        background: white;
+        padding: 30px 35px;
+        margin: 0px;
+        text-align: center;
+    }
+
+    .container .left .img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 80px;
+        border: 1px solid gray;
+        width: 100px;
+    }
+
+    .container .left img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        opacity: 0.5;
+    }
+
+    .container .right {
+        width: 60%;
+        max-height: 450px;
+        height: 100%;
+        padding: 30px 35px;
+        border-radius: 80px;
+    }
+
+    footer {
+        margin-left: 0;
+        bottom: 0;
+        left: 0px;
+        right: 0px;
+        position: absolute;
+        padding: 5px;
+        width: 100%;
+    }
 </style>
 <body>
-
- <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <img src="images/logo.png" width="50" height="50" alt="Logo">
-      </div>
-      <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <li class="active"><a href="/landlordProfile">Profile</a></li>
-        <li><a href="/landlordMessaging">Messaging</a></li>
-        <li><a href="/appointmentListLandlords">Appointments</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/viewLandlordListings">My Listings</a></li>
-            <li><a href="/propertySearchLandlords">Search Listings</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <li class="active"><a href="/landlordProfile">Profile</a></li>
+                    <li><a href="/landlordMessaging">Messaging</a></li>
+                    <li><a href="/appointmentListLandlords">Appointments</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/viewLandlordListings">My Listings</a></li>
+                            <li><a href="/propertySearchLandlords">Search Listings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-  </nav>
+    </nav>
 
-<div class="container">
-  <div class="left">
-    <!--img class="img" src="images/landlord.jpg" alt="user" -->
-    <h4>{{fullname}}</h4>
-    <p>{{email}}</p>
-    <p>{{phone}}</p>
-  </div>
-  <div class="right">
-    <div class="info">
-      <h3>This Landlord's Current Listings</h3>
-      <div class="info_data">
-        <table class="table">
-    <tbody>
-      <tr>
-        <th>Address</th>
-      </tr>
-      {{#each list}}
-      <tr>
-        <td>{{this.address}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    <div class="container">
+        <div class="left">
+            <!--img class="img" src="images/landlord.jpg" alt="user" -->
+            <h4>{{fullname}}</h4>
+            <p>{{email}}</p>
+            <p>{{phone}}</p>
         </div>
-    </div>
-  </div>
-  <footer class="container-fluid bg-4 text-center margin">
-    <p>Contact us at support@ohis.com</p>
-  </footer>
-    <script>
+        <div class="right">
+            <div class="info">
+                <h3>This Landlord's Current Listings</h3>
+                <div class="info_data">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Address</th>
+                            </tr>
+                            {{#each list}}
+                            <tr>
+                                <td>{{this.address}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer class="container-fluid bg-4 text-center margin">
+            <p>Contact us at support@ohis.com</p>
+        </footer>
+        <script>
 
-    </script>
+        </script>
 
 </body>
 
