@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Property Search for Landlords</title>
+  <title>Property Search for Students</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="template.css">
@@ -64,35 +64,35 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
+          <span class="icon-bar"></span>
         </button>
         <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <li class="active"><a href="/landlordProfile">Profile</a></li>
-        <li><a href="/landlordMessaging">Messaging</a></li>
-        <li><a href="/appointmentListLandlords">Appointments</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/viewLandlordListings">My Listings</a></li>
-            <li><a href="/propertySearchLandlords">Search Listings</a></li>
+        <ul class="nav navbar-nav navbar-collpase">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
+            <li><a href="/adminManagingUsers">Manage Accounts</a></li>
+            <li><a href="/adminManagingListings">Manage Listings</a></li>
+            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/propertySearch">Search Listings</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
-
 
 <div container-fluid>
 <div class="row">
   <div class="col-sm-4" style="background-color:lavender;">
     <div class="form-group">
-      <form name="filtersForm" id="filtersForm" action="/propertySearchLandlords/sort" method="POST">
+      <form name="filtersForm" id="filtersForm" action="/propertySearchAdmin/sort" method="POST">
       <label for="groupSize">
         <br>Group size:</label>
       <select class="form-control" name="groupSize" id="groupSize">
@@ -157,8 +157,8 @@
           </button>
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Sort by <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/propertySearchLandlords/sort1">Price low to high</a></li>
-            <li><a href="/propertySearchLandlords/sort2">Price high to low</a></li>
+            <li><a href="/propertySearchAdmin/sort1">Price low to high</a></li>
+            <li><a href="/propertySearchAdmin/sort2">Price high to low</a></li>
         </div>
       </div>
     </form>
@@ -171,9 +171,9 @@
             <img src="images/apt.jpg">
             <p><strong>{{this.address}}</strong></p>
             <p>{{this.number_of_room}} bed(s) {{this.bath}} bath(s)</p>
-            <form action="/housingProfileForLandlords" method="POST">
+            <form action="/housingProfile" method="POST">
       <input type="hidden" id="listingId" name="listingId" value="{{this.listingId}}">
-      <button type="submit" class="btn" data-target="#housingProfileLandlords">View</button>
+      <button type="submit" class="btn" data-target="#housingProfile">View</button>
     </form>
           </div>
         </div>     
@@ -192,12 +192,12 @@
   <script>
     function logout(){
       alert("You have been logged out");
-      window.location='index';
+      window.location='login.html';
     }
   </script>
    <script>
     function openHousingProfile() {
-        window.location = '/housingProfileForLandlords';
+        window.location = '/housingProfile';
     }
 </script>
 </body>

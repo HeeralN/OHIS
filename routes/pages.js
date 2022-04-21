@@ -6,12 +6,12 @@ router.get("/",(req,res)=>{
     res.render("index");
 });
 
-router.get("/landlordCreateAccount",(req,res)=>{
-    res.render("landlordCreateAccount");
-});
+// router.get("/landlordCreateAccount",(req,res)=>{
+//     res.render("landlordCreateAccount");
+// });
 
-router.get("/studentCreateAccount",(req,res)=>{
-    res.render("studentCreateAccount");
-});
+// router.get("/studentCreateAccount",(req,res)=>{
+//     res.render("studentCreateAccount");
+// });
 
 module.exports = router;

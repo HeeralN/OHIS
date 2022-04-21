@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Message</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .navbar {
+        margin-bottom: 0;
+        background-color: #b2a7cc !important;
+        z-index: 9999;
+        border: 0;
+        font-family: Montserrat, sans-serif;
+        font-size: 15px !important;
+        line-height: 1.42857143 !important;
+        letter-spacing: 2px;
+        border-radius: 0;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+        color: rgb(53, 18, 90) !important;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+        color: #8b699b !important;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: #c9c4d5 !important;
+    }
+
+    .bg-4 {
+        color: rgb(53, 18, 90);
+        margin-bottom: 500;
+        margin-top: 50;
+        padding-top: 50;
+        background-color: #b2a7cc !important;
+    }
+
+    input, label {
+        margin: 5px 5px;
+    }
+
+    .form-group {
+        padding-left: 50;
+        width: 450px;
+        float: center;
+    }
+
+    .form-control {
+        float: center;
+    }
+
+    footer {
+        margin-left: 0;
+        bottom: 0;
+        left: 0px;
+        right: 0px;
+        position: absolute;
+        padding: 5px;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div container-fluid>
+        <div style="background-color:lightblue;">
+            <br><br>
+            <h1>Create a message:</h1>
+            <form action="/createMessage" method="POST" id="createMessage">
+
+                <!-- Sender -->
+                <div class="form-group">
+                    <label for="sender" class="formbuilder-text-label"> Sender: </label>
+                    <input type="text" class="form-control" name="sender" id="sender" value={{sender}} readonly>
+                </div>
+                <!-- Receiver -->
+                <div class="form-group">
+                    <label for="receiver" class="formbuilder-text-label"> Receiver: </label>
+                    <input type="text" class="form-control" name="receiver" id="receiver" value={{receiver}} readonly>
+                </div>
+                <!-- Subject -->
+                <div class="form-group">
+                    <label for="subject" class="formbuilder-text-label"> Subject: </label>
+                    <input type="text" class="form-control" name="subject" id="subject">
+                </div>
+                <!-- Message Body -->
+                <div class=" form-group">
+                    <label for="message" class="textarea-label">Message: </label>
+                    <textarea type="textarea" class="form-control" name="message_body" id="message_body"></textarea>
+                </div>
+                <br><br><br><br>
+                <div class="submit-button">
+                    <button type="submit" class="Submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="container-fluid bg-4 text-center margin">
+        <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    </footer>
+</body>
+
+</html>

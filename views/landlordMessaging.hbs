@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Landlord Messaging</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+</head>
+<style>
+    .navbar {
+        margin-bottom: 0;
+        background-color: #b2a7cc !important;
+        z-index: 9999;
+        border: 0;
+        font-family: Montserrat, sans-serif;
+        font-size: 15px !important;
+        line-height: 1.42857143 !important;
+        letter-spacing: 2px;
+        border-radius: 0;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+        color: rgb(53, 18, 90) !important;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+        color: #8b699b !important;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: #c9c4d5 !important;
+    }
+
+    .bg-4 {
+        color: rgb(53, 18, 90);
+        margin-bottom: 500;
+        margin-top: 50;
+        padding-top: 50;
+        background-color: #b2a7cc !important;
+    }
+
+    .container1 {
+        width: 50%;
+        float: left;
+    }
+
+    .container2 {
+        width: 50%;
+        float: right;
+    }
+
+    .container2 img {
+        height: 100%;
+        width: 70%;
+        margin-top: 10px;
+        margin-left: 40px;
+        object-fit: contain;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    body {
+        background: lavender;
+    }
+
+    .styled-table {
+        border-collapse: collapse;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 600px;
+        background-color: white;
+        margin-top: 10px;
+        margin-left: 90px;
+    }
+
+    .styled-table thead tr {
+        background-color: gray;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid gray;
+    }
+
+    .navbar {
+        margin-bottom: 0;
+        background-color: #b2a7cc !important;
+        z-index: 9999;
+        border: 0;
+        font-family: Montserrat, sans-serif;
+        font-size: 15px !important;
+        line-height: 1.42857143 !important;
+        letter-spacing: 2px;
+        border-radius: 0;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+        color: rgb(53, 18, 90) !important;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+        color: #8b699b !important;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: #c9c4d5 !important;
+    }
+
+    .bg-4 {
+        color: rgb(53, 18, 90);
+        margin-bottom: 500;
+        margin-top: 50;
+        padding-top: 50;
+        background-color: #b2a7cc !important;
+    }
+
+    .row {
+        padding-left: 25px;
+        padding-right: 25px;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .modal-fade {
+        vertical-align: middle;
+    }
+</style>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <li><a href="/landlordProfile">Profile</a></li>
+                    <li class="active"><a href="/landlordMessaging">Messaging</a></li>
+                    <li><a href="/appointmentListLandlords">Appointments</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/viewLandlordListings">My Listings</a></li>
+                            <li><a href="/propertySearchLandlords">Search Listings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br><br><br>
+    <table id="landlordMessages" class="table table-hover">
+        <thead>
+            <th class="col-md-1">Sender</th>
+            <th class="col-md-1">Subject</th>
+            <th class="col-md-1">Message</th>
+        </thead>
+        <tbody>
+            {{#each landlordMessages}}
+            <tr>
+                <td>{{this.sender}}</td>
+                <td>{{this.subject}}</td>
+                <td>{{this.message_body}}</td>
+                <td>
+                    <form action="/createMessage" method="POST">
+                        <input type="hidden" name="receiver" id="receiver" value="{{this.sender}}" />
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="myModal">Reply</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="sender"><b>Sender: </b><span></span></div>
+                    <div class="subject"><b>Subject: </b><span></span></div>
+                    <div class="message"><b>Message: </b><span></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            $('#landlordMessages').DataTable({
+                searching: false,
+                responsive: true,
+                "autoWidth": false,
+            });
+            var table = $('#landlordMessages').DataTable();
+            $('#landlordMessages tbody').on('click', 'tr', function () {
+                console.log(table.row(this).data());
+                $(".modal-body div span").text("");
+                $(".sender span").text(table.row(this).data()[0]);
+                $(".subject span").text(table.row(this).data()[1]);
+                $(".message span").text(table.row(this).data()[2]);
+                $("#myModal").modal("show");
+            });
+        });
+    </script>
+
+    {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+
+    <footer class="container-fluid bg-4 text-center margin">
+        <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    </footer>
+
+</body>
+
+</html>
