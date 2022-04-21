@@ -5,7 +5,6 @@ const session = require('express-session');
 const dotenv= require("dotenv");
 const path = require("path");
 dotenv.config({path: './.env'})
-const path = require("path")
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
