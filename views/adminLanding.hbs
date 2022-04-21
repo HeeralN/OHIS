@@ -5,12 +5,15 @@
   <title>Admin Landing</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
   <style>
+      body {
+          background: linear-gradient(#8b699b, gray);
+      }
     .navbar {
     margin-bottom: 0;
     background-color: #b2a7cc !important;
@@ -22,6 +25,7 @@
     letter-spacing: 2px;
     border-radius: 0;
   }
+
   
   .navbar li a, .navbar .navbar-brand {
     color: rgb(53, 18, 90) !important;
@@ -36,30 +40,35 @@
     background-color: #c9c4d5 !important;
   }
 
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
+  /*.bg-4 {*/
+  /*  color: rgb(53, 18, 90);*/
+  /*  margin-bottom: 500;*/
+  /*  margin-top: 50;*/
+  /*  padding-top: 50;*/
+  /*    background: linear-gradient(#8b699b, gray);*/
+  /*}*/
     .container1 {
       width: 50%;
       float: left;
+    }
+    .container1 h1 {
+        margin-left: 90px;
+
     }
 
     .container2 {
       width: 50%;
       float: right;
+
     }
 
-    .container2 img {
-      height: 100%;
-      width: 70%;
-      margin-top: 10px;
-      margin-left: 40px;
-      object-fit: contain;
-    }
+    /*.container2 img {*/
+    /*  height: 100%;*/
+    /*  width: 70%;*/
+    /*  margin-top: 40px;*/
+    /*    margin-bottom: 40px;*/
+    /*  object-fit: contain;*/
+    /*}*/
 
     h2 {
       text-align: center;
@@ -69,15 +78,32 @@
       background: lavender;
     }
 
-    .styled-table {
+    .container1 .styled-table {
+        border-collapse: collapse;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 600px;
+        background-color: white;
+        margin-top: 10px;
+        margin-left:90px;
+    }
+
+    .container2 .styled-table {
       border-collapse: collapse;
       font-size: 0.9em;
       font-family: sans-serif;
       min-width: 600px;
       background-color: white;
       margin-top: 10px;
-      margin-left: 90px;
     }
+    /*.container2 #myDiv {*/
+    /*    border-collapse: collapse;*/
+    /*    font-size: 0.9em;*/
+    /*    font-family: sans-serif;*/
+    /*    min-width: 600px;*/
+    /*    background-color: white;*/
+    /*    margin-top: 10px;*/
+    /*}*/
 
     .styled-table thead tr {
       background-color: gray;
@@ -94,6 +120,7 @@
       border-bottom: 1px solid gray;
     }
 
+
     .navbar {
     margin-bottom: 0;
     background-color: #b2a7cc !important;
@@ -119,20 +146,20 @@
     background-color: #c9c4d5 !important;
   }
 
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
+  /*.bg-4 {*/
+  /*  color: rgb(53, 18, 90);*/
+  /*  margin-bottom: 500;*/
+  /*  margin-top: 50;*/
+  /*  padding-top: 50;*/
+  /*  background-color: #b2a7cc !important;*/
+  /*}*/
 
-  .row {
-    padding-left: 25px;
-    padding-right: 25px;
-    justify-content: center;
-    align-content: center;
-  }
+  /*.row {*/
+  /*  padding-left: 25px;*/
+  /*  padding-right: 25px;*/
+  /*  justify-content: center;*/
+  /*  align-content: center;*/
+  /*}*/
   </style>
 </head>
 
@@ -208,7 +235,9 @@
         {{/each}}
       </tbody>
     </table>
-    <div class="container2" id="myDiv" style="width:600px;height:250px;"></div>
+    <div class="container20" id="myDiv" style="width:600px; height:250px; margin-top: 40px; margin-left:0px;
+        margin-bottom: 40px;
+     "></div>
   </div>
 
   <script>
