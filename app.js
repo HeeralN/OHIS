@@ -356,6 +356,23 @@ app.get('/studentMessaging', function (req, res) {
     }
 });
 
+app.get('/studentMessaging', function (req, res) {
+    if (req.session.loggedin) {
+        // res.render('studentMessaging');
+        db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+            if (results) {
+                return res.render('studentMessaging', { studentMessages: results });
+            }
+            else {
+                return res.render('studentProfile', { message: 'There was an error fetching messages!' });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+
 app.get('/viewStudentSublet', function(req,res) {  // TODO check if this works, should populate listings on view listings page
     if (req.session.loggedin) {
         db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
@@ -1355,6 +1372,7 @@ app.post('/studentCreateAccount', function(req, res) {
             console.log(error);
         }
         if (results.length > 0) {
+            console.log(results);
             return res.render("studentCreateAccount", {
                 message: "That username or email is already in use"
             })
@@ -1416,8 +1434,8 @@ app.get('/activate', function(req, res) {
 
 
 //if username is correct, check if it matches the activation code
-    //if it matches activation code, then submit and change active to true; redirect to login page and say user is now active
-    //if does not match the activation code, then render page again with message that activation code for user is incorrect
+//if it matches activation code, then submit and change active to true; redirect to login page and say user is now active
+//if does not match the activation code, then render page again with message that activation code for user is incorrect
 //if username is incorrect, then say that it is incorrect
 app.post('/activate', function(req, res) {
     const {username, activation} = req.body;
