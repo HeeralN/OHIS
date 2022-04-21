@@ -491,7 +491,10 @@ app.post('/housingProfile', function(req, res) {
 app.post('/housingProfile/bookAppt', function(req, res) {
     const {landlord_id, listingId, date, time} = req.body;
     var dateTime = date + " " + time;
-    db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: dateTime} , (error,results) => {
+    db.query("SELECT student_username, landlord_username, listingID FROM appointment WHERE student_username = ? AND landlord_username = ? AND listingID = ?", [req.session.username, landlord_id, listingId], (error,results) => {
+        console.log(results)
+        if(!results){
+        db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: dateTime} , (error,results) => {
         if (error){
             console.log(error);
         }
@@ -502,6 +505,13 @@ app.post('/housingProfile/bookAppt', function(req, res) {
             })
         }
     });
+    }
+    else{
+        return res.render("housingProfile",{
+            message: "You already have an appointment for this listing"
+        });
+    }
+});
 });
 
 app.get('/propertySearch', function(req, res) {
@@ -1228,24 +1238,6 @@ else {
     res.send('Please login to view this page!');
 }
 });
-
-
-app.post('/housingProfile/bookAppt', function(req, res) {
-    const {landlord_id, listingId, date, time} = req.body;
-    var dateTime = date + " " + time;
-    db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, date: dateTime} , (error,results) => {
-        if (error){
-            console.log(error);
-        }
-        else{
-            console.log(results);
-            return res.render("housingProfile", {
-                message:"Sublet listing posted"
-            })
-        }
-    });
-});
-
 
 app.get('/appointmentListStudents', function(req, res){
     if (req.session.loggedin) {
