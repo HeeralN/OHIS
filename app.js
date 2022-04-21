@@ -432,14 +432,14 @@ app.post('/createSubletPage', function(req, res) {
                     }
                     else{
                         console.log(results);
-                        return res.render("createSubletPage", {
+                        return res.render("viewStudentSublet", {
                             message:"Sublet listing posted"
                         })
                     }
                 });
             });
         } else{
-            return res.render("createSubletPage", {
+            return res.render("viewStudentSublet", {
                 message:"Max number of sublets created already."
             })
         }
