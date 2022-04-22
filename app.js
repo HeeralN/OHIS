@@ -429,6 +429,11 @@ app.post('/housingProfile', function(req, res) {
     var hardwood_floorsBool = null;
     var carpeted_floorsBool = null;
     db.query('SELECT listingId, address, username, square_feet, bath, number_of_room, rental_price, restriction, gym, pool, laundry, parking, furnished, dishwasher, hardwood_floors, carpeted_floors, description FROM listing WHERE listingId = ?',[housingId], function(error, results, fields) {
+            db.query('update listing set viewcount = viewcount + 1 where listingId = ? ', [housingId], function(error, results){
+                if (error){
+                    console.log(error);
+                }
+            });
             if(results[0].restriction){
                 restrictionBool = "Pets allowed";
             }
@@ -841,7 +846,7 @@ app.get('/landlordProfile', function(req, res) {
                 if (error){
                     console.log(error);
                 }
-                db.query("SELECT address from listing where username = ?", [req.session.username], (error, listings) => {
+                db.query("SELECT address, viewcount from listing where username = ?", [req.session.username], (error, listings) => {
                     console.log(listings);
                     if (error){
                         console.log(error);
@@ -904,7 +909,7 @@ app.post('/createListingPage',function(req ,res) {
         db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet,
             bath: numberOfBath, number_of_room: numTotalRooms, occupancy_date: occupancyDate, lease_type: leaseType, rental_price: rentalRate, restriction: restrictions,
             gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors,
-            carpeted_floors: carpetedFloors, isSublet: 0, imagePath: ""} , (error,results)=>{
+            carpeted_floors: carpetedFloors, isSublet: 0, imagePath: "", viewcount: 0} , (error,results)=>{
 
             if (error){
                 console.log(error);

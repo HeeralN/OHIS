@@ -159,10 +159,13 @@
                         <tbody>
                             <tr>
                                 <th>Address</th>
+                                <th>Viewcount</th>
                             </tr>
-                            {{#each list}}
+
+                            {{#each listings}}
                             <tr>
                                 <td>{{this.address}}</td>
+                                <td>{{this.viewcount}}</td>
                             </tr>
                             {{/each}}
                         </tbody>
