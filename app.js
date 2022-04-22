@@ -12,10 +12,11 @@ const { count } = require('console');
 const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 var crypto = require("crypto");
+const assert = require('assert');
 
 dotenv.config({path: './.env'})
 
@@ -25,7 +26,7 @@ const db = mysql.createConnection({
     password:process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
 });
-
+app.use(bodyParser.json());
 const publicDirectory = path.join(__dirname, "./public")//put css or javascript for frontend
 app.use(express.static(publicDirectory))
 
@@ -1540,5 +1541,7 @@ app.post('/landlordCreateAccount', function(req, res) {
         })
     });
 });
+
+module.exports = app;
 
 //var id = crypto.randomBytes(20).toString('hex');
