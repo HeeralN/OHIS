@@ -49,6 +49,8 @@ db.connect((error)=> {
 //Define Routes
 app.use("/", require("./routes/pages"))
 app.use("/auth", require("./routes/auth"));
+// route for images
+app.use(express.static(__dirname + '/views'));
 
 app.use(session({
     secret: 'secret',
@@ -1281,8 +1283,6 @@ app.post('/appointmentListStudents', function(req, res){
         return res.redirect('/');  
     }
 });
-
-
 
 app.get('/appointmentListLandlords', function(req, res){
     if (req.session.loggedin) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -12,133 +12,150 @@
 
 <style>
     body {
-        display:flex;
-        height:100vh;
+        display: flex;
+        height: 100vh;
         justify-content: center;
         align-items: center;
-        padding:20px;
+        padding: 20px;
         background: linear-gradient(#Ff7eb0, #50cdf9);
     }
-    .container{
-        max-width:700px;
-        width:100%;
-        max-height:450px;
-        height:100%;
+
+    .container {
+        max-width: 700px;
+        width: 100%;
+        max-height: 450px;
+        height: 100%;
         background: white;
         padding: 40px 35px;
-        border-radius:8px;
+        border-radius: 8px;
     }
+
     .logo-row {
-        position:absolute;
+        position: absolute;
         align-items: center;
-        top:0;
-        margin-bottom:10px;
+        top: 0;
+        margin-bottom: 10px;
         padding-bottom: 10px;
     }
+
     .logo {
         width: 200px;
         height: 200px;
         text-align: center;
     }
-    .container .title{
+
+    .container .title {
         font-size: 30px;
-        font-weight:100;
+        font-weight: 100;
         margin-bottom: 10px;
         text-align: center;
     }
 
-    .container form .user-info{
+    .container form .user-info {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
     }
-    form .user-info .reg-box{
-        margin-bottom:25px;
-        width:calc(100%/2 - 25px);
+
+    form .user-info .reg-box {
+        margin-bottom: 25px;
+        width: calc(100%/2 - 25px);
     }
 
     .user-info .reg-box .info {
-        display:block;
-        font-weight:500;
-        margin-bottom:5px;
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
     }
+
     .user-info .reg-box input {
-        height:35px;
-        width:100%;
-        border-radius:8px;
+        height: 35px;
+        width: 100%;
+        border-radius: 8px;
         padding-left: 8px;
         font-size: 14px;
     }
+
     .submit-button {
         margin: 15px;
     }
+
     .submit-button button {
-        height:40px;
+        height: 40px;
         padding: 5px 0 5px 0;
         justify-content: center;
-        width:50%;
+        width: 50%;
         display: block;
         margin: 0 auto;
         padding-bottom: 10px;
         font-size: 19px;
         color: black;
         background-color: white;
-        outline:10px;
+        outline: 10px;
         outline-color: #000;
-        border-color:black;
+        border-color: black;
         border-width: 2px;
         border-radius: 50px;
-        font-weight:100;
+        font-weight: 100;
     }
+
     .submit-button button:hover {
         box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         opacity: 0.5;
     }
+
     footer {
-        bottom:0;
-        position:absolute;
+        bottom: 0;
+        position: absolute;
     }
 </style>
+
 <body>
-<div class="logo-row">
-    <div class="logo">
-        <img src="images/logo.png" alt="logo" class="logo">
+    <div class="logo-row">
+        <div class="logo">
+            <img src="/images/logo.png" alt="logo" class="logo">
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="title">Welcome Back</div>
-    <br>
-    <form action="/auth/index" method="POST" id="Login">
-        <div class="user-info">
-            <div class="reg-box">
-                <label for="username">User Name</label>
-                <input type="text" id="username" placeholder="Username" name="username" required/>
+    <div class="container">
+        <div class="title">Welcome Back</div>
+        <br>
+        <form action="/auth/index" method="POST" id="Login">
+            <div class="user-info">
+                <div class="reg-box">
+                    <label for="username">User Name</label>
+                    <input type="text" id="username" placeholder="Username" name="username" required />
+                </div>
+                <div class="reg-box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Password" name="password" required />
+                </div>
             </div>
-            <div class="reg-box">
-                <label for="password">Password</label>
-                <input type="password"  id="password" placeholder="Password" name="password" required/>
+            <div class="submit-button">
+                <button type="submit" class="Submit">Login</button>
             </div>
-        </div>
-        <div class="submit-button">
-            <button type="submit" class="Submit">Login</button>
-        </div>
-    </form>
-    {{#if message}}
+        </form>
+        {{#if message}}
         <h4 class="alert alert-danger mt-4">{{message}}</h4>
-    {{/if}}
+        {{/if}}
 
-    <div class="submit-button">
-        <a href="/resetPassword">Forgot Password?</a>
+        <form action="/resetPassword" method="GET">
+            <div class="submit-button">
+                <button type="submit" class="submit" href="/resetPassword">Forgot Password?</button>
+            </div>
+        </form>
+        <form action="/landlordCreateAccount" method="GET">
+            <div class="submit-button">
+                <button type="submit" class="submit" href="/landlordCreateAccount">Create a Landlord Account</button>
+            </div>
+        </form>
+        <form action="/studentCreateAccount" method="GET">
+            <div class="submit-button">
+                <button type="submit" class="submit" href="/studentCreateAccount">Create a Student Account</button>
+            </div>
+        </form>
     </div>
-    <div class="submit-button">
-        <a href="/landlordCreateAccount">Create a Landlord Account</a>
-    </div>
-    <div class="submit-button">
-        <button type="submit" class="submit" href="/studentCreateAccount">Create a Student Account</a>
-    </div>
-</div>
-<script>
+    <script>
     // function goToStudentAcc(){
     //     window.location="/views/studentCreateAccount.hbs";
     // }
@@ -165,10 +182,10 @@
     //     }
     // }
 
-</script>
-<footer class="container-fluid bg-4 text-center margin" id="footer">
-    <p>Contact us at offcampushousinginfosystem@gmail.com</p>
-</footer>
+    </script>
+    <footer class="container-fluid bg-4 text-center margin" id="footer">
+        <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    </footer>
 </body>
 
 </html>
