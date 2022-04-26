@@ -54,22 +54,7 @@
     align-content: center;
   }
 
-.modal{
-  margin-top: 100px;
 
-}
-.well{
-        background-color: #EDE1F2;
-}
-.well-block {
-    background-color: #fff;
-    border: 1px solid #e9e6e8;
-    padding: 40px;
-}
-
-.well-title {
-    margin-bottom: 40px;
-}
 </style>
 </head>
 <body>
@@ -117,11 +102,11 @@
     <img src="images/apt.jpg" class="img-responsive" alt="apt1" style="margin-bottom: 10px">
     <div class="btn-group-vertical">
     <button class="btn btn-primary" href="/studentMessaging">Contact Landlord</button>
-    <button type="button" class="btn btn-primary" onClick="openModal()" data-toggle="modal" data-target="#myModal">Book Viewing</button>
+    <button type="button" class="btn btn-primary">Book Viewing</button>
     <button class="btn btn-primary" href="/landlordProfile">View Landlord's Page</button>
    </div>
 
-  <div id="myModal" class="modal fade" role="dialog">
+   <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -141,7 +126,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="date">Preferred Date</label>
-                                        <input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
+                                        <input id="date" name="date" type="text" placeholder="Preferred Date" class="form-control input-md">
                                     </div>
                                 </div>
                                  <div class="col-md-6">
@@ -163,9 +148,6 @@
                                 </div>
                             </div>
                         </form>
-                            {{#if message}}
-        <h4 class="alert alert-danger mt-4">{{message}}</h4>
-    {{/if}}
                     </div>
       </div>
       <div class="modal-footer">
@@ -173,7 +155,8 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+
 
 
    <br><br>
@@ -214,16 +197,6 @@
   <div class="panel panel-info">
     <div class="panel-heading">About the Property</div>
   <ul class="list-group">
-    <li class="list-group-item">
-      <span class="glyphicon glyphicon-home"></span>
-      &nbsp;
-      &nbsp;
-      {{listingId}}</li>
-      <li class="list-group-item">
-      <span class="glyphicon glyphicon-home"></span>
-      &nbsp;
-      &nbsp;
-      {{username}}</li>
     <li class="list-group-item">
       <span class="glyphicon glyphicon-home"></span>
       &nbsp;
@@ -322,13 +295,6 @@
   span.onclick = function() {
   modal.style.display = "none";
 }
-$('.datepicker').datepicker({
-  inline: true
-});
-<script>
-
-
-</script>
 </script>
 </body>
 </html>
