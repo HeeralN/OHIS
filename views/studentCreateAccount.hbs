@@ -28,16 +28,16 @@
             letter-spacing: 2px;
             border-radius: 0;
         }
-
+        
         .navbar li a, .navbar .navbar-brand {
             color: rgb(53, 18, 90) !important;
         }
-
+        
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: #8b699b !important;
             background-color: rgb(255, 255, 255) !important;
         }
-
+        
         .dropdown-menu li a:hover {
             background-color: #c9c4d5 !important;
         }
@@ -137,11 +137,11 @@
     </div>
 </nav>
 
-<button type="button" class="btn" id="button">
-    <a href="/"><span class="glyphicon glyphicon-triangle-left"></span> Back</a></button>
+<!--button type="button" class="btn" id="button">
+    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a-->
 <div class="container">
     <div class="title">Student Registration</div>
-    <form action="/studentCreateAccount" method="POST" id="NewAccount">
+    <form action="/auth/studentCreateAccount" method="POST" id="NewAccount">
         <div class="user-info">
             <div class="reg-box">
                 <label for="fullname">Full Name</label>
@@ -177,7 +177,7 @@
     {{/if}}
 </div>
 <footer class="container-fluid bg-4 text-center margin">
-    <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    <p>Contact us at support@ohis.com</p>
 </footer>
 <script>
     function viewProfile(){

@@ -14,40 +14,8 @@
             height:100vh;
             justify-content: center;
             align-items: center;
-            padding:20px;
+            padding:40px;
             background: linear-gradient(#8b699b, gray);
-        }
-        .navbar {
-            margin-bottom: 0;
-            background-color: #b2a7cc !important;
-            z-index: 9999;
-            border: 0;
-            font-family: Montserrat, sans-serif;
-            font-size: 15px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 2px;
-            border-radius: 0;
-        }
-
-        .navbar li a, .navbar .navbar-brand {
-            color: rgb(53, 18, 90) !important;
-        }
-
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #8b699b !important;
-            background-color: rgb(255, 255, 255) !important;
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: #c9c4d5 !important;
-        }
-
-        .bg-4 {
-            color: rgb(53, 18, 90);
-            margin-bottom: 500;
-            margin-top: 50;
-            padding-top: 50;
-            background-color: #b2a7cc !important;
         }
         .container{
             max-width:700px;
@@ -99,6 +67,7 @@
             width:30%;
             font-size: 19px;
             color: black;
+            border-radius: 1px;
             background-color: white;
             outline:10px;
             outline-color: #000;
@@ -107,20 +76,14 @@
             border-radius: 50px;
             font-weight:100;
         }
-        form .submit-button input:hover {
-            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-            opacity: 0.5;
+        footer {
+            bottom:0;
+            position:absolute;
+            width:100%;
+            padding:5px;
         }
         #button {
             position:absolute; top:60px; left:10px;
-        }
-        footer {
-            margin-left:0;
-            bottom:0;
-            left:0px; right:0px;
-            position:absolute;
-            padding:5px;
-            width:100%;
         }
     </style>
 </head>
@@ -136,11 +99,11 @@
     </div>
 </nav>
 
-<button type="button" class="btn" id="button">
-    <a href="/"><span class="glyphicon glyphicon-triangle-left"></span> Back</a></button>
+<!--button type="button" class="btn" id="button">
+    <a href="login.html"><span class="glyphicon glyphicon-triangle-left"></span> Back</button></a-->
 <div class="container">
     <div class="title">Landlord Registration</div>
-    <form action="/landlordCreateAccount" method="POST" id="NewAccount">
+    <form action="/auth/landlordCreateAccount" method="POST" id="NewAccount">
         <div class="user-info">
             <div class="reg-box">
                 <label for="fullname">Full Name</label>
@@ -177,7 +140,7 @@
     {{/if}}
 </div>
 <footer class="container-fluid bg-4 text-center margin">
-    <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    <p>Contact us at support@ohis.com</p>
 </footer>
 <script>
     function viewProfile(){

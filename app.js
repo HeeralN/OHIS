@@ -4,21 +4,13 @@ const mysql = require('mysql');
 const session = require('express-session');
 const dotenv= require("dotenv");
 const path = require("path");
-dotenv.config({path: './.env'})
-const path = require("path")
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
 const { query } = require('express');
-const bcrypt = require("bcryptjs");
-const jwt=require("jsonwebtoken");
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const nodemailer = require('nodemailer');
-const sgTransport = require('nodemailer-sendgrid-transport');
-var crypto = require("crypto");
 
+dotenv.config({path: './.env'})
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,  //put ip address if not running on localhost
@@ -63,33 +55,35 @@ app.listen(5001, () => {
     console.log("Sever started on Port 5001")
 });
 
+// app.get("/",(req,res)=>{
+//     res.render("index");
+// });
+//
+// app.get("/landlordCreateAccount",(req,res)=>{
+//     res.render("landlordCreateAccount");
+// });
+//
+// app.get("/studentCreateAccount",(req,res)=>{
+//     res.render("studentCreateAccount");
+// });
 
 // LOGIN/LOGOUT
 app.post('/auth/index', function(req, res) {
     const {username, password} = req.body;
     if (username && password) {
-        db.query('SELECT username,password,adminPerms,active FROM account WHERE username = ?', [username], function(error, results, fields) {
+        db.query('SELECT username,password,adminPerms FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (results.length > 0) {
-                if (results[0].active===0){
-                    return res.render("index",{
-                        message: "Account is not activated. Check email to activate account."
-                    });
+                req.session.loggedin = true;
+                req.session.username = username;
+                if (results[0].adminPerms === 0) {  //0 is for student
+                    res.redirect("/studentProfile");
                 }
-                const comparison = bcrypt.compare(password, results[0].password);
-                if (comparison){
-                    req.session.loggedin = true;
-                    req.session.username = username;
-                    if (results[0].adminPerms === 0) {  //0 is for student
-                        res.redirect("/studentProfile");
-                    }
-                    else if (results[0].adminPerms === 1) {   //1 is for landlord
-                        res.redirect('/landlordProfile');
-                    }
-                    else if (results[0].adminPerms === 2) {    //2 is for admin
-                        res.redirect('/adminLanding');
-                    }
+                else if (results[0].adminPerms === 1) {   //1 is for landlord
+                    res.redirect('/landlordProfile');
                 }
-
+                else if (results[0].adminPerms === 2) {    //2 is for admin
+                    res.redirect('/adminLanding');
+                }
 
             } else {
                 return res.render("index",{
@@ -149,7 +143,7 @@ app.get("/logout",(req,res)=>{
         }
         console.log("The session has been destroyed!")
         res.redirect("/");
-    })
+    }) 
 });
 
 // ADMIN
@@ -180,15 +174,15 @@ app.get('/adminLanding', function(req, res) {
 app.get('/adminManagingListings', function(req, res) {
     if (req.session.loggedin) {
         res.render('adminManagingListings');
-    } else {
+    } else { 
         res.send('Please login to view this page!');
     }
-});
+}); 
 
 app.get('/adminManagingUsers', function(req, res) {
     if (req.session.loggedin) {
         res.render('adminManagingUsers');
-    } else {
+    } else { 
         res.send('Please login to view this page!');
     }
 });
@@ -203,10 +197,11 @@ app.post('/adminManagingListings/getListing', function(req, res) {
             } else {
                 return res.render('adminManagingListings', {message: 'Listing not found!'});
             }
+            res.end();
         });
     }
     else {
-        return res.render('adminManagingListings', {message: 'Please enter a value!'});
+        return res.render('adminManagingListings', {message: 'Please enter a value!'}); 
     }
 });
 
@@ -220,6 +215,7 @@ app.post('/adminManagingListings/deleteListing', function(req, res) {
             } else {
                 return res.render('adminManagingListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
             }
+            res.end();
         });
     }
     else {
@@ -237,6 +233,7 @@ app.post('/adminManagingUsers/getUser', function(req, res) {
             } else {
                 return res.render('adminManagingUsers', {message: 'User not found!'});
             }
+            res.end();
         });
     }
     else {
@@ -246,7 +243,7 @@ app.post('/adminManagingUsers/getUser', function(req, res) {
 
 app.post('/adminManagingUsers/deleteUser', function(req, res) {
     const userId = req.body.username;
-
+    
     if (userId) {
         db.query('DELETE FROM account WHERE username = ?', [userId], function(error, results, fields) {
             console.log(results[0]);
@@ -255,6 +252,7 @@ app.post('/adminManagingUsers/deleteUser', function(req, res) {
             } else {
                 return res.render('adminManagingUsers', {message: 'There was an error deleting this user! They may have been deleted already.'});
             }
+            res.end();
         });
     }
     else {
@@ -330,7 +328,7 @@ app.post("/editStudentProfile", (req ,res) => {
 app.get('/viewStudentSublet', function(req,res) {  // TODO check if this works, should populate listings on view listings page
     if (req.session.loggedin) {
         db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
-            if(results.length > 0){
+            if(results.length > 0){ 
                 return res.render('viewStudentSublet', {listing: results});
             }
             else{
@@ -365,19 +363,19 @@ app.post('/viewStudentSublet/studentDeleteSublet', function(req,res) {
 app.get('/createSubletPage', function(req, res){
     if (req.session.loggedin) {
         res.render("createSubletPage");
-    } else {
+    } else { 
         res.send('Please login to view this page!');
     }
 });
 
 app.post('/createSubletPage', function(req, res) {
     console.log(req.session.username);
-    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms,
+    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
         occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
-
+    
     const fullAddress = street + ', ' + inputCity + ', ' + inputState + ', ' + inputZip + ', ' + inputCountry;
     let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+    
     // make sure the student doesn't have more than one sublet already
     db.query("SELECT COUNT(*) AS total FROM listing WHERE username= ?", [req.session.username], function(error, results, fields) {
         //console.log(results[0].total);
@@ -393,11 +391,11 @@ app.post('/createSubletPage', function(req, res) {
                     })
                 }
                 //console.log("Got to before insert statement");
-                db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet,
+                db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet, 
                     bath: numberOfBath, number_of_room: numTotalRooms, occupancy_date: occupancyDate, lease_type: leaseType, rental_price: rentalRate, restriction: restrictions,
-                    gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors,
+                    gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors, 
                     carpeted_floors: carpetedFloors, isSublet: 1, imagePath: ""} , (error,results) => {
-
+                    
                     if (error){
                         console.log(error);
                     }
@@ -424,7 +422,7 @@ app.post('/housingProfile', function(req, res) {
     var gymBool = null;
     var poolBool = null;
     var laundryBool = null;
-    var parkingBool = null;
+    var parkingBool = null; 
     var furnishedBool = null;
     var dishwasherBool = null;
     var hardwood_floorsBool = null;
@@ -484,8 +482,9 @@ app.post('/housingProfile', function(req, res) {
             else{
                 carpeted_floorsBool = "No carpeted floors";
             }
-            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description});
-
+            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description}); 
+              
+        res.end();
     });
 });
 
@@ -527,6 +526,7 @@ app.get('/propertySearch', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -692,6 +692,7 @@ app.post('/propertySearch/sort', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -712,6 +713,7 @@ app.get('/propertySearch/sort1', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -731,6 +733,7 @@ app.get('/propertySearch/sort2', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -745,16 +748,16 @@ app.get("/roommateMatchingFormEdit", (req, res) => {
         res.redirect('/');
     }
 });
-
+ 
 app.post("/roommateMatchingFormEdit", (req, res) => {
     const {gender, international, smoker, roomcare, bedtime, sleephabit, personality, studyhabit, musicvol} = req.body;
-    db.query("UPDATE preference SET ? WHERE username = ?", [{gender: gender, international: international, smoker: smoker, roomcare: roomcare,
+    db.query("UPDATE preference SET ? WHERE username = ?", [{gender: gender, international: international, smoker: smoker, roomcare: roomcare, 
         bedtime:bedtime, sleephabit:sleephabit, personality:personality, studyhabit:studyhabit, musicvol:musicvol}, req.session.username],
         async (error, results) => {
             if (error) {
                 console.log(error);
-            }
-            else{
+            }   
+            else{ 
                 return res.redirect("/roommateMatchingForm");
             }
         });
@@ -766,8 +769,8 @@ app.get("/roommateMatchingResults", (req, res) => {
         db.query("select * from preference where username = ?", [req.session.username], async (error, selfpref) => {
             if (error) {
                 console.log(error);
-            }
-            else{
+            }   
+            else{ 
                 db.query("select * from preference where username <> ?", [req.session.username], async (error, preflist) => {
                     var percentage = {};
                     for (let i = 0; i < preflist.length; i++){
@@ -784,7 +787,7 @@ app.get("/roommateMatchingResults", (req, res) => {
                     var ordered = Object.keys(percentage).map(function(key) {
                         return [key, percentage[key]];
                       });
-
+                      
                       ordered.sort(function(first, second) {
                         return second[1] - first[1];
                       });
@@ -799,7 +802,7 @@ app.get("/roommateMatchingResults", (req, res) => {
                             };
                             info.push(infoToPush);
                             console.log(info);
-
+                            
                             if (i == ordered.slice(0, 5).length - 1){
                                 return res.render("roommateMatchingResults", {list: info});
                             }
@@ -821,10 +824,10 @@ app.get('/roommateMatchingForm', (req, res)=>{
                 console.log(error);
             }
             console.log(result);
-            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol});
+            res.render("roommateMatchingForm", {gender: result[0].gender, international: result[0].international, smoker: result[0].smoker, roomcare: result[0].roomcare, bedtime: result[0].bedtime, sleephabit: result[0].sleephabit, personality: result[0].personality, studyhabit: result[0].studyhabit, musicvol: result[0].musicvol}); 
         });
     } else {
-        res.redirect('/');
+        res.redirect('/'); 
     }
 });
 
@@ -850,7 +853,7 @@ app.get('/landlordProfile', function(req, res) {
         });
     } else {
         res.redirect('/');
-    }
+    } 
 });
 
 
@@ -860,7 +863,7 @@ app.get('/viewLandlordListings', function(req,res) {  // TODO check if this work
             if (error) {
                 console.log(error);
             }
-            if(results.length > 0){
+            if(results.length > 0){ 
                 return res.render('viewLandlordListings', {listing: results});
             }
             else{
@@ -875,16 +878,16 @@ app.get('/viewLandlordListings', function(req,res) {  // TODO check if this work
 app.get('/createListingPage', function(req, res){
     if (req.session.loggedin) {
         res.render("createListingPage");
-    } else {
+    } else { 
         res.send('Please login to view this page!');
     }
 });
 
 app.post('/createListingPage',function(req ,res) {
     //console.log(req.session.username);
-    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms,
+    const {street, inputCity, inputState, inputZip, inputCountry, buildingWebsite, descriptionOfListing, squareFeet, numberOfBath, numTotalRooms, 
         occupancyDate, leaseType, rentalRate, restrictions, gym, pool,laundry, parking, furnished, dishwasher, hardwoodFloors, carpetedFloors} = req.body;
-
+    
     const fullAddress = street + ', ' + inputCity + ', ' + inputState + ', ' + inputZip + ', ' + inputCountry;
     let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
@@ -898,12 +901,12 @@ app.post('/createListingPage',function(req ,res) {
                 message: "A listing at the given address already exists"
             })
         }
-
-        db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet,
+        
+        db.query("INSERT INTO listing SET ?", {address:fullAddress, username: req.session.username, link: buildingWebsite, description: descriptionOfListing, square_feet: squareFeet, 
             bath: numberOfBath, number_of_room: numTotalRooms, occupancy_date: occupancyDate, lease_type: leaseType, rental_price: rentalRate, restriction: restrictions,
-            gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors,
+            gym: gym, pool: pool, laundry: laundry, parking: parking, furnished: furnished, dishwasher: dishwasher, hardwood_floors: hardwoodFloors, 
             carpeted_floors: carpetedFloors, isSublet: 0, imagePath: ""} , (error,results)=>{
-
+            
             if (error){
                 console.log(error);
             }
@@ -943,7 +946,7 @@ app.post('/housingProfileForLandlords', function(req, res) {
     var gymBool = null;
     var poolBool = null;
     var laundryBool = null;
-    var parkingBool = null;
+    var parkingBool = null; 
     var furnishedBool = null;
     var dishwasherBool = null;
     var hardwood_floorsBool = null;
@@ -1003,8 +1006,9 @@ app.post('/housingProfileForLandlords', function(req, res) {
             else{
                 carpeted_floorsBool = "No carpeted floors";
             }
-            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description});
-
+            return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description}); 
+              
+        res.end();
     });
 });
 
@@ -1020,6 +1024,7 @@ app.get('/propertySearchLandlords', function(req, res) {
         } else {
             return res.render('propertySearchLandlords', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -1040,6 +1045,7 @@ app.get('/propertySearchLandlords/sort1', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -1059,6 +1065,7 @@ app.get('/propertySearchLandlords/sort2', function(req, res) {
         } else {
             return res.render('propertySearch', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -1224,6 +1231,7 @@ app.post('/propertySearchLandlords/sort', function(req, res) {
         } else {
             return res.render('propertySearchLandlords', {message: 'Listings not found!'});
         }
+        res.end();
     });
 }
 else {
@@ -1330,205 +1338,3 @@ app.post('/appointmentListLandlords', function(req, res){
         return res.redirect('/');  
     }
 });
-// var options = {
-//     auth: {
-//         api_user: 'krishna_p1611',
-//         api_key: 'ohissupport12345'
-//     }
-// }
-
-// var client = nodemailer.createTransport({
-//     service: 'SendGrid',
-//     auth: {
-//         user: 'krishna_p1611',
-//         pass: 'ohissupport12345'
-//     }
-// });
-
-const transporter = nodemailer.createTransport({
-    port: 465,               // true for 465, false for other ports
-    host: "smtp.gmail.com",
-    auth: {
-        user: 'offcampushousinginfosystem@gmail.com',
-        pass: 'ohissupport12345',
-    },
-    secure: true,
-});
-
-app.get('/studentCreateAccount', function(req, res) {
-    res.render("studentCreateAccount");
-});
-
-app.get('/landlordCreateAccount', function(req, res) {
-    res.render("landlordCreateAccount");
-});
-
-app.post('/studentCreateAccount', function(req, res) {
-    //console.log(req.body);
-    const {fullname, username, university, password, email, confirmpassword} = req.body;
-    var re = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\\.edu$");
-    if (!re.test(email)) {
-        return res.render("studentCreateAccount", {
-            message: "Email is not an university email (.edu) or valid format"
-        })
-    }
-    const myRnId = parseInt(Date.now() + Math.random()*10)
-    db.query("SELECT username, email FROM account WHERE username =? or email= ?", [username, email], async (error, results) => {
-        if (error) {
-            console.log(error);
-        }
-        if (results.length > 0) {
-            return res.render("studentCreateAccount", {
-                message: "That username or email is already in use"
-            })
-
-        } else if (password !== confirmpassword) {
-            return res.render("studentCreateAccount", {
-                message: "Passwords do not match"
-            })
-
-        }
-
-        let hashedPassword = await bcrypt.hash(password, 8);
-
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "0", temptoken: myRnId, active:0}, (error,results)=>{
-            db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
-                if (error){
-                    console.log(results);
-                    console.log(error);
-                }
-            })
-
-            db.query("INSERT INTO preference SET ?", {username: username}, (error,results)=>{
-                if (error){
-                    console.log(results);
-                    console.log(error);
-                }
-            })
-
-
-            if (error){
-                console.log(error);
-            }
-            else{
-                console.log(results);
-                const mailData = {
-                    from: 'offcampushousinginfosystem@gmail.com',  // sender address
-                    to: req.body.email,   // list of receivers
-                    subject: 'OHIS Activation Link',
-                    text: 'Hello ' + req.body.username + '. Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.Please click on the following link below to complete your activation: http://localhost:5001/activate/' ,
-                    html: 'Hello <strong>' + req.body.username + '</strong>,<br><br>Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.<br>Please click on the link below to complete your activation: <br><a href="http://localhost:5001/activate/">http://localhost:5001/activate/</a>'
-                };
-                transporter.sendMail(mailData, function (err, info) {
-                    if(err)
-                        console.log(err)
-                    else
-                        return res.render("index", {
-                            message: "Click on Email Link to Verify Account."
-                        })
-                });
-            }
-
-        })
-    });
-});
-
-app.get('/activate', function(req, res) {
-    return res.render('activate');
-});
-
-
-//if username is correct, check if it matches the activation code
-    //if it matches activation code, then submit and change active to true; redirect to login page and say user is now active
-    //if does not match the activation code, then render page again with message that activation code for user is incorrect
-//if username is incorrect, then say that it is incorrect
-app.post('/activate', function(req, res) {
-    const {username, activation} = req.body;
-    db.query("SELECT username, temptoken FROM account WHERE username =?", [username], async (error, results) => {
-        if (error) {
-            console.log(error);
-        }
-        if (results.length > 0) {
-            if (activation===results[0].temptoken) {
-                db.query('UPDATE account SET ? WHERE username = ?', [{active: 1}, username], (error,results)=>{
-                    return res.render("index", {
-                        message: "Your account is activated"
-                    })
-                });
-            }
-            else {
-                return res.render("activate", {
-                    message: "Username or Activation Code is incorrect"
-                })
-            }
-
-        } else {
-            return res.render("activate", {
-                message: "That username does not exist."
-            })
-
-        }
-    });
-});
-
-app.post('/landlordCreateAccount', function(req, res) {
-    const {fullname, username, phone, password, email, confirmpassword} = req.body;
-
-    db.query("SELECT username,email FROM account WHERE username=? or email= ?", [username, email], async (error, results) => {
-        if (error) {
-            console.log(error);
-        }
-        if (results.length > 0) {
-            return res.render("landlordCreateAccount",{
-                message: "That username or email is already in use"
-            })
-
-        }
-        else if(password!==confirmpassword) {
-            return res.render("landlordCreateAccount",{
-                message: "Passwords do not match"
-            })
-
-        }
-
-        let hashedPassword = await bcrypt.hash(password, 8);
-        const myRnId = parseInt(Date.now() + Math.random()*10)
-        db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "1", temptoken: myRnId, active:0}, (error,results)=>{
-            db.query("INSERT INTO landlord SET ?", {phone:phone, username:username}, (error,results)=>{
-                if (error){
-                    console.log(results);
-                    console.log(error);
-                }
-            })
-            if (error){
-                console.log(results);
-                console.log(error);
-            }
-            else{
-                if (error){
-                    console.log(error);
-                }
-                else{
-                    console.log(results);
-                    const mailData = {
-                        from: 'offcampushousinginfosystem@gmail.com',  // sender address
-                        to: req.body.email,   // list of receivers
-                        subject: 'OHIS Activation Link',
-                        text: 'Hello ' + req.body.username + '. Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.Please click on the following link below to complete your activation: http://localhost:5001/activate/' ,
-                        html: 'Hello <strong>' + req.body.username + '</strong>,<br><br>Thank you for registering with OHIS. Your activation code is ' + myRnId+ '.<br>Please click on the link below to complete your activation: <br><a href="http://localhost:5001/activate/">http://localhost:5001/activate/</a>'
-                    };
-                    transporter.sendMail(mailData, function (err, info) {
-                        if(err)
-                            console.log(err)
-                        else
-                            return res.render("index", {
-                                message: "Click on Email Link to Verify Account."
-                            })
-                    });
-                }
-            }
-        })
-    });
-});
-
-//var id = crypto.randomBytes(20).toString('hex');
