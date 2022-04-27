@@ -328,6 +328,89 @@ app.post("/editStudentProfile", (req ,res) => {
     }
 });
 
+app.get('/studentMessaging', function (req, res) {
+    if (req.session.loggedin) {
+        // res.render('studentMessaging');
+        db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+            if (results) {
+                return res.render('studentMessaging', { studentMessages: results });
+            }
+            else {
+                return res.render('studentProfile', { message: 'There was an error fetching messages!' });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/createMessage', function (req, res) {
+    if (req.session.loggedin) {
+        //console.log("Init "+req.body);
+        //console.log("Init Username: "+req.session.username+", Receiver: "+ req.body.receiver);
+        res.render('createMessage', { sender: req.session.username, receiver: req.body.receiver });
+    } else {
+        res.send('Please login to view this page!');
+    }
+});
+
+app.post('/createMessage', function (req, res) {
+    if (req.session.loggedin) {
+        const { sender, receiver, subject, message_body } = req.body;
+        db.query("SELECT * FROM account WHERE username =?", [req.session.username], (error, sender_username) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                // res.render('studentMessaging');
+                db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                        return res.render('studentMessaging');
+                    }
+                    else {
+                        db.query("SELECT * FROM account WHERE username = ?", [receiver], (error, receiver_username) => {
+                            if (error) {
+                                console.log(error);
+                            }
+                            else if (sender_username && receiver_username) {
+                                db.query("INSERT INTO message SET ?", {
+                                    sender: sender, receiver: receiver, subject: subject,
+                                    message_body: message_body
+                                }, (error, results) => {
+
+                                    if (error) {
+                                        console.log(error);
+                                    }
+                                    // sender is a student
+                                    else if (sender_username[0].adminPerms == 0) {
+                                        return res.render("studentMessaging", {
+                                            message: "Message sent."
+                                        })
+                                    }
+                                    // sender is a landlord
+                                    else if (sender_username[0].adminPerms == 1) {
+                                        return res.render("landlordMessaging", {
+                                            message: "Message sent."
+                                        })
+                                    }
+                                });
+                            }
+                            else {
+                                return res.render("createListingPage", { message: "Unable to create message." })
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+
 app.get('/viewStudentSublet', function(req,res) {  // TODO check if this works, should populate listings on view listings page
     if (req.session.loggedin) {
         db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
@@ -351,8 +434,14 @@ app.post('/viewStudentSublet/studentDeleteSublet', function(req,res) {
             db.query('DELETE FROM listing WHERE username = ? AND listingId = ? AND isSublet = 1', [req.session.username, housingId], function(error, results, fields) {
                 console.log(results);
                 if (results && error === null) {
-                    // when attempting to delete a landlord listing, this message comes up. the message should not pop up, especially since the listing is correctly not deleted from the DB
-                    return res.render('viewStudentSublet', {message: 'Sublet listing deleted!'});
+                    db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
+                        if(results.length > 0){
+                            return res.render('viewStudentSublet', {listing: results});
+                        }
+                        else{
+                            return res.render('viewStudentSublet');
+                        }
+                    });
                 } else {
                     return res.render('viewStudentSublet', {message: 'There was an error deleting this listing! It may have been deleted already.'});
                 }
@@ -862,8 +951,24 @@ app.get('/landlordProfile', function(req, res) {
     }
 });
 
+app.get('/landlordMessaging', function (req, res) {
+    if (req.session.loggedin) {
+        // res.render('studentMessaging');
+        db.query('SELECT * FROM message WHERE receiver = ? ORDER BY date_created DESC', [req.session.username], function (error, results, fields) {
+            if (results) {
+                return res.render('landlordMessaging', { landlordMessages: results });
+            }
+            else {
+                return res.render('LandlordProfile', { message: 'There was an error fetching messages!' });
+            }
+        });
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
 
-app.get('/viewLandlordListings', function(req,res) {  // TODO check if this works, should populate listings on view listings page
+app.get('/viewLandlordListings', function(req,res) { 
     if (req.session.loggedin) {
         db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
             if (error) {
@@ -934,7 +1039,18 @@ app.post("/viewLandlordListings/landlordDeleteListing", function(req,res) {
         if (housingId) {
             db.query('DELETE FROM listing WHERE username = ? AND listingId = ? AND isSublet = 0', [req.session.username, housingId], function(error, results, fields) {
                 if (results && error === null) {
-                    return res.render('viewLandlordListings', {message: 'Listing deleted!'});
+                    db.query('SELECT listingId, date_created, occupancy_date FROM listing WHERE username=?', [req.session.username], function(error, results) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        if(results.length > 0){
+                            // render page with updated listing information
+                            return res.render('viewLandlordListings', {listing: results, message: 'Listing deleted!'});
+                        }
+                        else{
+                            return res.render('viewLandlordListings');
+                        }
+                    });
                 } else {
                     return res.render('viewLandlordListings', {message: 'There was an error deleting this listing! It may have been deleted already.'});
                 }
