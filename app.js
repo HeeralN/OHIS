@@ -3,11 +3,13 @@ const app = express();
 const mysql = require('mysql');
 const session = require('express-session');
 const dotenv= require("dotenv");
+const path = require("path");
 dotenv.config({path: './.env'})
 const bodyParser = require("body-parser");
 const { CLIENT_FOUND_ROWS } = require('mysql/lib/protocol/constants/client');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 const { count } = require('console');
+const { query } = require('express');
 const bcrypt = require("bcryptjs");
 const jwt=require("jsonwebtoken");
 const sgMail = require('@sendgrid/mail');
@@ -15,6 +17,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 var crypto = require("crypto");
+
 
 
 const db = mysql.createConnection({
