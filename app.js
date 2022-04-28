@@ -1465,29 +1465,102 @@ app.post('/landlordCreateAccount', function(req, res) {
     });
 });
 
+app.get('housingProfile', function(req, res) {
+    return res.render('housingProfile');
+})
+
 app.post('/housingProfile/bookAppt', function(req, res) {
     const {landlord_id, listingId, date, time} = req.body;
-    var dateTime = date + " " + time;
-    db.query("SELECT student_username, landlord_username, listingID FROM appointment WHERE student_username = ? AND landlord_username = ? AND listingID = ?", [req.session.username, landlord_id, listingId], (error,results) => {
-        console.log(results)
+    const housingId = listingId;
+    console.log("ID: " + housingId);
+    var restrictionBool = null;
+    var gymBool = null;
+    var poolBool = null;
+    var laundryBool = null;
+    var parkingBool = null;
+    var furnishedBool = null;
+    var dishwasherBool = null;
+    var hardwood_floorsBool = null;
+    var carpeted_floorsBool = null;
+    db.query('SELECT listingId, address, username, square_feet, bath, number_of_room, rental_price, restriction, gym, pool, laundry, parking, furnished, dishwasher, hardwood_floors, carpeted_floors, description FROM listing WHERE listingId = ?',[housingId], function(error, results, fields) {
+        var dateTime = date + " " + time;
+        if (error){
+            console.log(error);
+        }
+        db.query("SELECT student_username, landlord_username, listingID FROM appointment WHERE student_username = ? AND landlord_username = ? AND listingID = ?", [req.session.username, landlord_id, listingId], (error,results) => {
+            console.log(results)
+            if (error){
+                console.log(error);
+            }
         if(!results){
         db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: dateTime} , (error,results) => {
         if (error){
             console.log(error);
         }
-        else{
-            console.log(results);
-            return res.render("housingProfile", {
-                message:"Sublet listing posted"
-            })
-        }
+            if(results[0].restriction){
+                restrictionBool = "Pets allowed";
+            }
+            else{
+                restrictionBool = "Pets not allowed";
+            }
+            if(results[0].gym){
+                gymBool = "Gym";
+            }
+            else{
+                gymBool = "No gym";
+            }
+            if(results[0].pool){
+                poolBool = "Pool";
+            }
+            else{
+                poolBool = "No pool";
+            }
+            if(results[0].laundry){
+                laundryBool = "Laundry";
+            }
+            else{
+                laundryBool = "No laundry";
+            }
+            if(results[0].parking){
+                parkingBool = "Parking on premises";
+            }
+            else{
+                parkingBool = "No parking included";
+            }
+            if(results[0].furnished){
+                furnishedBool = "Furnished";
+            }
+            else{
+                furnishedBool = "Unfurnished";
+            }
+            if(results[0].dishwasher){
+                dishwasherBool = "Dishwasher";
+            }
+            else{
+                dishwasherBool = "No dishwasher";
+            }
+            if(results[0].hardwood_floors){
+                hardwood_floorsBool = "Hardwood floors";
+            }
+            else{
+                hardwood_floorsBool = "No hardwood floors";
+            }
+            if(results[0].carpeted_floors){
+                arpeted_floorsBool = "Carpeted floors";
+            }
+            else{
+                carpeted_floorsBool = "No carpeted floors";
+            }
+        return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description, message: "Appointment booked."});
     });
+    }else{
+        return res.render('housingProfile', {listingId: results[0].listingId, address: results[0].address, username: results[0].username, square_feet: results[0].square_feet, bath: results[0].bath, number_of_room: results[0].number_of_room, rental_price: results[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: results[0].description, message: "You already have an appointment for this listing"});
+
     }
-    else{
-        return res.render("housingProfile",{
-            message: "You already have an appointment for this listing"
-        });
-    }
+        }); 
+    });
 });
-});
+
+
+
 //var id = crypto.randomBytes(20).toString('hex');
