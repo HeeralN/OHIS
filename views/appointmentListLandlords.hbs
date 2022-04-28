@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>View Landlord Listings</title>
+    <title>Booked Appointments</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="template.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
@@ -19,15 +19,6 @@
             background: linear-gradient(#8b699b, gray);
         }
 
-        .form-group-input {
-            width: 200px;
-        }
-
-        .alert {
-            position: center;
-            width: 400px;
-        }
-
         footer {
             bottom: 0;
             position: absolute;
@@ -38,7 +29,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -51,14 +41,14 @@
             </div>
             <div id="myNavbar">
                 <ul class="nav navbar-nav navbar-collpase">
-                    <li><a href="/landlordProfile">Profile</a></li>
-                    <li><a href="/landlordMessaging">Messaging</a></li>
-                    <li><a href="/appointmentListLandlords">Appointments</a></li>
-                    <li class="dropdown-active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                    <li><a href="landlordProfile">Profile</a></li>
+                    <li><a href="landlordMessaging">Messaging</a></li>
+                    <li class="active"><a href="appointmentListLandlords">Appointments</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="active"><a href="/viewLandlordListings">My Listings</a></li>
-                            <li><a href="/propertySearchLandlords">Search Listings</a></li>
+                            <li><a href="viewLandlordListings">My Listings</a></li>
+                            <li><a href="propertySearchLandlords">Search Listings</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -68,52 +58,30 @@
             </div>
         </div>
     </nav>
-
-
     <div class="container mt-3">
-        <h2>View Listings</h2>
-        <p>View all listings created by this account.</p>
-
-        <form action="/createListingPage" method="GET">
-            <button type="submit" class="btn btn-primary mt-3">Create Listing</button>
-        </form>
-        <!--button type="button" class="btn btn-primary mt-3" onclick="createListing()">Create Listing</button-->
-
-        <div class="form-group">
+        <form action="/appointmentListLandlords" method="POST">
+            <h2>Booked Appointments</h2>
+            <p>Keep track and manage your booked appointments.</p>
             <table class="table">
-                <thead>
-                    <th>Listing ID</th>
-                    <th>Date Listed</th>
-                    <th>Lease Date</th>
-                </thead>
                 <tbody>
-                    {{#each listing}}
                     <tr>
+                        <th></th>
+                        <th>Landlord Username</th>
+                        <th>Listing ID</th>
+                        <th>Date/Time</th>
+                    </tr>
+                    {{#each list}}
+                    <tr>
+                        <td><input type="checkbox" id="checkbox" name="checkbox" value="{{this.listingId}}"></td>
+                        <td>{{this.landlord}}</td>
                         <td>{{this.listingId}}</td>
-                        <td>{{this.date_created}}</td>
-                        <td>{{this.occupancy_date}}</td>
+                        <td>{{this.time}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
-        </div>
-
-        <br><br><br>
-        <h2>Delete a Listing</h2>
-        <p>Type the listing ID if you wish to delete it.</p>
-        <form action="/viewLandlordListings/landlordDeleteListing" method="POST">
-            <div class="form-group-input">
-                <input type="text" class="form-control" id="listingID" name="listingID" placeholder="Enter listing ID"
-                    required>
-                <button type="submit" class="btn btn-default">Delete Listing</button>
-            </div>
+            <button type="submit" class="btn btn-primary mt-3">Delete</button>
         </form>
-
-        {{#if message}}
-        <div class='alert'>
-            <h4 class="alert alert-danger mt-4">{{message}}</h4>
-        </div>
-        {{/if}}
     </div>
 
     <footer class="container-fluid bg-4 text-center margin">
