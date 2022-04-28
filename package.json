@@ -2,7 +2,7 @@
   "name": "Off-Campus-Housing-Information-System",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "mocha",
     "start": "nodemon app.js"

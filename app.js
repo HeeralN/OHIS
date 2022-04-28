@@ -30,10 +30,13 @@ app.use(bodyParser.json());
 const publicDirectory = path.join(__dirname, "./public")//put css or javascript for frontend
 app.use(express.static(publicDirectory))
 
+var jsonParser = app.use(bodyParser.urlencoded({ extended: true }));
+
 //parse URL-encoded bodies (as sent by html forms)
 app.use(express.urlencoded({extended:false}));
 //parse JSON bodies (as sent by API clients)
 app.use(express.json());
+
 
 
 app.set("view engine", "hbs");
@@ -76,14 +79,17 @@ app.listen(5001, () => {
 // });
 
 // LOGIN/LOGOUT
-app.post('/auth/index', function(req, res) {
+app.post('/auth/index',function(req, res) {
     const {username, password} = req.body;
+    requestAsJson = JSON.stringify(req.body);
+    //res.setHeader('Content-Type', 'application/json');
+    //console.log('The POST data received was: ' + requestAsJson);
     if (username && password) {
         db.query('SELECT username,password,adminPerms FROM account WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (results.length > 0) {
                 if (results[0].active===0){
                     return res.render("index",{
-                        message: "Account is not activated. Check email to activate account."
+                        message: "Account is not activated. Check email to activate account.", requestAsJson
                     });
                 }
                 const comparison = bcrypt.compare(password, results[0].password);
@@ -105,12 +111,14 @@ app.post('/auth/index', function(req, res) {
                     message: "Incorrect Username and/or Password"
                 });
             }
+            //res.end(requestAsJson);
         });
     } else {
         return res.render("studentCreateAccount",{
             message: "Incorrect Username and/or Password"
         });
     }
+    //res.end(requestAsJson);
 });
 
 app.get('/resetPassword', function(req, res) {
@@ -1388,6 +1396,7 @@ app.post('/studentCreateAccount', function(req, res) {
         let hashedPassword = await bcrypt.hash(password, 8);
 
         db.query("INSERT INTO account SET ?", {fullname:fullname, username:username, email: email, password: hashedPassword, adminPerms: "0", temptoken: myRnId, active:0}, (error,results)=>{
+            console.log(results);
             db.query("INSERT INTO student SET ?", {university:university, username:username, profile_description: "Edit Profile to Give Brief Description About Yourself"}, (error,results)=>{
                 if (error){
                     console.log(results);
