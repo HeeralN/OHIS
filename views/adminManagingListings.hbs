@@ -1,163 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Admin Manage Listings</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Admin Manage Listings</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(#8b699b, gray);
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        container {
+            margin-top: 30px;
+            margin-right: 50px;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        .row {
+            padding-left: 25px;
+            padding-right: 25px;
+            justify-content: center;
+            align-content: center;
+        }
+    </style>
 </head>
-<style>
-   body {
-        display:flex;
-        height:100vh;
-        justify-content: center;
-        align-items: center;
-        padding:20px;
-        background: linear-gradient(#8b699b, gray);
-    }
-  .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
-
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-  container{
-    margin-top: 30px;
-    margin-right:50px;
-  }
-  .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
-
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-
-  .row {
-    padding-left: 25px;
-    padding-right: 25px;
-    justify-content: center;
-    align-content: center;
-  }
-</style>
 <body>
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <img src="images/logo.png" width="50" height="50" alt="Logo">
-      </div>
-      <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <ul class="nav navbar-nav">
-          <li><a href="/adminLanding">Admin Dashboard</a></li>
-          <li><a href="/adminManagingUsers">Manage Accounts</a></li>
-          <li class="active"><a href="/adminManagingListings">Manage Listings</a></li>
-          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  <li><a href="/propertySearchAdmin">Search Listings</a></li>
-              </ul>
-          </li>
-        </ul>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/adminLanding">Admin Dashboard</a></li>
+                        <li><a href="/adminManagingUsers">Manage Accounts</a></li>
+                        <li class="active"><a href="/adminManagingListings">Manage Listings</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/propertySearchAdmin">Search Listings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-  </nav>
-
-<div class="container">
-  <h2>Manage Listings</h2>
-
-  <form action="/adminManagingListings/getListing" method="POST">
-    <div class="form-group">
-      <label for="listingID">Housing Listing ID</label>
-      <input type="text" class="form-control" id="listingID" name="listingID" placeholder="Enter housing listing ID">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-    <!--button type="submit" class="btn btn-default">Submit</button-->
-  </form> 
-  
-  <div id="housingListingProfile">
+    </nav>
+    
     <div class="container">
-      <h2>Selected Housing Listing Profile</h2>
-      <p><b>ID:</b> {{listingId}}</p>
-      <p><b>Address:</b> {{address}}</p>
-      <p><b>Username:</b> {{username}}</p>
-      <p><b>Date Created:</b> {{date_created}}</p>
-      <p><b>Last Modified:</b> {{last_modified}}</p>
-      <p><b>Link:</b> {{link}}</p>
-  </div>
+        <h2>Manage Listings</h2>
 
-  <form action="/adminManagingListings/deleteListing" method="POST">
-      <input type="hidden" id="listingID" name="listingID" value="{{listingId}}">
-      <button type="submit" class="btn btn-danger" data-target="#deleteListing">Delete Listing</button>
-  </form>
+        <form action="/adminManagingListings/getListing" method="POST">
+            <div class="form-group">
+                <label for="listingID">Housing Listing ID</label>
+                <input type="text" class="form-control" id="listingID" name="listingID"
+                    placeholder="Enter housing listing ID">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>
 
-  {{#if message}}
-    <h4 class="alert alert-danger mt-4">{{message}}</h4>
-  {{/if}}
+        <div id="housingListingProfile">
+            <div class="container">
+                <h2>Selected Housing Listing Profile</h2>
+                <p><b>ID:</b> {{listingId}}</p>
+                <p><b>Address:</b> {{address}}</p>
+                <p><b>Username:</b> {{username}}</p>
+                <p><b>Date Created:</b> {{date_created}}</p>
+                <p><b>Last Modified:</b> {{last_modified}}</p>
+                <p><b>Link:</b> {{link}}</p>
+            </div>
 
-</div>
+            <form action="/adminManagingListings/deleteListing" method="POST">
+                <input type="hidden" id="listingID" name="listingID" value="{{listingId}}">
+                <button type="submit" class="btn btn-danger" data-target="#deleteListing">Delete Listing</button>
+            </form>
+
+            {{#if message}}
+            <h4 class="alert alert-danger mt-4">{{message}}</h4>
+            {{/if}}
+        </div>
 </body>
+
 </html>

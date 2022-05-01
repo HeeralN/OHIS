@@ -2,218 +2,221 @@
 <html lang="en">
 
 <head>
-  <title>Roommate Matching Form</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="template.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    body {
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: linear-gradient(#8b699b, gray);
+    <title>Roommate Matching Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="template.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(#8b699b, gray);
 
-    }
-    .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
+        }
 
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-    footer {
-      margin-left: 0;
-      bottom: 0;
-      left: 0px;
-      right: 0px;
-      position: absolute;
-      padding: 5px;
-      width: 100%;
-    }
-  </style>
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        footer {
+            margin-left: 0;
+            bottom: 0;
+            left: 0px;
+            right: 0px;
+            position: absolute;
+            padding: 5px;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <img src="images/logo.png" width="50" height="50" alt="Logo">
-      </div>
-      <div id="myNavbar">
-        <ul class="nav navbar-nav navbar-collpase">
-          <li><a href="/studentProfile">Profile</a></li>
-          <li><a href="/studentMessaging">Messaging</a></li>
-          <li><a href="/appointmentListStudents">Appointments</a></li>
-          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="/viewStudentSublet">My Listings</a></li>
-              <li><a href="/propertySearch">Search Listings</a></li>
-            </ul>
-          </li>
-          <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates <span
-                class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
-              <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <li><a href="/studentProfile">Profile</a></li>
+                    <li><a href="/studentMessaging">Messaging</a></li>
+                    <li><a href="/appointmentListStudents">Appointments</a></li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/viewStudentSublet">My Listings</a></li>
+                            <li><a href="/propertySearch">Search Listings</a></li>
+                        </ul>
+                    </li>
+                    <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roommates
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/roommateMatchingForm">Roommate Matching Form</a></li>
+                            <li><a href="/roommateMatchingResults">Roommate Matching Results</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <h2>Edit Your Roommate Preferences</h2>
+        <p>Your changed preferences will reflect on Roommate Matching Results.</p>
+
+        <form action="/roommateMatchingFormEdit" method="POST" id="FormEdit">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td>Gender</td>
+                        <td>
+                            <select id="sel1" name="gender">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Non-binary">Non-binary</option>
+                                <option value="No preference">No preference</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prefer/Accept an international student?</td>
+                        <td>
+                            <select id="sel2" name="international">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Are you a smoker?</td>
+                        <td>
+                            <select id="sel3" name="smoker">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Room care</td>
+                        <td>
+                            <select id="sel4" name="roomcare">
+                                <option value="Always Clean">Always Clean</option>
+                                <option value="Clean but not obsessive">Clean but not obsessive</option>
+                                <option value="Casual">Casual</option>
+                                <option value="A few clothes lying around">A few clothes lying around</option>
+                                <option value="Disaster Area">Disaster Area</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bedtime</td>
+                        <td>
+                            <select id="sel5" name="bedtime">
+                                <option value="9pm-12am">9pm-12am</option>
+                                <option value="12am-3am">12am-3am</option>
+                                <option value="Later than 3am">Later than 3am</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sleeping Habits</td>
+                        <td>
+                            <select id="sel6" name="sleephabit">
+                                <option value="Snore/Sleepwalk">Snore/Sleepwalk</option>
+                                <option value="Light Sleeper">Light Sleeper</option>
+                                <option value="Sleep through anything">Sleep through anything</option>
+                                <option value="Windows open">Windows open</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>My Personality</td>
+                        <td>
+                            <select id="sel7" name="personality">
+                                <option value="Shy">Shy</option>
+                                <option value="Talkative">Talkative</option>
+                                <option value="Mellow">Mellow</option>
+                                <option value="Loud">Loud</option>
+                                <option value="Perky">Perky</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Study Habits</td>
+                        <td>
+                            <select id="sel8" name="studyhabit">
+                                <option value="Study outside">Study outside</option>
+                                <option value="Must be quiet">Must be quiet</option>
+                                <option value="Study with music">Study with music</option>
+                                <option value="Late night study">Late night study</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Music Volume Level Preference</td>
+                        <td>
+                            <select id="sel9" name="musicvol">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="submit-button">
+                <button type="submit" class="Submit">Submit</button>
+            </div>
+        </form>
     </div>
-  </nav>
-
-  <div class="container mt-3">
-    <h2>Edit Your Roommate Preferences</h2>
-    <p>Your changed preferences will reflect on Roommate Matching Results.</p>
-
-    <form action="/roommateMatchingFormEdit" method="POST" id="FormEdit">
-      <table class="table table-hover">
-        <tbody>
-          <tr>
-            <td>Gender</td>
-            <td>
-              <select id="sel1" name="gender">
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Non-binary">Non-binary</option>
-                <option value="No preference">No preference</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Prefer/Accept an international student?</td>
-            <td>
-              <select id="sel2" name="international">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Are you a smoker?</td>
-            <td>
-              <select id="sel3" name="smoker">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Room care</td>
-            <td>
-              <select id="sel4" name="roomcare">
-                <option value="Always Clean">Always Clean</option>
-                <option value="Clean but not obsessive">Clean but not obsessive</option>
-                <option value="Casual">Casual</option>
-                <option value="A few clothes lying around">A few clothes lying around</option>
-                <option value="Disaster Area">Disaster Area</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Bedtime</td>
-            <td>
-              <select id="sel5" name="bedtime">
-                <option value="9pm-12am">9pm-12am</option>
-                <option value="12am-3am">12am-3am</option>
-                <option value="Later than 3am">Later than 3am</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Sleeping Habits</td>
-            <td>
-              <select id="sel6" name="sleephabit">
-                <option value="Snore/Sleepwalk">Snore/Sleepwalk</option>
-                <option value="Light Sleeper">Light Sleeper</option>
-                <option value="Sleep through anything">Sleep through anything</option>
-                <option value="Windows open">Windows open</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>My Personality</td>
-            <td>
-              <select id="sel7" name="personality">
-                <option value="Shy">Shy</option>
-                <option value="Talkative">Talkative</option>
-                <option value="Mellow">Mellow</option>
-                <option value="Loud">Loud</option>
-                <option value="Perky">Perky</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Study Habits</td>
-            <td>
-              <select id="sel8" name="studyhabit">
-                <option value="Study outside">Study outside</option>
-                <option value="Must be quiet">Must be quiet</option>
-                <option value="Study with music">Study with music</option>
-                <option value="Late night study">Late night study</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Music Volume Level Preference</td>
-            <td>
-              <select id="sel9" name="musicvol">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="submit-button">
-        <button type="submit" class="Submit">Submit</button>
-      </div>
-    </form>
-  </div>
-  <footer class="container-fluid bg-4 text-center margin">
-    <p>Contact us at offcampushousinginfosystem@gmail.com</p>
-  </footer>
-  <script>
-  </script>
+    <footer class="container-fluid bg-4 text-center margin">
+        <p>Contact us at offcampushousinginfosystem@gmail.com</p>
+    </footer>
 </body>
 
 </html>

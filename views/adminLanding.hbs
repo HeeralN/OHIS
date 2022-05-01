@@ -2,279 +2,288 @@
 <html lang="en">
 
 <head>
-  <title>Admin Landing</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
-  <style>
-      body {
-          background: linear-gradient(#8b699b, gray);
-      }
-    .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
+    <title>Admin Landing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(#8b699b, gray);
+        }
 
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
-
-  /*.bg-4 {*/
-  /*  color: rgb(53, 18, 90);*/
-  /*  margin-bottom: 500;*/
-  /*  margin-top: 50;*/
-  /*  padding-top: 50;*/
-  /*    background: linear-gradient(#8b699b, gray);*/
-  /*}*/
-    .container1 {
-      width: 50%;
-      float: left;
-    }
-    .container1 h1 {
-        margin-left: 90px;
-
-    }
-
-    .container2 {
-      width: 50%;
-      float: right;
-
-    }
-
-    /*.container2 img {*/
-    /*  height: 100%;*/
-    /*  width: 70%;*/
-    /*  margin-top: 40px;*/
-    /*    margin-bottom: 40px;*/
-    /*  object-fit: contain;*/
-    /*}*/
-
-    h2 {
-      text-align: center;
-    }
-
-    body {
-      background: lavender;
-    }
-
-    .container1 .styled-table {
-        border-collapse: collapse;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 600px;
-        background-color: white;
-        margin-top: 10px;
-        margin-left:90px;
-    }
-
-    .container2 .styled-table {
-      border-collapse: collapse;
-      font-size: 0.9em;
-      font-family: sans-serif;
-      min-width: 600px;
-      background-color: white;
-      margin-top: 10px;
-    }
-    /*.container2 #myDiv {*/
-    /*    border-collapse: collapse;*/
-    /*    font-size: 0.9em;*/
-    /*    font-family: sans-serif;*/
-    /*    min-width: 600px;*/
-    /*    background-color: white;*/
-    /*    margin-top: 10px;*/
-    /*}*/
-
-    .styled-table thead tr {
-      background-color: gray;
-      color: #ffffff;
-      text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-      padding: 12px 15px;
-    }
-
-    .styled-table tbody tr {
-      border-bottom: 1px solid gray;
-    }
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
 
 
-    .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
 
-  /*.bg-4 {*/
-  /*  color: rgb(53, 18, 90);*/
-  /*  margin-bottom: 500;*/
-  /*  margin-top: 50;*/
-  /*  padding-top: 50;*/
-  /*  background-color: #b2a7cc !important;*/
-  /*}*/
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
 
-  /*.row {*/
-  /*  padding-left: 25px;*/
-  /*  padding-right: 25px;*/
-  /*  justify-content: center;*/
-  /*  align-content: center;*/
-  /*}*/
-  </style>
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        /*.bg-4 {*/
+        /*  color: rgb(53, 18, 90);*/
+        /*  margin-bottom: 500;*/
+        /*  margin-top: 50;*/
+        /*  padding-top: 50;*/
+        /*    background: linear-gradient(#8b699b, gray);*/
+        /*}*/
+        .container1 {
+            width: 50%;
+            float: left;
+        }
+
+        .container1 h1 {
+            margin-left: 90px;
+
+        }
+
+        .container2 {
+            width: 50%;
+            float: right;
+
+        }
+
+        /*.container2 img {*/
+        /*  height: 100%;*/
+        /*  width: 70%;*/
+        /*  margin-top: 40px;*/
+        /*    margin-bottom: 40px;*/
+        /*  object-fit: contain;*/
+        /*}*/
+
+        h2 {
+            text-align: center;
+        }
+
+        body {
+            background: lavender;
+        }
+
+        .container1 .styled-table {
+            border-collapse: collapse;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 600px;
+            background-color: white;
+            margin-top: 10px;
+            margin-left: 90px;
+        }
+
+        .container2 .styled-table {
+            border-collapse: collapse;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 600px;
+            background-color: white;
+            margin-top: 10px;
+        }
+
+        /*.container2 #myDiv {*/
+        /*    border-collapse: collapse;*/
+        /*    font-size: 0.9em;*/
+        /*    font-family: sans-serif;*/
+        /*    min-width: 600px;*/
+        /*    background-color: white;*/
+        /*    margin-top: 10px;*/
+        /*}*/
+
+        .styled-table thead tr {
+            background-color: gray;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid gray;
+        }
+
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        /*.bg-4 {*/
+        /*  color: rgb(53, 18, 90);*/
+        /*  margin-bottom: 500;*/
+        /*  margin-top: 50;*/
+        /*  padding-top: 50;*/
+        /*  background-color: #b2a7cc !important;*/
+        /*}*/
+
+        /*.row {*/
+        /*  padding-left: 25px;*/
+        /*  padding-right: 25px;*/
+        /*  justify-content: center;*/
+        /*  align-content: center;*/
+        /*}*/
+    </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
+                        <li><a href="/adminManagingUsers">Manage Accounts</a></li>
+                        <li><a href="/adminManagingListings">Manage Listings</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/propertySearchAdmin">Search Listings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <img src="images/logo.png" width="50" height="50" alt="Logo">
-      </div>
-      <div id="myNavbar">
-        <ul class="nav navbar-nav navbar-collpase">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/adminLanding">Admin Dashboard</a></li>
-            <li><a href="/adminManagingUsers">Manage Accounts</a></li>
-            <li><a href="/adminManagingListings">Manage Listings</a></li>
-            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  <li><a href="/propertySearchAdmin">Search Listings</a></li>
-              </ul>
-            </li>
-          </ul>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
+    <h2>Admin Dashboard</h2>
+    <div class="container1">
+        <h1>Top 10 Users (By # Listings)</h1>
+        <table class="styled-table">
+            <thead>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Number of Listings</th>
+                <th>Account Type</th>
+            </thead>
+            <tbody>
+                {{#each listingData}}
+                <tr>
+                    <td>{{this.username}}</td>
+                    <td>{{this.fullname}}</td>
+                    <td>{{this.numListings}}</td>
+                    <td>{{this.accountType}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
-  </nav>
 
-  <h2>Admin Dashboard</h2>
-  <div class="container1">
-    <h1>Top 10 Users (By # Listings)</h1>
-    <table class="styled-table">
-      <thead>
-        <th>Username</th>
-        <th>Full Name</th>
-        <th>Number of Listings</th>
-        <th>Account Type</th>
-      </thead>
-      <tbody>
-        {{#each listingData}}
-        <tr>
-          <td>{{this.username}}</td>
-          <td>{{this.fullname}}</td>
-          <td>{{this.numListings}}</td>
-          <td>{{this.accountType}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="container2" id="signupTable">
-    <h1>Signups (Last 7 Days)</h1>
-    <table class="styled-table">
-      <thead>
-        <th>Date</th>
-        <th># Registered</th>
-      </thead>
-      <tbody>
-        {{#each signupData}}
-        <tr>
-          <td>{{this.date}}</td>
-          <td>{{this.numAccountsRegistered}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    <div class="container20" id="myDiv" style="width:600px; height:250px; margin-top: 40px; margin-left:0px;
+    <div class="container2" id="signupTable">
+        <h1>Signups (Last 7 Days)</h1>
+        <table class="styled-table">
+            <thead>
+                <th>Date</th>
+                <th># Registered</th>
+            </thead>
+            <tbody>
+                {{#each signupData}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.numAccountsRegistered}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="container20" id="myDiv" style="width:600px; height:250px; margin-top: 40px; margin-left:0px;
         margin-bottom: 40px;
      "></div>
-  </div>
+    </div>
 
-  <script>
-    var plotDates = [];
-    var plotNums = [];
+    <script>
+        var plotDates = [];
+        var plotNums = [];
 
-    {{#each signupData}}
-    plotDates.push("{{this.date}}");
-    plotNums.push("{{this.numAccountsRegistered}}");
-    {{/each}}
+        { {#each signupData } }
+        plotDates.push("{{this.date}}");
+        plotNums.push("{{this.numAccountsRegistered}}");
+        {
+            {
+                /each}}
 
-    console.log(plotDates);
-    console.log(plotNums);
+                console.log(plotDates);
+                console.log(plotNums);
 
-    var data = [
-      {
-        x: plotDates, 
-        y: plotNums,
-        type: 'bar'
-      }
-    ];
+                var data = [
+                    {
+                        x: plotDates,
+                        y: plotNums,
+                        type: 'bar'
+                    }
+                ];
 
-    var layout = {
-      title: 'Number of Users Registered (Last 7 Days)',
-      xaxis: {
-        title: 'Date'
-      },
-      yaxis: {
-        title: '# Users'
-      }
-    };
-    Plotly.newPlot('myDiv', data, layout);
-  </script>
+                var layout = {
+                    title: 'Number of Users Registered (Last 7 Days)',
+                    xaxis: {
+                        title: 'Date'
+                    },
+                    yaxis: {
+                        title: '# Users'
+                    }
+                };
+                Plotly.newPlot('myDiv', data, layout);
+    </script>
 
-  {{#if message}}
+    {{#if message}}
     <h4 class="alert alert-danger mt-4">{{message}}</h4>
-  {{/if}}
+    {{/if}}
 
 </body>
+
 </html>

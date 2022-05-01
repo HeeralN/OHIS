@@ -9,81 +9,80 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        input,
+        label {
+            margin: 5px 5px;
+        }
+
+        .form-group {
+            width: 450px;
+        }
+
+        .form-control {
+            float: left;
+        }
+
+        #inputCity {
+            width: 50%;
+        }
+
+        #inputState {
+            width: 15%;
+        }
+
+        #inputZip {
+            width: 28%;
+        }
+
+        #inputCounty {
+            width: 45%;
+        }
+
+        #inputCountry {
+            width: 50%;
+        }
+
+        #inputsquare-feet {
+            width: 15%;
+        }
+    </style>
 </head>
-<style>
-    .navbar {
-        margin-bottom: 0;
-        background-color: #b2a7cc !important;
-        z-index: 9999;
-        border: 0;
-        font-family: Montserrat, sans-serif;
-        font-size: 15px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 2px;
-        border-radius: 0;
-    }
-
-    .navbar li a,
-    .navbar .navbar-brand {
-        color: rgb(53, 18, 90) !important;
-    }
-
-    .navbar-nav li a:hover,
-    .navbar-nav li.active a {
-        color: #8b699b !important;
-        background-color: rgb(255, 255, 255) !important;
-    }
-
-    .dropdown-menu li a:hover {
-        background-color: #c9c4d5 !important;
-    }
-
-    .bg-4 {
-        color: rgb(53, 18, 90);
-        margin-bottom: 500;
-        margin-top: 50;
-        padding-top: 50;
-        background-color: #b2a7cc !important;
-    }
-
-    input,
-    label {
-        margin: 5px 5px;
-    }
-
-    .form-group {
-        width: 450px;
-    }
-
-    .form-control {
-        float: left;
-    }
-
-    #inputCity {
-        width: 50%;
-    }
-
-    #inputState {
-        width: 15%;
-    }
-
-    #inputZip {
-        width: 28%;
-    }
-
-    #inputCounty {
-        width: 45%;
-    }
-
-    #inputCountry {
-        width: 50%;
-    }
-
-    #inputsquare-feet {
-        width: 15%;
-    }
-</style>
-
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -129,7 +128,7 @@
                 <!--h4>Student Jane Doe</h4-->
                 <img class="img" src="images/landlord.jpg" width="150" height="150" alt="user">
             </div>
-           
+
             <div class="col-sm-8" style="background-color:lightblue;">
 
                 <div class="rendered-form">

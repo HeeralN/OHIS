@@ -18,6 +18,7 @@
       padding: 20px;
       background: linear-gradient(#8b699b, gray);
     }
+
     .navbar {
       margin-bottom: 0;
       background-color: #b2a7cc !important;
@@ -29,16 +30,18 @@
       letter-spacing: 2px;
       border-radius: 0;
     }
-    
-    .navbar li a, .navbar .navbar-brand {
+
+    .navbar li a,
+    .navbar .navbar-brand {
       color: rgb(53, 18, 90) !important;
     }
-    
-    .navbar-nav li a:hover, .navbar-nav li.active a {
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
       color: #8b699b !important;
       background-color: rgb(255, 255, 255) !important;
     }
-    
+
     .dropdown-menu li a:hover {
       background-color: #c9c4d5 !important;
     }
@@ -50,13 +53,16 @@
       padding-top: 50;
       background-color: #b2a7cc !important;
     }
+
     .form-group-input {
       width: 200px;
     }
+
     .alert {
-      position:center;
+      position: center;
       width: 400px;
     }
+
     footer {
       bottom: 0;
       position: absolute;
@@ -65,34 +71,35 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
+          <span class="icon-bar"></span>
         </button>
         <img src="images/logo.png" width="50" height="50" alt="Logo">
       </div>
       <div id="myNavbar">
-      <ul class="nav navbar-nav navbar-collpase">
-        <li><a href="/landlordProfile">Profile</a></li>
-        <li><a href="/landlordMessaging">Messaging</a></li>
-        <li><a href="/appointmentListLandlords">Appointments</a></li>
-        <li class="dropdown-active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class="active"><a href="/viewLandlordListings">My Listings</a></li>
-            <li><a href="/propertySearchLandlords">Search Listings</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-collpase">
+          <li><a href="/landlordProfile">Profile</a></li>
+          <li><a href="/landlordMessaging">Messaging</a></li>
+          <li><a href="/appointmentListLandlords">Appointments</a></li>
+          <li class="dropdown-active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="active"><a href="/viewLandlordListings">My Listings</a></li>
+              <li><a href="/propertySearchLandlords">Search Listings</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
-        </div>
+      </div>
     </div>
   </nav>
 

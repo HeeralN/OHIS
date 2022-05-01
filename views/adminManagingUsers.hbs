@@ -2,161 +2,165 @@
 <html lang="en">
 
 <head>
-  <title>Admin Manage Users</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="template.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Admin Manage Users</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(#8b699b, gray);
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        .row {
+            padding-left: 25px;
+            padding-right: 25px;
+            justify-content: center;
+            align-content: center;
+        }
+    </style>
 </head>
-<style>
-  body {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(#8b699b, gray);
-  }
 
-  .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-
-  .navbar li a,
-  .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-
-  .navbar-nav li a:hover,
-  .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
-
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-  .navbar {
-    margin-bottom: 0;
-    background-color: #b2a7cc !important;
-    z-index: 9999;
-    border: 0;
-    font-family: Montserrat, sans-serif;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-  }
-  
-  .navbar li a, .navbar .navbar-brand {
-    color: rgb(53, 18, 90) !important;
-  }
-  
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #8b699b !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #c9c4d5 !important;
-  }
-
-  .bg-4 {
-    color: rgb(53, 18, 90);
-    margin-bottom: 500;
-    margin-top: 50;
-    padding-top: 50;
-    background-color: #b2a7cc !important;
-  }
-
-  .row {
-    padding-left: 25px;
-    padding-right: 25px;
-    justify-content: center;
-    align-content: center;
-  }
-</style>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <img src="images/logo.png" width="50" height="50" alt="Logo">
-      </div>
-      <div id="myNavbar">
-        <ul class="nav navbar-nav navbar-collpase">
-          <ul class="nav navbar-nav">
-            <li><a href="/adminLanding">Admin Dashboard</a></li>
-            <li class="active"><a href="/adminManagingUsers">Manage Accounts</a></li>
-            <li><a href="/adminManagingListings">Manage Listings</a></li>
-            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  <li><a href="/propertySearchAdmin">Search Listings</a></li>
-              </ul>
-            </li>
-          </ul>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo.png" width="50" height="50" alt="Logo">
+            </div>
+            <div id="myNavbar">
+                <ul class="nav navbar-nav navbar-collpase">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/adminLanding">Admin Dashboard</a></li>
+                        <li class="active"><a href="/adminManagingUsers">Manage Accounts</a></li>
+                        <li><a href="/adminManagingListings">Manage Listings</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Housing<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/propertySearchAdmin">Search Listings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <div class="container">
-    <h2>Manage Users</h2>
+    <div class="container">
+        <h2>Manage Users</h2>
 
-    <form action="/adminManagingUsers/getUser" method="POST">
-      <div class="form-group">
-        <label for="userID">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-      <!--button type="submit" class="btn btn-default">Submit</button-->
-    </form>
+        <form action="/adminManagingUsers/getUser" method="POST">
+            <div class="form-group">
+                <label for="userID">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>
 
-    <div id="userProfile">
-      <div class="container">
-        <h2>Selected User Profile</h2>
-        <p><b>Username</b>: {{username}}</p>
-        <p><b>Name</b> {{fullname}}</p>
-        <p><b>Email</b>: {{email}}</p>
-        <p><b>Admin?</b>: {{adminPerms}}</p>
-      </div>
+        <div id="userProfile">
+            <div class="container">
+                <h2>Selected User Profile</h2>
+                <p><b>Username</b>: {{username}}</p>
+                <p><b>Name</b> {{fullname}}</p>
+                <p><b>Email</b>: {{email}}</p>
+                <p><b>Admin?</b>: {{adminPerms}}</p>
+            </div>
 
-      <form action="/adminManagingUsers/deleteUser" method="POST">
-        <input type="hidden" id="username" name="username" value="{{username}}">
-        <button type="submit" class="btn btn-danger" data-target="#deleteUser">Delete User</button>
-      </form>
+            <form action="/adminManagingUsers/deleteUser" method="POST">
+                <input type="hidden" id="username" name="username" value="{{username}}">
+                <button type="submit" class="btn btn-danger" data-target="#deleteUser">Delete User</button>
+            </form>
 
-      {{#if message}}
-      <h4 class="alert alert-danger mt-4">{{message}}</h4>
-      {{/if}}
+            {{#if message}}
+            <h4 class="alert alert-danger mt-4">{{message}}</h4>
+            {{/if}}
 
-    </div>
+        </div>
 </body>
 
 </html>

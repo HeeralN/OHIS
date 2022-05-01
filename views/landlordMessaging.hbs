@@ -12,140 +12,141 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <style>
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        .container1 {
+            width: 50%;
+            float: left;
+        }
+
+        .container2 {
+            width: 50%;
+            float: right;
+        }
+
+        .container2 img {
+            height: 100%;
+            width: 70%;
+            margin-top: 10px;
+            margin-left: 40px;
+            object-fit: contain;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        body {
+            background: lavender;
+        }
+
+        .styled-table {
+            border-collapse: collapse;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 600px;
+            background-color: white;
+            margin-top: 10px;
+            margin-left: 90px;
+        }
+
+        .styled-table thead tr {
+            background-color: gray;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid gray;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #b2a7cc !important;
+            z-index: 9999;
+            border: 0;
+            font-family: Montserrat, sans-serif;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 2px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: rgb(53, 18, 90) !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #8b699b !important;
+            background-color: rgb(255, 255, 255) !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #c9c4d5 !important;
+        }
+
+        .bg-4 {
+            color: rgb(53, 18, 90);
+            margin-bottom: 500;
+            margin-top: 50;
+            padding-top: 50;
+            background-color: #b2a7cc !important;
+        }
+
+        .row {
+            padding-left: 25px;
+            padding-right: 25px;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .modal-fade {
+            vertical-align: middle;
+        }
+    </style>
 </head>
-<style>
-    .navbar {
-        margin-bottom: 0;
-        background-color: #b2a7cc !important;
-        z-index: 9999;
-        border: 0;
-        font-family: Montserrat, sans-serif;
-        font-size: 15px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 2px;
-        border-radius: 0;
-    }
 
-    .navbar li a,
-    .navbar .navbar-brand {
-        color: rgb(53, 18, 90) !important;
-    }
-
-    .navbar-nav li a:hover,
-    .navbar-nav li.active a {
-        color: #8b699b !important;
-        background-color: rgb(255, 255, 255) !important;
-    }
-
-    .dropdown-menu li a:hover {
-        background-color: #c9c4d5 !important;
-    }
-
-    .bg-4 {
-        color: rgb(53, 18, 90);
-        margin-bottom: 500;
-        margin-top: 50;
-        padding-top: 50;
-        background-color: #b2a7cc !important;
-    }
-
-    .container1 {
-        width: 50%;
-        float: left;
-    }
-
-    .container2 {
-        width: 50%;
-        float: right;
-    }
-
-    .container2 img {
-        height: 100%;
-        width: 70%;
-        margin-top: 10px;
-        margin-left: 40px;
-        object-fit: contain;
-    }
-
-    h2 {
-        text-align: center;
-    }
-
-    body {
-        background: lavender;
-    }
-
-    .styled-table {
-        border-collapse: collapse;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 600px;
-        background-color: white;
-        margin-top: 10px;
-        margin-left: 90px;
-    }
-
-    .styled-table thead tr {
-        background-color: gray;
-        color: #ffffff;
-        text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-    }
-
-    .styled-table tbody tr {
-        border-bottom: 1px solid gray;
-    }
-
-    .navbar {
-        margin-bottom: 0;
-        background-color: #b2a7cc !important;
-        z-index: 9999;
-        border: 0;
-        font-family: Montserrat, sans-serif;
-        font-size: 15px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 2px;
-        border-radius: 0;
-    }
-
-    .navbar li a,
-    .navbar .navbar-brand {
-        color: rgb(53, 18, 90) !important;
-    }
-
-    .navbar-nav li a:hover,
-    .navbar-nav li.active a {
-        color: #8b699b !important;
-        background-color: rgb(255, 255, 255) !important;
-    }
-
-    .dropdown-menu li a:hover {
-        background-color: #c9c4d5 !important;
-    }
-
-    .bg-4 {
-        color: rgb(53, 18, 90);
-        margin-bottom: 500;
-        margin-top: 50;
-        padding-top: 50;
-        background-color: #b2a7cc !important;
-    }
-
-    .row {
-        padding-left: 25px;
-        padding-right: 25px;
-        justify-content: center;
-        align-content: center;
-    }
-
-    .modal-fade {
-        vertical-align: middle;
-    }
-</style>
 
 <body>
 

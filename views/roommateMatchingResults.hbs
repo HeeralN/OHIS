@@ -68,7 +68,6 @@
 </head>
 
 <body>
-
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -125,8 +124,8 @@
           <td>
             <form action="/createMessage" method="POST">
               <input type="hidden" name="receiver" id="receiver" value="{{this.username}}" />
-              <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="myModal">Contact Me!</button>
+              <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="myModal">Contact
+                Me!</button>
             </form>
           </td>
         </tr>
@@ -173,12 +172,6 @@
   <footer class="container-fluid bg-4 text-center margin">
     <p>Contact us at support@ohis.com</p>
   </footer>
-  <script>
-    function logout() {
-      alert("You have been logged out");
-      window.location = 'login.html';
-    }
-  </script>
 </body>
 
 </html>

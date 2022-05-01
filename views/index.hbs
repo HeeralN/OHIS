@@ -8,107 +8,106 @@
     <link rel="stylesheet" href="/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(#Ff7eb0, #50cdf9);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            max-height: 450px;
+            height: 100%;
+            background: white;
+            padding: 40px 35px;
+            border-radius: 8px;
+        }
+
+        .logo-row {
+            position: absolute;
+            align-items: center;
+            top: 0;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+        }
+
+        .container .title {
+            font-size: 30px;
+            font-weight: 100;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .container form .user-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        form .user-info .reg-box {
+            margin-bottom: 25px;
+            width: calc(100%/2 - 25px);
+        }
+
+        .user-info .reg-box .info {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .user-info .reg-box input {
+            height: 35px;
+            width: 100%;
+            border-radius: 8px;
+            padding-left: 8px;
+            font-size: 14px;
+        }
+
+        .submit-button {
+            margin: 15px;
+        }
+
+        .submit-button button {
+            height: 40px;
+            padding: 5px 0 5px 0;
+            justify-content: center;
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            font-size: 19px;
+            color: black;
+            background-color: white;
+            outline: 10px;
+            outline-color: #000;
+            border-color: black;
+            border-width: 2px;
+            border-radius: 50px;
+            font-weight: 100;
+        }
+
+        .submit-button button:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            opacity: 0.5;
+        }
+
+        footer {
+            bottom: 0;
+            position: absolute;
+        }
+    </style>
 </head>
-
-<style>
-    body {
-        display: flex;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        background: linear-gradient(#Ff7eb0, #50cdf9);
-    }
-
-    .container {
-        max-width: 700px;
-        width: 100%;
-        max-height: 450px;
-        height: 100%;
-        background: white;
-        padding: 40px 35px;
-        border-radius: 8px;
-    }
-
-    .logo-row {
-        position: absolute;
-        align-items: center;
-        top: 0;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-    }
-
-    .logo {
-        width: 200px;
-        height: 200px;
-        text-align: center;
-    }
-
-    .container .title {
-        font-size: 30px;
-        font-weight: 100;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .container form .user-info {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    form .user-info .reg-box {
-        margin-bottom: 25px;
-        width: calc(100%/2 - 25px);
-    }
-
-    .user-info .reg-box .info {
-        display: block;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-
-    .user-info .reg-box input {
-        height: 35px;
-        width: 100%;
-        border-radius: 8px;
-        padding-left: 8px;
-        font-size: 14px;
-    }
-
-    .submit-button {
-        margin: 15px;
-    }
-
-    .submit-button button {
-        height: 40px;
-        padding: 5px 0 5px 0;
-        justify-content: center;
-        width: 50%;
-        display: block;
-        margin: 0 auto;
-        padding-bottom: 10px;
-        font-size: 19px;
-        color: black;
-        background-color: white;
-        outline: 10px;
-        outline-color: #000;
-        border-color: black;
-        border-width: 2px;
-        border-radius: 50px;
-        font-weight: 100;
-    }
-
-    .submit-button button:hover {
-        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        opacity: 0.5;
-    }
-
-    footer {
-        bottom: 0;
-        position: absolute;
-    }
-</style>
 
 <body>
     <div class="logo-row">
@@ -155,34 +154,6 @@
             </div>
         </form>
     </div>
-    <script>
-    // function goToStudentAcc(){
-    //     window.location="/views/studentCreateAccount.hbs";
-    // }
-    // // document.getElementById("CreateStudentAcc").onclick = function () {
-    // //     location.href = "studentCreateAccount.hbs";
-    // // };
-    // function goToLandlordAcc(){
-    //     window.location='landlordCreateAccount.html';
-    // }
-    // function validateForm() {
-    //     let x = document.forms["Login"]["username"].value;
-    //     let y = document.forms["Login"]["password"].value;
-    //     if (x == "student" && y == "student") {
-    //         window.location = 'studentProfile.hbs.html';
-    //     }
-    //     else if (x == "landlord" && y == "landlord") {
-    //         window.location = 'landlordProfile.html';
-    //     }
-    //     else if (x == "admin" && y == "admin") {
-    //         window.location = 'adminLanding.html';
-    //     }
-    //     else{
-    //         alert("Username or password not found.");
-    //     }
-    // }
-
-    </script>
     <footer class="container-fluid bg-4 text-center margin" id="footer">
         <p>Contact us at offcampushousinginfosystem@gmail.com</p>
     </footer>
