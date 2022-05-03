@@ -884,6 +884,7 @@ app.post('/housingProfile', function (req, res) {
     });
 });
 
+
 app.post('/housingProfile/bookAppt', function (req, res) {
     const { landlord_id, listingId, date, time } = req.body;
     const housingId = listingId;
@@ -957,23 +958,17 @@ app.post('/housingProfile/bookAppt', function (req, res) {
         else {
             carpeted_floorsBool = "No carpeted floors";
         }
-        db.query("SELECT student_username, landlord_username, listingId FROM appointment WHERE student_username = ? AND landlord_username = ? AND listingId = ?", [req.session.username, landlord_id, listingId], (error, results) => {
+    var datetime = time + " " + date;
+        db.query("INSERT INTO appointment SET ?",  {student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: datetime} , (error,results) => {
+        if (error){
+            console.log(error);
+        }
+        else{
             console.log(results);
-            if (error) {
-                console.log(error);
-            }
-            if (!results) {
-                db.query("INSERT INTO appointment SET ?", { student_username: req.session.username, landlord_username: landlord_id, listingID: listingId, time: dateTime }, (error, results) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                    console.log(results);
-                    return res.render('housingProfile', { listingId: propertyData[0].listingId, address: propertyData[0].address, username: propertyData[0].username, square_feet: propertyData[0].square_feet, bath: propertyData[0].bath, number_of_room: propertyData[0].number_of_room, rental_price: propertyData[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: propertyData[0].description, message: "Appointment booked." });
-                });
-            } else {
-                return res.render('housingProfile', { listingId: propertyData[0].listingId, address: propertyData[0].address, username: propertyData[0].username, square_feet: propertyData[0].square_feet, bath: propertyData[0].bath, number_of_room: propertyData[0].number_of_room, rental_price: propertyData[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: propertyData[0].description, message: "You already have an appointment for this listing" });
-
-            }
+            return res.render('housingProfile', { listingId: propertyData[0].listingId, address: propertyData[0].address, username: propertyData[0].username, square_feet: propertyData[0].square_feet, bath: propertyData[0].bath, number_of_room: propertyData[0].number_of_room, rental_price: propertyData[0].rental_price, restriction: restrictionBool, gym: gymBool, pool: poolBool, laundry: laundryBool, parking: parkingBool, furnished: furnishedBool, dishwasher: dishwasherBool, hardwood_floors: hardwood_floorsBool, carpeted_floors: carpeted_floorsBool, description: propertyData[0].description, message: "Appointment booked." });
+              
+        }
+    
         });
     });
 });
